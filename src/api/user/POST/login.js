@@ -1,5 +1,5 @@
 import axios from "axios";
-import { saveLocalStorageToken } from "./saveLocalToken";
+import { saveLocalStorageToken } from "../saveLocalToken";
 
 const postLogin = async (loginData) => {
   const config = {
