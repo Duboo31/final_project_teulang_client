@@ -6,9 +6,9 @@ const Main = () => {
     return users;
   });
 
-  console.log("redux data: ", users);
+  console.log("mian redux data: ", users);
 
-  return <div>메인 페이지</div>;
+  return <div></div>;
 };
 
 export default Main;

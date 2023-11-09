@@ -5,8 +5,8 @@ import Main from "../pages/recipe/Main";
 import Register from "../pages/users/Register";
 
 // components
-import Navigation from "../componet/Navigation";
-import NotFound from "../componet/NotFound";
+import Navigation from "../component/Navigation";
+import NotFound from "../component/NotFound";
 
 const Router = () => {
   return (
