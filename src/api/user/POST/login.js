@@ -16,7 +16,6 @@ const postLogin = async (loginData) => {
     saveLocalStorageToken(access, refresh);
     return response;
   } catch (err) {
-    console.log("로그인 실패 err :", err);
     return err;
   }
 };
