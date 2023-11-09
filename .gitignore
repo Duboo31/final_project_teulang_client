@@ -108,3 +108,6 @@ sketch
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,linux,react,macos
+
+# 로컬 환경 json server
+/db.json
