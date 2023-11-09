@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Search from "../../component/Search";
 import Row from "../../component/Row";
-import requests from "../../api/requests";
+import requests from "../../api/recipes/requests";
 
 const Main = () => {
   // const users = useSelector(({ users }) => {
