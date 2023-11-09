@@ -1,22 +1,22 @@
 import React from "react";
-import { Outlet, Link } from "react-router-dom";
-import { logout } from "../redux/modules/users";
-import { useDispatch } from "react-redux";
+import { Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
+import IsLoginNavi from "./navigation/IsLoginNavi";
+import IsLogoutNavi from "./navigation/IsLogoutNavi";
 
 const Navigation = () => {
-  const dispatch = useDispatch();
+  const users = useSelector(({ users }) => {
+    return users;
+  });
+
+  console.log(users);
 
   return (
     <>
-      <nav>네비게이션</nav>
-      <Link to="login">로그인 ㄱ</Link>
-      <button
-        onClick={() => {
-          dispatch(logout());
-        }}
-      >
-        로그아웃
-      </button>
+      <div>
+        {users.isAuthorized ? <IsLoginNavi users={users} /> : <IsLogoutNavi />}
+      </div>
+      <div>관리자 문의</div>
       <main>
         <Outlet />
       </main>

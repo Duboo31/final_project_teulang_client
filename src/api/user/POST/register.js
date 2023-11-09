@@ -9,11 +9,9 @@ const postRegister = async (registerData) => {
   };
 
   try {
-    const { data } = await axios.request(config);
-    console.log(data);
-    return data;
+    const response = await axios.request(config);
+    return response;
   } catch (err) {
-    console.log(err);
     return err;
   }
 };
