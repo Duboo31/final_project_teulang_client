@@ -6,6 +6,7 @@ import Register from "../pages/users/Register";
 import SearchPage from "../pages/recipe/SearchPage";
 import DetailPage from "../pages/recipe/DetailPage";
 import CreatePage from "../pages/recipe/CreatePage";
+import Profile from "../pages/users/Profile";
 
 // components
 import Navigation from "../component/Navigation";
@@ -22,6 +23,7 @@ const Router = () => {
           <Route path="/search" element={<SearchPage />} />
           <Route path="/create" element={<CreatePage />} />
           <Route path="/recipe/:recipeId" element={<DetailPage />} />
+          <Route path="/profile/:userId" element={<Profile />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
