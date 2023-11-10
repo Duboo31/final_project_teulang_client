@@ -1,15 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { getPorfile } from "../../api/user/GET/profile";
 import { useQuery } from "react-query";
 
 const Profile = () => {
-  const userParmas = useParams();
+  const { userId } = useParams();
 
-  const { data, isSuccess, isError } = useQuery(
-    ["user", userParmas.userId],
-    () => getPorfile(userParmas.userId)
-  );
+  const { data } = useQuery(["user", userId], () => getPorfile(userId));
 
   console.log("?: ", data);
 
