@@ -60,13 +60,13 @@ const Row = ({ title, id, fetchUrl }) => {
       >
         <div id={id}>
           {recipes.map((recipe) => (
-            <SwiperSlide>
-                <p>title: {recipe.title}</p>
+            <SwiperSlide key={recipe.id}>
+              <p>title: {recipe.title}</p>
               <img
                 key={recipe.id}
                 style={{ padding: "25px 0" }}
                 className={`row__poster`}
-                src={(recipe.api_recipe) ? `${urls.foodSafetyKoreaURL}/${recipe.recipe_thumbnail.split("media")[1]} ` : `${urls.baseURL}/${recipe.recipe_thumbnail} `}
+                src={(recipe.api_recipe) ? `${urls.foodSafetyKoreaURL}${recipe.recipe_thumbnail.split("www.foodsafetykorea.go.kr")[1]}` : `${urls.baseURL}${recipe.recipe_thumbnail}`}
                 alt={recipe.name}
                 onClick={() => navigate(`/recipe/${recipe.id}`)}
               />
