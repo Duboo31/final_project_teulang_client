@@ -9,9 +9,13 @@ const IsLoginNavi = ({ users }) => {
     dispatch(logout());
   };
 
+  const onClickUserNicknameHandler = () => {
+    console.log("유저 이름 클릭");
+  };
+
   return (
     <span>
-      <span>{users.userNickname}님</span>
+      <span onClick={onClickUserNicknameHandler}>{users.userNickname}님</span>
       <button onClick={onClickLogoutBtnHandler}>로그아웃</button>
     </span>
   );
