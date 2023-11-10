@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { getPorfile } from "../../api/user/GET/profile";
+import { useQuery } from "react-query";
 
 const Profile = () => {
+  const userParmas = useParams();
+
+  const { data, isSuccess, isError } = useQuery(
+    ["user", userParmas.userId],
+    () => getPorfile(userParmas.userId)
+  );
+
+  console.log("?: ", data);
+
   return <div>프로필 페이지</div>;
 };
 
