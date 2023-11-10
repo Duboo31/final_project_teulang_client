@@ -17,8 +17,6 @@ export default function DetailPage() {
   const fetchRecipeDetailData = async () => {
     try {
         const request = await axios.get(requests.fetchRecipeList + recipeId);
-        // console.log("request from page: ", request.data);
-        // console.log("request.comments", request.data.article_recipe_comment);
         setRecipeDetail(request.data);
     } catch (error) {
         navigate('/*'); // NotFound 페이지로 이동.
@@ -28,7 +26,7 @@ export default function DetailPage() {
   return (
     <div>
       <RecipeDetail recipeDetail={recipeDetail} />
-      <Comments recipeComments={recipeDetail.comments}/>
+      <Comments recipeComments={recipeDetail.article_recipe_comment}/>
     </div>
   );
 }
