@@ -26,7 +26,7 @@ export default function DetailPage() {
   return (
     <div>
       <RecipeDetail recipeDetail={recipeDetail} />
-      <Comments recipeComments={recipeDetail.article_recipe_comment}/>
+      <Comments recipeComments={recipeDetail.article_recipe_comment} recipeId={recipeId}/> {/* 댓글 수정/삭제/작성 기능 필요 */}
     </div>
   );
 }

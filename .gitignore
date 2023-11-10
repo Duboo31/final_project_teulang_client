@@ -112,3 +112,6 @@ sketch
 
 # 로컬 환경 json server
 /db.json
+
+# token
+token.js
