@@ -70,7 +70,7 @@ const Row = ({ title, id, fetchUrl }) => {
                 alt={recipe.name}
                 onClick={() => navigate(`/recipe/${recipe.id}`)}
               />
-              <p>author: {recipe.author}</p>
+              <p onClick={() => navigate(`/profile/${recipe.user_data.id}`)}>author: {recipe.author}</p>
               <p>description: {recipe.description}</p>
             </SwiperSlide>
           ))}
