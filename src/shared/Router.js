@@ -7,6 +7,7 @@ import SearchPage from "../pages/recipe/SearchPage";
 import DetailPage from "../pages/recipe/DetailPage";
 import CreatePage from "../pages/recipe/CreatePage";
 import MultiViewPage from "../pages/recipe/MultiViewPage";
+import Profile from "../pages/users/Profile";
 
 // components
 import Navigation from "../component/Navigation";
@@ -24,6 +25,7 @@ const Router = () => {
           <Route path="/create" element={<CreatePage />} />
           <Route path="/recipe/:recipeId" element={<DetailPage />} />
           <Route path="/multi" element={<MultiViewPage />} />
+          <Route path="/profile/:userId" element={<Profile />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

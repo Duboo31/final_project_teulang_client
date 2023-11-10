@@ -1,5 +1,5 @@
 import axios from "axios";
-import { saveLocalStorageToken } from "./saveLocalToken";
+import { saveLocalStorageToken } from "../saveLocalToken";
 
 const postLogin = async (loginData) => {
   const config = {
@@ -16,7 +16,6 @@ const postLogin = async (loginData) => {
     saveLocalStorageToken(access, refresh);
     return response;
   } catch (err) {
-    console.log("로그인 실패 err :", err);
     return err;
   }
 };
