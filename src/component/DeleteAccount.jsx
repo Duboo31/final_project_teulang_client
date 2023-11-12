@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useMutation } from "react-query";
+import { useSelector } from "react-redux";
+import { deleteUserAccount } from "../api/user/DELETE/account";
 
 const DeleteAccount = () => {
   // 삭제 버튼 활성화
   const [isBtnActve, setIsBtnActive] = useState(false);
+
+  const user = useSelector(({ users }) => {
+    return users;
+  });
 
   // useForm - 폼 데이터의 정보 받기 및 유효성 검사
   const {
@@ -17,21 +24,14 @@ const DeleteAccount = () => {
     setIsBtnActive((cur) => !cur);
   };
 
-  // const { mutate } = useMutation(postRegister, {
-  //   onSuccess: (result) => {
-  //     // api "요청!!"이 성공했을 경우
-  //     // 의미는 값을 받아오기를 실패해도 요청을 "보내는 것"을 성공
-  //     // 했을 경우 err 혹은 response을 받아옵니다.
-  //     console.log("회원탈퇴 성공", result);
-  //     // if (status === 400) {
-  //     // 이 부분에서 에러 메세지를 화면에 뿌려주면 됨
-  //     // 즉, data를 뿌려주면 됨
-  //     // }
-  //   },
-  //   onError: (result) => {
-  //     console.log("회원탈퇴 실패: ", result);
-  //   },
-  // });
+  const { mutate } = useMutation(deleteUserAccount, {
+    onSuccess: (result) => {
+      console.log("회원탈퇴 요청 성공", result);
+    },
+    onError: (result) => {
+      console.log("회원탈퇴 실패: ", result);
+    },
+  });
 
   const sendDeleteAccountBtnHandler = ({ checkBtn, password }) => {
     if (!checkBtn) {
@@ -48,8 +48,11 @@ const DeleteAccount = () => {
       );
       return;
     }
-    console.log(checkBtn, password);
-    alert("ㅋㅋ");
+    const userInfo = {
+      password,
+      userId: user.userId,
+    };
+    mutate(userInfo);
   };
 
   return (
@@ -71,6 +74,9 @@ const DeleteAccount = () => {
             </ul>
             <form onSubmit={handleSubmit(sendDeleteAccountBtnHandler)}>
               <input type="checkbox" {...register("checkBtn")} />
+              <p>
+                상기 털랭 회원탈퇴 시 처리사항 안내를 확인하였음에 동의합니다.
+              </p>
               <div>{errors?.checkBtn?.message}</div>
               <div>회원탈퇴를 위해 회원님의 비밀번호를 확인 합니다.</div>
               <div>
