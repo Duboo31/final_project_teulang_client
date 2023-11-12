@@ -1,9 +1,35 @@
 import React, { useEffect } from "react";
 import urls from "../shared/url";
+import axios from "../api/recipes/axios";
+import { useNavigate } from "react-router-dom";
+import tokens from "../api/recipes/token";
 
 const RecipeDetail = ({ recipeDetail }) => {
+  const navigate = useNavigate();
+
+  const handleDeleteRecipe = async () => {
+    await axios
+    .delete(
+      `/articles/recipe/${recipeDetail.id}/`,
+      {
+        headers: {
+          Authorization: `Bearer ${tokens.accesstoken}`,
+        },
+      }
+    )
+    .then(function (response) {
+      console.log("reponse.data ", response.data);
+      navigate("/");
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
   return (
     <div>
+      <button onClick={handleDeleteRecipe}>게시글 삭제</button>
+
       {recipeDetail.id !== undefined 
       ? ( // recipeDetail에 fetch 된 값이 담긴 경우.
         <div>
