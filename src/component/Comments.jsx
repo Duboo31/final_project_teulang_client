@@ -65,7 +65,7 @@ export default function Comments({ recipeComments, recipeId }) {
         // 이렇게 하기 위해서 원래 response로 오던 "댓글이 작성되었습니다"를 새로 작성된 데이터로 바꿨는데 이렇게 하는게 맞나?
 
         // 생성 인풋 값 지우기
-        const createInput = document.getElementById("comment_create_input");
+        const createInput = document.getElementById(`comment_create_input${recipeId}`);
         createInput.value = "";
       })
       .catch(function (error) {
@@ -150,7 +150,7 @@ export default function Comments({ recipeComments, recipeId }) {
   return (
     <section>
       <div>
-        <input onChange={handleCreateInputChange} id="comment_create_input"/>
+        <input onChange={handleCreateInputChange} id={`comment_create_input${recipeId}`}/>
         <button onClick={handleCreateComment}>create</button>
       </div>
 
