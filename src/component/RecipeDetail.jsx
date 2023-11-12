@@ -15,8 +15,8 @@ const RecipeDetail = ({ recipeDetail }) => {
             style={{ width: "300px" }}
             src={
               recipeDetail.api_recipe
-                ? `${urls.foodSafetyKoreaURL}/${recipeDetail.recipe_thumbnail.split("www.foodsafetykorea.go.kr")[1]} ` // api_recipe인 경우 식품안전나라에서 이미지 가져옴.
-                : `${urls.baseURL}/${recipeDetail.recipe_thumbnail} ` // api_recipe가 아닌 경우 서버에서 이미지 가져옴.
+                ? `${urls.foodSafetyKoreaURL}${recipeDetail.recipe_thumbnail.split("www.foodsafetykorea.go.kr")[1]} ` // api_recipe인 경우 식품안전나라에서 이미지 가져옴.
+                : `${urls.baseURL}${recipeDetail.recipe_thumbnail} ` // api_recipe가 아닌 경우 서버에서 이미지 가져옴.
             }
             alt="recipe_thumbnail"
           />
