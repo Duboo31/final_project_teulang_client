@@ -1,16 +1,46 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { getPorfile } from "../../api/user/GET/profile";
 import { useQuery } from "react-query";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
+  // 프로필 페이지에서 현재 로그인 유저와 페이지의 유저가 같은 유저인지 확인
+  const [isMyAccount, setIsMyAccount] = useState(false);
+
+  // 리덕스 스토어의 현재 계정 정보
+  const user = useSelector(({ users }) => {
+    return users;
+  });
+
+  const navigate = useNavigate();
+
+  // url에서 가져온 계정 번호
   const { userId } = useParams();
+
+  useEffect(() => {
+    setIsMyAccount(user.userId === Number(userId));
+  }, [userId, user]);
 
   const { data } = useQuery(["user", userId], () => getPorfile(userId));
 
-  console.log("?: ", data);
+  console.log("프로필 정보: ", data);
 
-  return <div>프로필 페이지</div>;
+  const onClickProfileUpdateBtnHandler = () => {
+    console.log("프로실 수정 버튼 클릭");
+    navigate(`/profile/userModify/`);
+  };
+
+  return (
+    <div>
+      <div>프로필 페이지</div>
+      <div>
+        {isMyAccount && (
+          <div onClick={onClickProfileUpdateBtnHandler}>프로필 수정</div>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default Profile;
