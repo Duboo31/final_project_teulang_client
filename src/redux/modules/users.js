@@ -7,17 +7,25 @@ const initialState = {
   userId: "",
   userEmail: "",
   userNickname: "",
+  userProfile: "",
 };
 
 const userInfo = getUserInfoInLocalStorage();
 
 if (userInfo) {
-  const { userId, userEmail, nickname } = userInfo;
+  const { userId, userEmail, nickname, profileImg } = userInfo;
+
+  const localNickname = localStorage.getItem("nickname");
 
   initialState.isAuthorized = true;
   initialState.userId = userId;
   initialState.userEmail = userEmail;
-  initialState.userNickname = nickname;
+  initialState.userProfile = profileImg;
+  if (localNickname === null) {
+    initialState.userNickname = nickname;
+  } else {
+    initialState.userNickname = localNickname;
+  }
 }
 
 const counterSlice = createSlice({
@@ -37,8 +45,11 @@ const counterSlice = createSlice({
       state.userNickname = "";
       localStorage.clear();
     },
+    modify: (state, action) => {
+      state.userNickname = action.payload.userNickname;
+    },
   },
 });
 
 export default counterSlice.reducer;
-export const { login, logout } = counterSlice.actions;
+export const { login, logout, modify } = counterSlice.actions;

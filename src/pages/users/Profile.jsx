@@ -35,8 +35,15 @@ const Profile = () => {
     <div>
       <div>프로필 페이지</div>
       <div>
+        <img
+          src={`${process.env.REACT_APP_SERVER_LOCAL_URL}/media/user_defalt.jpg`}
+          alt="프로필 이미지"
+        />
+      </div>
+
+      <div>
         {isMyAccount && (
-          <div onClick={onClickProfileUpdateBtnHandler}>프로필 수정</div>
+          <button onClick={onClickProfileUpdateBtnHandler}>프로필 수정</button>
         )}
       </div>
     </div>
