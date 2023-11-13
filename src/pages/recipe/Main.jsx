@@ -13,8 +13,11 @@ const Main = () => {
 
   return (
     <div>
-      <Search />
-      <Row title="인기 레시피 (북마크 개수 많은 순)" id="PR" fetchUrl={requests.fetchRecipeList} />
+      <Row
+        title="인기 레시피 (북마크 개수 많은 순)"
+        id="PR"
+        fetchUrl={requests.fetchRecipeList}
+      />
       <Row title="최신 레시피" id="LR" fetchUrl={requests.fetchRecipeList} />
     </div>
   );

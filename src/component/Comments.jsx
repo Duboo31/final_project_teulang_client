@@ -65,7 +65,9 @@ export default function Comments({ recipeComments, recipeId }) {
         // 이렇게 하기 위해서 원래 response로 오던 "댓글이 작성되었습니다"를 새로 작성된 데이터로 바꿨는데 이렇게 하는게 맞나?
 
         // 생성 인풋 값 지우기
-        const createInput = document.getElementById(`comment_create_input${recipeId}`);
+        const createInput = document.getElementById(
+          `comment_create_input${recipeId}`
+        );
         createInput.value = "";
       })
       .catch(function (error) {
@@ -150,7 +152,10 @@ export default function Comments({ recipeComments, recipeId }) {
   return (
     <section>
       <div>
-        <input onChange={handleCreateInputChange} id={`comment_create_input${recipeId}`}/>
+        <input
+          onChange={handleCreateInputChange}
+          id={`comment_create_input${recipeId}`}
+        />
         <button onClick={handleCreateComment}>create</button>
       </div>
 
@@ -161,9 +166,13 @@ export default function Comments({ recipeComments, recipeId }) {
             if (comment.id) {
               // 이걸 안 하면 삭제했을 때 저 comment.id랑 comment.content 등만 사라지고 기존에 그냥 comment 이런 글자나 div는 남음.
               return (
-                <div key={comment.id} style={{border: "1px solid"}}>
-                    <img src={`${urls.baseURL}${comment.user_data.user_img}`} style={{width: "30px"}}/> {/* 백에서 user_defalt.jpg 로 되어있음. user_default.jpg로 수정 필요 */}
-                    author: {comment.user_data.nickname} <br/>
+                <div key={comment.id} style={{ border: "1px solid" }}>
+                  <img
+                    src={`${urls.baseURL}${comment.user_data.user_img}`}
+                    style={{ width: "30px" }}
+                  />{" "}
+                  {/* 백에서 user_defalt.jpg 로 되어있음. user_default.jpg로 수정 필요 */}
+                  author: {comment.user_data.nickname} <br />
                   comment{index}: {comment.content}{" "}
                   <input
                     onChange={handleUpdateInputChange}
@@ -171,7 +180,9 @@ export default function Comments({ recipeComments, recipeId }) {
                     style={{ display: "none" }}
                   />
                   <button
-                    onClick={() => handleUpdateComment(comment.id, comment.content)}
+                    onClick={() =>
+                      handleUpdateComment(comment.id, comment.content)
+                    }
                     id={`comment_update_btn${comment.id}`}
                   >
                     수정하기
