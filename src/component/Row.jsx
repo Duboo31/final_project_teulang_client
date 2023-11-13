@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/recipes/axios";
-import "../style/Row.css"
-
 import urls from "../shared/url";
+import "../styles/Row.css"
 
 // import Swiper core and required modules
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
-
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules"; 
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -38,10 +36,10 @@ const Row = ({ title, id, fetchUrl }) => {
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         loop={true} // loop 기능을 사용할 것인지
         breakpoints={{
-          1378: {
-            slidesPerView: 6, // 한번에 보이는 슬라이드 개수
-            slidesPerGroup: 6, // 몇개씩 슬라이드 할지
-          },
+          // 1378: {
+          //   slidesPerView: 6, // 한번에 보이는 슬라이드 개수
+          //   slidesPerGroup: 6, // 몇개씩 슬라이드 할지
+          // },
           998: {
             slidesPerView: 5,
             slidesPerGroup: 5,
@@ -66,12 +64,12 @@ const Row = ({ title, id, fetchUrl }) => {
                 key={recipe.id}
                 style={{ padding: "25px 0" }}
                 className={`row__poster`}
-                src={(recipe.api_recipe) ? `${urls.foodSafetyKoreaURL}${recipe.recipe_thumbnail.split("www.foodsafetykorea.go.kr")[1]}` : `${urls.baseURL}${recipe.recipe_thumbnail}`}
+                src={(recipe.api_recipe) ? `${recipe.recipe_thumbnail_api}` : `${urls.baseURL}${recipe.recipe_thumbnail}`}
                 alt={recipe.name}
                 onClick={() => navigate(`/recipe/${recipe.id}`)}
               />
               <p onClick={() => navigate(`/profile/${recipe.user_data.id}`)}>author: {recipe.author}</p>
-              <p>description: {recipe.description}</p>
+              <p>description: {recipe.description ? recipe.description : "-"}</p>
             </SwiperSlide>
           ))}
         </div>

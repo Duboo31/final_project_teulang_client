@@ -13,7 +13,7 @@ const SearchResults = () => {
   let query = useQuery();
 
   const searchTermString = query.get("q");
-  const searchTerms = searchTermString.split(",");
+  const searchTerms = (searchTermString ? searchTermString.split(",") : []);
   let searchTerm = "";
   let updatedSearchTerm = "";
 
@@ -43,13 +43,12 @@ const SearchResults = () => {
   };
 
   const renderSearchRecipes = () => {
+    console.log(searchResults);
     return searchResults.length > 0 ? (
       <section>
         {searchResults.map((recipe, index) => {
           const recipeImageUrl = recipe.api_recipe
-            ? `${urls.foodSafetyKoreaURL}${
-                recipe.recipe_thumbnail.split("www.foodsafetykorea.go.kr")[1]
-              }`
+            ? `${recipe.recipe_thumbnail_api}`
             : `${urls.baseURL}${recipe.recipe_thumbnail}`;
           return (
             <div key={index}>

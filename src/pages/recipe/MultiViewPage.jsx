@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 // components
 import RecipeDetailForm from "../../component/RecipeDetailForm";
 import BookmarksModal from "../../component/BookmarksModal";
-import requests from "../../api/recipes/requests";
 
 export default function MultiViewPage() {
   // 페이지는 rfc로, 컴포넌트는 rafc?로 하는 이유가?
@@ -11,6 +11,11 @@ export default function MultiViewPage() {
   const [recipeId2, setRecipeId2] = useState(0);
   const [isLeftClicked, setIsRecipe1Clicked] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+
+  // 로그인 된 유저 정보
+  const user = useSelector(({ users }) => {
+    return users;
+  });
 
   const handleClick = (e) => {
     console.log(e.target.name);
@@ -74,11 +79,11 @@ export default function MultiViewPage() {
         </div>
       </div>
 
-      {modalOpen && (
+      {modalOpen && user.userId && (
         <BookmarksModal
           setModalOpen={setModalOpen}
           setRecipeId={isLeftClicked ? setRecipeId1 : setRecipeId2}
-          fetchUrl={requests.fetchMyPageData}
+          fetchUrl={`users/${user.userId}/`}
           setIsRecipe1Clicked={setIsRecipe1Clicked}
         />
       )}

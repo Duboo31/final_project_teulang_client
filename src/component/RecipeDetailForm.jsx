@@ -18,7 +18,7 @@ export default function RecipeDetailForm({ recipeId }) {
 
   const fetchRecipeDetailData = async () => {
     try {
-      const request = await axios.get(requests.fetchRecipeList + recipeId);
+      const request = await axios.get(requests.fetchRecipeListAll + recipeId);
       setRecipeDetail(request.data);
       console.log("fetchRecipeDetailData", request.data);
     } catch (error) {
