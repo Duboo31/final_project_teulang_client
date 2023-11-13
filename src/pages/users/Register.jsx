@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { postRegister } from "../../api/user/POST/register";
 import { useMutation } from "react-query";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // 유효성 검사
 import { EMAIL_REGEX, PWD_REGEX } from "../../js/validation";
@@ -26,6 +26,8 @@ const Register = () => {
     watch,
   } = useForm();
 
+  const navigate = useNavigate();
+
   // 제어 컴포넌트로 이메일, 닉네임 중복 검사를 위한 실시간 확인
   const watchEmail = watch("email");
   const watchNickname = watch("nickname");
@@ -36,6 +38,9 @@ const Register = () => {
       // 의미는 값을 받아오기를 실패해도 요청을 "보내는 것"을 성공
       // 했을 경우 err 혹은 response을 받아옵니다.
       console.log("회원가입 '요청' 성공", result);
+      alert(`가입한 이메일로 인증 요청을 보냈습니다.
+이메일을 확인하세요.`);
+      navigate("/login");
       // if (status === 400) {
       // 이 부분에서 에러 메세지를 화면에 뿌려주면 됨
       // 즉, data를 뿌려주면 됨

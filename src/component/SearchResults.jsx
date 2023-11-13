@@ -13,12 +13,13 @@ const SearchResults = () => {
   let query = useQuery();
 
   const searchTermString = query.get("q");
-  const searchTerms = searchTermString.split(",");
+  const searchTerms = (searchTermString ? searchTermString.split(",") : []);
   let searchTerm = "";
   let updatedSearchTerm = "";
 
   for (let i = 0; i < searchTerms.length; i++) {
-    if (i === searchTerms.length - 1) {// 검색어 마지막에는 쉼표 빼기.
+    if (i === searchTerms.length - 1) {
+      // 검색어 마지막에는 쉼표 빼기.
       updatedSearchTerm += searchTerms[i];
     } else {
       updatedSearchTerm += searchTerms[i] + ",";
@@ -34,9 +35,7 @@ const SearchResults = () => {
 
   const fetchSearchRecipe = async (searchTerm) => {
     try {
-      const request = await axios.get(
-        `articles/recipe/search?q=${searchTerm}`
-      );
+      const request = await axios.get(`articles/recipe/search?q=${searchTerm}`);
       setSearchResults(request.data);
     } catch (error) {
       console.log("error", error);
@@ -44,16 +43,23 @@ const SearchResults = () => {
   };
 
   const renderSearchRecipes = () => {
+    console.log(searchResults);
     return searchResults.length > 0 ? (
       <section>
         {searchResults.map((recipe, index) => {
           const recipeImageUrl = recipe.api_recipe
-            ? `${urls.foodSafetyKoreaURL}${recipe.recipe_thumbnail.split("www.foodsafetykorea.go.kr")[1]}`
+            ? `${recipe.recipe_thumbnail_api}`
             : `${urls.baseURL}${recipe.recipe_thumbnail}`;
           return (
-            <div key={index}> {/* recipe.id로 넣고싶은데, 현재 백엔드에서 같은 id로 여러 개가 넘어옴. 이런 경우 재렌더링될 때 그 key 값의 하나의 div만 없어짐. */}
+            <div key={index}>
+              {" "}
+              {/* recipe.id로 넣고싶은데, 현재 백엔드에서 같은 id로 여러 개가 넘어옴. 이런 경우 재렌더링될 때 그 key 값의 하나의 div만 없어짐. */}
               <div onClick={() => navigate(`/recipe/${recipe.id}`)}>
-                <img src={recipeImageUrl} alt="recipe" style={{width: "200px"}}/>
+                <img
+                  src={recipeImageUrl}
+                  alt="recipe"
+                  style={{ width: "200px" }}
+                />
               </div>
             </div>
           );

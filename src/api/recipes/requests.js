@@ -1,6 +1,7 @@
 const requests = {
-    fetchRecipeList: "articles/recipe/",
-    fetchMyPageData: "users/2/",
-}
+  fetchRecipeListAll: "articles/recipe/",
+  fetchRecipeListBookmarks: "articles/recipe/?option=bookmark",
+  fetchRecipeListLatest: "articles/recipe/?option=latest",
+};
 
 export default requests;

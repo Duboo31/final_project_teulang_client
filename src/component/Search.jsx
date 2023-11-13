@@ -17,7 +17,7 @@ export default function Search() {
 
   // 검색어 입력 시 검색어 url로 넘겨서 보냄.
   const handleSearch = () => { 
-    navigate(`/search?q=${searchValue}`);
+    navigate(`/search?q=${searchValue}&page=1`);
   };
 
   // input에 입력될 때마다 serachValue값 변경

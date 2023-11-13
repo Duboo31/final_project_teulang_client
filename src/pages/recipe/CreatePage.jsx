@@ -4,7 +4,6 @@ import CreateForm from '../../component/CreateForm'
 export default function CreatePage() {
   return (
     <div>
-      CreatePage
       <CreateForm />
     </div>
   )

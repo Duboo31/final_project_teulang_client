@@ -8,6 +8,7 @@ import DetailPage from "../pages/recipe/DetailPage";
 import CreatePage from "../pages/recipe/CreatePage";
 import MultiViewPage from "../pages/recipe/MultiViewPage";
 import Profile from "../pages/users/Profile";
+import Update from "../pages/users/Update";
 
 // components
 import Navigation from "../component/Navigation";
@@ -26,6 +27,7 @@ const Router = () => {
           <Route path="/recipe/:recipeId" element={<DetailPage />} />
           <Route path="/multi" element={<MultiViewPage />} />
           <Route path="/profile/:userId" element={<Profile />} />
+          <Route path="/profile/userModify" element={<Update />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
