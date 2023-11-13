@@ -32,6 +32,10 @@ const RecipeDetail = ({ recipeDetail }) => {
       console.log(error);
     });
   }
+  
+  const handleUpdateRecipe = () => {
+    navigate(`/`);
+  }
 
   return (
     <div>
@@ -39,6 +43,7 @@ const RecipeDetail = ({ recipeDetail }) => {
       {recipeDetail.id !== undefined 
       ? ( // recipeDetail에 fetch 된 값이 담긴 경우.
         <div>
+          {(user.userId === recipeDetail.user_data.id) && <button onClick={handleUpdateRecipe}>게시글 수정</button>}
           {(user.userId === recipeDetail.user_data.id) && <button onClick={handleDeleteRecipe}>게시글 삭제</button>}
           
           <img src={`${urls.baseURL}${recipeDetail.user_data.user_img}`} style={{width: "50px"}}/>

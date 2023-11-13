@@ -3,18 +3,28 @@ import { useNavigate } from "react-router-dom";
 import axios from "../api/recipes/axios";
 import tokens from "../api/recipes/token";
 
-export default function CreateForm() {
+export default function CreateForm({
+  recipe_thumbnail = "",
+  title = "",
+  description = "",
+  recipe_ingredients = "",
+  recipe_order_content = { 1: "" },
+  recipe_order_img = "",
+  isForUpdate = false,
+}) {
+  console.log(recipe_thumbnail, recipe_order_content);
+
   const navigate = useNavigate();
   const array = [{ order: 1, content: "" }];
   const [recipeOrders, setRecipeOrders] = useState(array);
 
   const [inputs, setInputs] = useState({
-    recipe_thumbnail: "",
-    title: "",
-    description: "",
-    recipe_ingredients: "",
-    recipe_order_content: {1:""}, // recipe_order를 아예 추가하지 않는 경우를 위해, 뭐 recipe_order_content가 {1:""}와 동일하면 form data에 append를 안하거나 해야할듯
-    recipe_order_img: "",
+    recipe_thumbnail: recipe_thumbnail,
+    title: title,
+    description: description,
+    recipe_ingredients: recipe_ingredients,
+    recipe_order_content: recipe_order_content, // recipe_order를 아예 추가하지 않는 경우를 위해, 뭐 recipe_order_content가 {1:""}와 동일하면 form data에 append를 안하거나 해야할듯
+    recipe_order_img: recipe_order_img,
   });
 
   const onChange = (e) => {
@@ -74,7 +84,8 @@ export default function CreateForm() {
         }
       } else if (key === "recipe_order_content") {
         let array_form = [];
-        for (const [order, content] of Object.entries( // key = order , value = content
+        for (const [order, content] of Object.entries(
+          // key = order , value = content
           inputs.recipe_order_content
         )) {
           const recipe_order = { content: content, order: order };
@@ -105,39 +116,36 @@ export default function CreateForm() {
       .catch(function (error) {
         console.log(error);
       });
-  }
+  };
 
   // 개발 단계에서 필요한, submit할 때 들어가는 input 확인용
   const showInputs = () => {
-    console.log("input", inputs)
-  }
+    console.log("input", inputs);
+  };
 
   return (
     <div>
       {/** 개발 단계에서 필요한 버튼. */}
       <button onClick={showInputs}>input보기</button>
-
       recipe_thumbnail:
       <input
         type="file"
         id="recipe_thumbnail_input"
         onChange={onChange}
         name="recipe_thumbnail"
-      /> <br />
-
+      />{" "}
+      <br />
       *title: <input id="title_input" onChange={onChange} name="title" /> <br />
-
       description:
       <input id="desc_input" onChange={onChange} name="description" /> <br />
-
       recipe_ingredients:
       <input
         id="ingredients_input"
         placeholder="각 재료는 쉼표만을 이용해 구분해주세요. (띄어쓰기 금지)"
         onChange={onChange}
         name="recipe_ingredients"
-      /> <br />
-
+      />{" "}
+      <br />
       recipe_order: <br /> <button onClick={addRecipeOrder}>+</button>
       {recipeOrders.map((recipeorder) => {
         return (
@@ -159,8 +167,12 @@ export default function CreateForm() {
           </div>
         );
       })}
-
       <button onClick={handleSubmit}>submit</button>
     </div>
   );
 }
+
+CreateForm.defaultProps = {
+  name: "이름 없음",
+  tel: 119,
+};
