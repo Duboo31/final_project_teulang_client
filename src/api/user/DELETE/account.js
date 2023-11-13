@@ -2,7 +2,6 @@ import axios from "axios";
 
 const deleteUserAccount = async (userInfo) => {
   const { password, userId } = userInfo;
-
   const accessToken = localStorage.getItem("access");
 
   const config = {
