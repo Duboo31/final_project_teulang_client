@@ -13,7 +13,7 @@ const userModify = async (obj) => {
     url: `${process.env.REACT_APP_SERVER_LOCAL_URL}/users/userModify/${userId}/`,
     headers: {
       Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk5ODQwMDYwLCJpYXQiOjE2OTk3OTY4NjAsImp0aSI6IjExZDE4NGNlNTc3ZTRhNzY4OTA5NTNiNGYyMzA4MDgwIiwidXNlcl9pZCI6MSwiZW1haWwiOiJkdWJvbzMxQGdtYWlsLmNvbSIsIm5pY2tuYW1lIjoiXHVjMmUwXHViNzdjXHViYTc0IiwidXNlcl9pbWciOiIvbWVkaWEvdXNlcl9kZWZhbHQuanBnIn0.Gc9HAfp4fghSZU5-f_7btQL2XllUCoZBDrelh2sghd8",
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk5ODg2OTA2LCJpYXQiOjE2OTk4NDM3MDYsImp0aSI6ImI5MWY2ZGNhMzMyMzQ1YjJhMDg0YmI2ZjEzNDVjOGZjIiwidXNlcl9pZCI6MSwiZW1haWwiOiJkdWJvbzMxQGdtYWlsLmNvbSIsIm5pY2tuYW1lIjoiXHVjNmMzXHVkNTA0XHViMmU0IiwidXNlcl9pbWciOiIvbWVkaWEvdXNlcl9kZWZhbHQuanBnIn0.fukXgSmA1-OjyWYQynQzZxrchfIwCV9V_5r72Y1I30Y",
       "Content-Type": "application/json",
     },
     data: modifyData,
