@@ -7,7 +7,7 @@ const deleteUserAccount = async (userInfo) => {
   const config = {
     method: "DELETE",
     maxBodyLength: Infinity,
-    url: `${process.env.REACT_APP_SERVER_LOCAL_URL}/api/signout/${userId}/`,
+    url: `${process.env.REACT_APP_SERVER_LOCAL_URL}/users/api/signout/${userId}/`,
     headers: {
       Authorization: `Bearer ${accessToken}`,
       "Content-Type": "application/json",
