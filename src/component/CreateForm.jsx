@@ -1,7 +1,7 @@
-import axios from "../api/recipes/axios";
 import React, { useState } from "react";
-import tokens from "../api/recipes/token";
 import { useNavigate } from "react-router-dom";
+import axios from "../api/recipes/axios";
+import tokens from "../api/recipes/token";
 
 export default function CreateForm() {
   const navigate = useNavigate();
@@ -49,6 +49,7 @@ export default function CreateForm() {
     }
   };
 
+  // 레시피 순서 추가 시, 직전 순서의 다음 순서로 레시피 순서 input 박스 추가.
   const addRecipeOrder = () => {
     // order 설정 바로 직전 값 컴포넌트의 order + 1
     setRecipeOrders((prevRecipeOrders) => [
@@ -64,7 +65,6 @@ export default function CreateForm() {
   };
 
   const handleSubmit = async () => {
-    console.log("inputs", inputs);
     var formData = new FormData();
 
     for (const [key, value] of Object.entries(inputs)) {
@@ -88,6 +88,10 @@ export default function CreateForm() {
       }
     }
 
+    postRecipe(formData);
+  };
+
+  const postRecipe = async (formData) => {
     await axios
       .post(`/articles/recipe/`, formData, {
         headers: {
@@ -101,34 +105,39 @@ export default function CreateForm() {
       .catch(function (error) {
         console.log(error);
       });
-  };
+  }
 
+  // 개발 단계에서 필요한, submit할 때 들어가는 input 확인용
   const showInputs = () => {
     console.log("input", inputs)
   }
 
   return (
     <div>
-        <button onClick={showInputs}>input보기</button>
+      {/** 개발 단계에서 필요한 버튼. */}
+      <button onClick={showInputs}>input보기</button>
+
       recipe_thumbnail:
       <input
         type="file"
         id="recipe_thumbnail_input"
         onChange={onChange}
         name="recipe_thumbnail"
-      />
-      <br />
+      /> <br />
+
       *title: <input id="title_input" onChange={onChange} name="title" /> <br />
+
       description:
       <input id="desc_input" onChange={onChange} name="description" /> <br />
+
       recipe_ingredients:
       <input
         id="ingredients_input"
         placeholder="각 재료는 쉼표만을 이용해 구분해주세요. (띄어쓰기 금지)"
         onChange={onChange}
         name="recipe_ingredients"
-      />
-      <br />
+      /> <br />
+
       recipe_order: <br /> <button onClick={addRecipeOrder}>+</button>
       {recipeOrders.map((recipeorder) => {
         return (
@@ -150,6 +159,7 @@ export default function CreateForm() {
           </div>
         );
       })}
+
       <button onClick={handleSubmit}>submit</button>
     </div>
   );

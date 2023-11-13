@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "../api/recipes/axios";
-import "../style/BookmarksModal.css";
+import "../styles/BookmarksModal.css";
 
 export default function BookmarksModal({
   setModalOpen,
@@ -12,7 +12,6 @@ export default function BookmarksModal({
 
   const fetchMyBookmarksData = async () => {
     const request = await axios.get(fetchUrl);
-    console.log("request.data: ", request.data.bookmarked_articles);
     setMyBookmarks(request.data.bookmarked_articles);
   };
 
@@ -21,7 +20,6 @@ export default function BookmarksModal({
   }, []);
 
   const handleClick = (e) => {
-    // console.log(e.target.id);
     setRecipeId(e.target.id);
     setModalOpen(false);
     setIsRecipe1Clicked(false);
