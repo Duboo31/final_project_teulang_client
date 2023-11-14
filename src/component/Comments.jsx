@@ -20,6 +20,8 @@ export default function Comments({ recipeComments, recipeId }) {
   };
 
   const handleCreateComment = async () => {
+    const accessToken = localStorage.getItem("access");
+
     await axios
       .post(
         `/articles/recipe/${recipeId}/comment/`,
@@ -29,7 +31,7 @@ export default function Comments({ recipeComments, recipeId }) {
         },
         {
           headers: {
-            Authorization: `Bearer ${tokens.accesstoken}`,
+            Authorization: `Bearer ${accessToken}`,
           },
         }
       )
@@ -64,6 +66,8 @@ export default function Comments({ recipeComments, recipeId }) {
     // 그랬더니 수정도 맨 위에거만 됨. 왜 그랬는지.. 아래 findindex 로직을 더 깊게 이해해봐야할 듯.
     // updateCommentId는 그때도 클릭한 댓글의 id로 잘 지정되었는데!
 
+    const accessToken = localStorage.getItem("access");
+
     if (updateBtn.textContent === "수정하기") {
       updateInput.style.display = "block";
       updateInput.value = prevCommentContent;
@@ -78,7 +82,7 @@ export default function Comments({ recipeComments, recipeId }) {
           },
           {
             headers: {
-              Authorization: `Bearer ${tokens.accesstoken}`,
+              Authorization: `Bearer ${accessToken}`,
             },
           }
         )
@@ -102,10 +106,12 @@ export default function Comments({ recipeComments, recipeId }) {
 
   // handle delete comment
   const handleDeleteComment = async (deleteCommentId) => {
+    const accessToken = localStorage.getItem("access");
+
     await axios
       .delete(`/articles/recipe/${recipeId}/comment/${deleteCommentId}/`, {
         headers: {
-          Authorization: `Bearer ${tokens.accesstoken}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       })
       .then(function (response) {

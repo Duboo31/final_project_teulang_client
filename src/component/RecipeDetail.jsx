@@ -15,12 +15,14 @@ const RecipeDetail = ({ recipeDetail }) => {
   });
 
   const handleDeleteRecipe = async () => {
+    const accessToken = localStorage.getItem("access");
+
     await axios
     .delete(
       `/articles/recipe/${recipeDetail.id}/`,
       {
         headers: {
-          Authorization: `Bearer ${tokens.accesstoken}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       }
     )
@@ -34,7 +36,7 @@ const RecipeDetail = ({ recipeDetail }) => {
   }
   
   const handleUpdateRecipe = () => {
-    navigate(`/`);
+    navigate("/create", { state: { recipeDetail } });
   }
 
   return (

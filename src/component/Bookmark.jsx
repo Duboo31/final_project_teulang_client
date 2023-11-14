@@ -4,7 +4,9 @@ import tokens from "../api/recipes/token";
 
 export default function Bookmark({ recipeId }) {
   const handleBookmark = async () => {
+    const accessToken = localStorage.getItem("access");
     const bookmarkBtn = document.getElementById("bookmark_btn");
+
     if (bookmarkBtn.textContent === "북마크 안 됨") {
       bookmarkBtn.textContent = "북마크 됨";
     } else {
@@ -13,7 +15,7 @@ export default function Bookmark({ recipeId }) {
     await axios
         .post(`/articles/recipe/${recipeId}/bookmark/`, {},{
           headers: {
-            Authorization: `Bearer ${tokens.accesstoken}`,
+            Authorization: `Bearer ${accessToken}`,
           },
         })
         .then(function (response) {
