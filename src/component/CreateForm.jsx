@@ -32,7 +32,7 @@ export default function CreateForm({
   });
 
   const onChange = (e, order) => {
-    const { name, value, files, id, key} = e.target;
+    const { name, value, files, id } = e.target;
 
     if (name === "recipe_order_img") {
       setInputs((prevInputs) => ({
