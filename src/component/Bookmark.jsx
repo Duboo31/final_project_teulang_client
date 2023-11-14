@@ -1,6 +1,5 @@
 import axios from "../api/recipes/axios";
 import React from "react";
-import tokens from "../api/recipes/token";
 
 export default function Bookmark({ recipeId }) {
   const handleBookmark = async () => {

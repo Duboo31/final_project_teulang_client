@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import urls from "../shared/url";
 import axios from "../api/recipes/axios";
 import { useNavigate } from "react-router-dom";
-import tokens from "../api/recipes/token";
 import Loading from "./Loading";
 import { useSelector } from "react-redux";
 
