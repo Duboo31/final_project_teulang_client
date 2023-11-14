@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import urls from "../shared/url";
 import axios from "../api/recipes/axios";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 
 const RecipeDetail = ({ recipeDetail }) => {
   const navigate = useNavigate();
+  const [starRate, setStarRate] = useState(""); // 별점 추가 관련 에러처리 필요. (현재 5점 이상이어도 그냥 추가됨.)
 
   // 로그인 된 유저 정보
   const user = useSelector(({ users }) => {
@@ -17,43 +18,90 @@ const RecipeDetail = ({ recipeDetail }) => {
     const accessToken = localStorage.getItem("access");
 
     await axios
-    .delete(
-      `/articles/recipe/${recipeDetail.id}/`,
-      {
+      .delete(`/articles/recipe/${recipeDetail.id}/`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
-      }
-    )
-    .then(function (response) {
-      console.log("reponse.data ", response.data);
-      navigate("/");
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
-  
+      })
+      .then(function (response) {
+        console.log("reponse.data ", response.data);
+        navigate("/");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   const handleUpdateRecipe = () => {
-    navigate("/create", { state: { recipeDetail } });
-  }
+    navigate("/update", { state: { recipeDetail } });
+  };
+
+  const handleChangeStarRate = (e) => {
+    setStarRate(e.target.value);
+  };
+
+  const handleSubmitStarRate = async () => {
+    const accessToken = localStorage.getItem("access");
+
+    await axios
+      .post(
+        `/articles/recipe/${recipeDetail.id}/star_rate/`,
+        {
+          star_rate: starRate,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then(function (response) {
+        console.log("reponse.data ", response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   return (
     <div>
-
-      {recipeDetail.id !== undefined 
-      ? ( // recipeDetail에 fetch 된 값이 담긴 경우.
+      {recipeDetail.id !== undefined ? (
+        // recipeDetail에 fetch 된 값이 담긴 경우.
         <div>
-          {(user.userId === recipeDetail.user_data.id) && <button onClick={handleUpdateRecipe}>게시글 수정</button>}
-          {(user.userId === recipeDetail.user_data.id) && <button onClick={handleDeleteRecipe}>게시글 삭제</button>}
-          
-          <img src={`${urls.baseURL}${recipeDetail.user_data.user_img}`} style={{width: "50px"}}/>
-          <span onClick={() => {navigate(`/profile/${recipeDetail.user_data.id}`)}}>author : {recipeDetail.author}</span> <br/>
+          {user.userId === recipeDetail.user_data.id && (
+            <button onClick={handleUpdateRecipe}>게시글 수정</button>
+          )}
+          {user.userId === recipeDetail.user_data.id && (
+            <button onClick={handleDeleteRecipe}>게시글 삭제</button>
+          )} <br />
 
-          <span>title : {recipeDetail.title}</span> <br/>
-
-          <span>평균 별점 : {recipeDetail.star_avg}</span> <br/>
-
+          {!(user.userId === recipeDetail.user_data.id) ? (
+            <div>
+              <span>star_rate : </span>
+              <input onChange={handleChangeStarRate} value={starRate} />
+              <button onClick={handleSubmitStarRate}>submit</button>
+            </div>
+          ) : (
+            <div>
+              <span>star_rate : </span>
+              <input value={starRate} /> - 내 게시글: 별점 작성 불가
+            </div>
+          )}
+          <br />
+          <img
+            src={`${urls.baseURL}${recipeDetail.user_data.user_img}`}
+            style={{ width: "50px" }}
+          />
+          <span
+            onClick={() => {
+              navigate(`/profile/${recipeDetail.user_data.id}`);
+            }}
+          >
+            author : {recipeDetail.author}
+          </span>{" "}
+          <br />
+          <span>title : {recipeDetail.title}</span> <br />
+          <span>평균 별점 : {recipeDetail.star_avg}</span> <br />
           <img
             style={{ width: "300px" }}
             src={
@@ -63,34 +111,51 @@ const RecipeDetail = ({ recipeDetail }) => {
             }
             alt="recipe_thumbnail"
           />
-          
           <div>
             ingredient :
             {recipeDetail.recipe_ingredients.map((ingredientObject) => {
-              return <span key={ingredientObject.id}>{ingredientObject.ingredients}</span>; // map에는 return이 있어야 한다!
+              return (
+                <span key={ingredientObject.id}>
+                  {ingredientObject.ingredients}
+                </span>
+              ); // map에는 return이 있어야 한다!
             })}
           </div>
-
-          <span>desc: {recipeDetail.description ? recipeDetail.description : "-"}</span> <br/>
-
+          <span>
+            desc: {recipeDetail.description ? recipeDetail.description : "-"}
+          </span>{" "}
+          <br />
           <span>recipe orders :</span>
           <div>
             {recipeDetail.recipe_order.map((orderObject) => {
               return (
                 <div key={orderObject.id}>
-                  {recipeDetail.api_recipe 
-                    ? (<img src={`${orderObject.recipe_img_api}`} style={{width: "150px"}}/>) 
-                    : (<img src={orderObject.recipe_img ? `${urls.baseURL}${orderObject.recipe_img}` : ""} style={{width: "150px"}}/>)
-                  }
-                  {orderObject.order}{". "}{orderObject.content} {/*content 뒤에 알파벳 붙어나오고(맨 앞 레시피만), 앞에 1. 이런 순서 번호가 붙음.*/}
+                  {recipeDetail.api_recipe ? (
+                    <img
+                      src={`${orderObject.recipe_img_api}`}
+                      style={{ width: "150px" }}
+                    />
+                  ) : (
+                    <img
+                      src={
+                        orderObject.recipe_img
+                          ? `${urls.baseURL}${orderObject.recipe_img}`
+                          : ""
+                      }
+                      style={{ width: "150px" }}
+                    />
+                  )}
+                  {orderObject.order}
+                  {". "}
+                  {orderObject.content}{" "}
+                  {/*content 뒤에 알파벳 붙어나오고(맨 앞 레시피만), 앞에 1. 이런 순서 번호가 붙음.*/}
                 </div>
-              ); 
+              );
             })}
           </div>
-
         </div>
-      ) 
-      : ( // recipeDetail에 fetch 된 값이 아직 담기지 않은 경우.
+      ) : (
+        // recipeDetail에 fetch 된 값이 아직 담기지 않은 경우.
         <Loading />
       )}
     </div>
