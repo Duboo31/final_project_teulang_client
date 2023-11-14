@@ -69,7 +69,6 @@ const Register = () => {
       return;
     }
     const result = await isDuplicateEmail(watchEmail);
-    console.log("result", result);
     if (!result) {
       setError(
         "email",
