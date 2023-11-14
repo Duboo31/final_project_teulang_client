@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/recipes/axios";
-import "../style/Row.css"
+import "../style/Row.css";
 
 import urls from "../shared/url";
 
@@ -66,11 +66,21 @@ const Row = ({ title, id, fetchUrl }) => {
                 key={recipe.id}
                 style={{ padding: "25px 0" }}
                 className={`row__poster`}
-                src={(recipe.api_recipe) ? `${urls.foodSafetyKoreaURL}${recipe.recipe_thumbnail.split("www.foodsafetykorea.go.kr")[1]}` : `${urls.baseURL}${recipe.recipe_thumbnail}`}
+                src={
+                  recipe.api_recipe
+                    ? `${urls.foodSafetyKoreaURL}${
+                        recipe.recipe_thumbnail.split(
+                          "www.foodsafetykorea.go.kr"
+                        )[1]
+                      }`
+                    : `${urls.baseURL}${recipe.recipe_thumbnail}`
+                }
                 alt={recipe.name}
                 onClick={() => navigate(`/recipe/${recipe.id}`)}
               />
-              <p onClick={() => navigate(`/profile/${recipe.user_data.id}`)}>author: {recipe.author}</p>
+              <p onClick={() => navigate(`/profile/${recipe.user_data.id}`)}>
+                author: {recipe.author}
+              </p>
               <p>description: {recipe.description}</p>
             </SwiperSlide>
           ))}
@@ -78,6 +88,6 @@ const Row = ({ title, id, fetchUrl }) => {
       </Swiper>
     </section>
   );
-}
+};
 
 export default Row;
