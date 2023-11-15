@@ -36,7 +36,11 @@ const Profile = () => {
       <div>프로필 페이지</div>
       <div>
         <img
-          src={`${process.env.REACT_APP_SERVER_LOCAL_URL}/media/user_defalt.jpg`}
+          src={
+            user.userProfile === "/media/user_defalt.jpg"
+              ? `${process.env.REACT_APP_SERVER_LOCAL_URL}/media/user_defalt.jpg`
+              : `${process.env.REACT_APP_SERVER_LOCAL_URL}${user.userProfile}`
+          }
           alt="프로필 이미지"
         />
       </div>
