@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/recipes/axios";
 import urls from "../shared/url";
-import "../styles/Row.css"
+import "../styles/Row.css";
 
 // import Swiper core and required modules
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules"; 
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -58,22 +58,45 @@ const Row = ({ title, id, fetchUrl }) => {
               <div className="recipe_content">
                 <span className="recipe_top_span">
                   <p className="recipe_title">{recipe.title}</p>
-                  <p className="recipe_star_avg">* {recipe.star_avg ? parseFloat(recipe.star_avg).toFixed(1) : "-"}</p>
+                  <p className="recipe_star_avg">
+                    *{" "}
+                    {recipe.star_avg
+                      ? parseFloat(recipe.star_avg).toFixed(1)
+                      : "-"}
+                  </p>
                 </span>
-                <span >
+                <span>
                   <img
                     key={recipe.id}
                     className={`recipe_thumbnail`}
-                    src={(recipe.api_recipe) ? `${recipe.recipe_thumbnail_api}` : `${urls.baseURL}${recipe.recipe_thumbnail}`}
+                    src={
+                      recipe.api_recipe
+                        ? `${recipe.recipe_thumbnail_api}`
+                        : `${urls.baseURL}${recipe.recipe_thumbnail}`
+                    }
                     alt={recipe.name}
                     onClick={() => navigate(`/recipe/${recipe.id}`)}
                   />
                 </span>
                 <span className="recipe_author">
-                  <img src={`${urls.baseURL}${recipe.user_data.user_img}`} className="recipe_author_img"/>
-                  <p className="recipe_author_nickname" onClick={() => navigate(`/profile/${recipe.user_data.id}`)}>{recipe.author}</p>
+                  <img
+                    src={`${urls.baseURL}${recipe.user_data.user_img}`}
+                    className="recipe_author_img"
+                  />
+                  <p
+                    className="recipe_author_nickname"
+                    onClick={() => navigate(`/profile/${recipe.user_data.id}`)}
+                  >
+                    {recipe.author}
+                  </p>
                 </span>
-                <p className="recipe_desc">{recipe.description ? recipe.description : "-"}</p>
+                <p className="recipe_desc">
+                  {recipe.description
+                    ? recipe.description.length > 13
+                      ? recipe.description.substr(0, 13) + " ..."
+                      : recipe.description
+                    : "-"}
+                </p>
               </div>
             </SwiperSlide>
           ))}
@@ -81,6 +104,6 @@ const Row = ({ title, id, fetchUrl }) => {
       </Swiper>
     </section>
   );
-}
+};
 
 export default Row;

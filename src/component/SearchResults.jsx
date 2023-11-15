@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../api/recipes/axios";
 import urls from "../shared/url";
+import "../styles/SearchResults.css";
 
 const SearchResults = () => {
   const [searchResults, setSearchResults] = useState([]);
   const navigate = useNavigate();
   const [maxPage, setMaxPage] = useState(0);
-  const pagination_btn = []
-  const pagination_btn_show = []
+  const pagination_btn = [];
+  const pagination_btn_show = [];
 
   const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -16,7 +17,7 @@ const SearchResults = () => {
   let query = useQuery();
 
   const searchTermString = query.get("q");
-  const searchTerms = (searchTermString ? searchTermString.split(",") : []);
+  const searchTerms = searchTermString ? searchTermString.split(",") : [];
   let searchTerm = "";
   let updatedSearchTerm = "";
   const curPage = query.get("page");
@@ -37,11 +38,13 @@ const SearchResults = () => {
     }
   }, [searchTermString, curPage]);
 
-  const fetchSearchRecipe = async (searchTerm, curPage=1) => {
+  const fetchSearchRecipe = async (searchTerm, curPage = 1) => {
     try {
-      const response = await axios.get(`articles/recipe/search?q=${searchTerm}&page=${curPage}`);
+      const response = await axios.get(
+        `articles/recipe/search?q=${searchTerm}&page=${curPage}`
+      );
       setSearchResults(response.data.serializer_data);
-      console.log(response.data.pagination_data)
+      console.log(response.data.pagination_data);
       setMaxPage(response.data.pagination_data.pages_num);
     } catch (error) {
       console.log("error", error);
@@ -49,54 +52,123 @@ const SearchResults = () => {
   };
 
   const pagination = () => {
-    for (let i = 1; i<maxPage+1; i++) {
-      pagination_btn.push(<button name={`${i}`}>{i}</button>)
+    for (let i = 1; i < maxPage + 1; i++) {
+      pagination_btn.push(
+        <button
+          name={`${i}`}
+          onClick={handleMove}
+          className="search_pagination_btn"
+        >
+          {i}
+        </button>
+      );
     }
-    const start = parseInt(curPage/5) * 5;
-    const end = (maxPage > (start + 5) ? (start + 5) : maxPage);
+    const start = parseInt(curPage / 5) * 5;
+    const end = maxPage > start + 5 ? start + 5 : maxPage;
     return pagination_btn.slice(start, end);
-  }
-  
+  };
+
   const handleMove = (e) => {
-    const {name} = e.target;
+    const { name } = e.target;
+    console.log(name);
     var go = 0;
 
-    if (name === "prev"){
-      go = (parseInt((curPage - 1)/5) - 1) * 5 + 1; // ex: 현재 6~10페이지라면, 1페이지로.
+    if (name === "prev") {
+      go = (parseInt((curPage - 1) / 5) - 1) * 5 + 1; // ex: 현재 6~10페이지라면, 1페이지로.
+    } else if (name === "next") {
+      go = (parseInt((curPage - 1) / 5) + 1) * 5 + 1; // ex: 현재 6~10페이지라면, 11페이지로.
     } else {
-      go = (parseInt((curPage - 1)/5) + 1) * 5 + 1; // ex: 현재 6~10페이지라면, 11페이지로.
+      go = name;
     }
 
-    if (go > 0 && go < maxPage) {
-      navigate(`/search?q=${searchTerm}&page=${go}`)
+    if (go > 0 && go <= maxPage) {
+      navigate(`/search?q=${searchTerm}&page=${go}`);
     }
-  }
+  };
 
   const renderSearchRecipes = () => {
     return searchResults.length > 0 ? (
-      <section>
+      <section className="search_section">
         {searchResults.map((recipe, index) => {
           const recipeImageUrl = recipe.api_recipe
             ? `${recipe.recipe_thumbnail_api}`
             : `${urls.baseURL}${recipe.recipe_thumbnail}`;
+
+          const created_at = recipe.api_recipe
+            ? "api recipe"
+            : recipe.created_at.split("T")[0] +
+              " " +
+              recipe.created_at.split("T")[1].substr(0, 5);
           return (
-            <div key={index}>
-              {" "}
-              {/* recipe.id로 넣고싶은데, 현재 백엔드에서 같은 id로 여러 개가 넘어옴. 이런 경우 재렌더링될 때 그 key 값의 하나의 div만 없어짐. */}
-              <div onClick={() => navigate(`/recipe/${recipe.id}`)}>
+            <div key={index} className="search_each_recipe">
+              <div
+                onClick={() => navigate(`/recipe/${recipe.id}`)}
+                className="search_recipe_content"
+              >
+                <div className="search_recipe_left">
+                  <div className="search_recipe_title_div">
+                    <p className="search_recipe_title">{recipe.title}</p>
+                  </div>
+                  <div className="search_recipe_desc_div">
+                    <p className="search_recipe_desc">
+                      {recipe.description
+                        ? recipe.description.length > 55
+                          ? recipe.description.substr(0, 55) + " ... 더보기"
+                          : recipe.description
+                        : "-"}
+                    </p>
+                  </div>
+                  <div className="search_recipe_left_footer">
+                    <span className="search_recipe_star_avg">
+                      별점: {recipe.star_avg ? recipe.star_avg : "-"}
+                    </span>
+                    <span className="search_recipe_bookmark_count">
+                      북마크: {recipe.bookmark_count}
+                    </span>
+                  </div>
+                </div>
                 <img
                   src={recipeImageUrl}
                   alt="recipe"
-                  style={{ width: "200px" }}
+                  className="search_recipe_thumbnail"
                 />
+              </div>
+
+              <div className="search_recipe_footer">
+                <div
+                  onClick={() => navigate(`/profile/${recipe.user_data_id}`)}
+                  className="search_recipe_author"
+                >
+                  <img
+                    src={`${urls.baseURL}${recipe.user_data.user_img}`}
+                    alt="user_img"
+                    className="search_recipe_author_img"
+                  />
+                  <span className="search_recipe_author_nickname">
+                    {recipe.author}
+                  </span>
+                </div>
+                <span className="search_recipe_created_at">{created_at}</span>
               </div>
             </div>
           );
         })}
-        <div>
-          <button name="prev" onClick={handleMove}>{"<"}</button>
+        <div className="search_pagination">
+          <button
+            name="prev"
+            onClick={handleMove}
+            className="search_pagination_btn_prev"
+          >
+            {"<"}
+          </button>
           {pagination()}
-          <button name="next" onClick={handleMove}>{">"}</button>
+          <button
+            name="next"
+            onClick={handleMove}
+            className="search_pagination_btn_next"
+          >
+            {">"}
+          </button>
         </div>
       </section>
     ) : (

@@ -2,7 +2,9 @@
     --main-color: rgb(237, 176, 62);  
     --light-color: rgb(255, 234, 197);
     --text-color: rgb(27, 14, 2);
-    --main-color-op60 : rgb(237, 176, 62, 0.6)
+    --main-color-op50 : rgb(237, 176, 62, 0.5);
+    --main-color-op60 : rgb(237, 176, 62, 0.6);
+    --main-color-op90 : rgb(237, 176, 62, 0.9);
   }
   .row {
     height: fit-content;
