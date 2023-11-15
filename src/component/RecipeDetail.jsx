@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import urls from "../shared/url";
 import axios from "../api/recipes/axios";
 import { useNavigate } from "react-router-dom";
 import Loading from "./Loading";
 import { useSelector } from "react-redux";
+import bookmarked_icon from "../images/bookmarked.png";
+import not_bookmarked_icon from "../images/not_bookmarked.png";
 
 import "../styles/RecipeDetail.css";
 
 const RecipeDetail = ({ recipeDetail }) => {
   const navigate = useNavigate();
-  const [starRate, setStarRate] = useState(""); // 별점 추가 관련 에러처리 필요. (현재 5점 이상이어도 그냥 추가됨.)
+  const [starRate, setStarRate] = useState(0);
+
+  useEffect(() => {
+    console.log(recipeDetail);
+  }, [recipeDetail]);
 
   // 로그인 된 유저 정보
   const user = useSelector(({ users }) => {
@@ -38,19 +44,45 @@ const RecipeDetail = ({ recipeDetail }) => {
     navigate("/update", { state: { recipeDetail } });
   };
 
-  const handleChangeStarRate = (e) => {
-    setStarRate(e.target.value);
-  };
-
   const handleSubmitStarRate = async () => {
     const accessToken = localStorage.getItem("access");
+    setStarRate(document.getElementById("user_star_rate").value);
 
     await axios
       .post(
         `/articles/recipe/${recipeDetail.id}/star_rate/`,
         {
-          star_rate: starRate,
+          star_rate: document.getElementById("user_star_rate").value,
         },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then(function (response) {
+        console.log("reponse.data ", response.data);
+        window.location.reload();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const handleBookmark = async (e) => {
+    const accessToken = localStorage.getItem("access");
+    const bookmark = document.getElementById("bookmark");
+    console.log(e.target.src === bookmarked_icon);
+
+    if (e.target.src === bookmarked_icon) {
+      bookmark.src = not_bookmarked_icon;
+    } else {
+      bookmark.src = bookmarked_icon;
+    }
+    await axios
+      .post(
+        `/articles/recipe/${recipeDetail.id}/bookmark/`,
+        {},
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -70,31 +102,24 @@ const RecipeDetail = ({ recipeDetail }) => {
       {recipeDetail.id !== undefined ? (
         // recipeDetail에 fetch 된 값이 담긴 경우.
         <div>
-          {user.userId === recipeDetail.user_data.id && (
-            <button onClick={handleUpdateRecipe}>게시글 수정</button>
-          )}
-          {user.userId === recipeDetail.user_data.id && (
-            <button onClick={handleDeleteRecipe}>게시글 삭제</button>
-          )}{" "}
-          <br />
-          {!(user.userId === recipeDetail.user_data.id) ? (
-            <div>
-              <span>star_rate : </span>
-              <input onChange={handleChangeStarRate} value={starRate} />
-              <button onClick={handleSubmitStarRate}>submit</button>
-            </div>
-          ) : (
-            <div>
-              <span>star_rate : </span>
-              <input value={starRate} /> - 내 게시글: 별점 작성 불가
-            </div>
-          )}
-          <br />
           <span className="detail_header">
             <p className="detail_title">{recipeDetail.title}</p>
-            <p className="detail_star_avg">
-              평균 별점 : {recipeDetail.star_avg ? parseFloat(recipeDetail.star_avg).toFixed(1) : "-"}
-            </p>
+            <div className="detail_header_rignt">
+              <p className="detail_star_avg">
+                평균 별점 :{" "}
+                {recipeDetail.star_avg
+                  ? parseFloat(recipeDetail.star_avg).toFixed(1)
+                  : "-"}
+              </p>
+              {!(user.userId === recipeDetail.user_data.id) && (
+                <img
+                  src={bookmarked_icon}
+                  id="bookmark"
+                  onClick={handleBookmark}
+                  className="detail_bookmark"
+                />
+              )}
+            </div>
           </span>
           <img
             src={
@@ -105,10 +130,13 @@ const RecipeDetail = ({ recipeDetail }) => {
             className="detail_recipe_thumbnail"
             alt="detail_recipe_thumbnail"
           />
-          <div
-            className="detail_footer"
-          >
-            <div className="detail_author" onClick={() => {navigate(`/profile/${recipeDetail.user_data.id}`);}}>
+          <div className="detail_footer">
+            <div
+              className="detail_author"
+              onClick={() => {
+                navigate(`/profile/${recipeDetail.user_data.id}`);
+              }}
+            >
               <img
                 src={`${urls.baseURL}${recipeDetail.user_data.user_img}`}
                 className="detail_author_img"
@@ -122,7 +150,49 @@ const RecipeDetail = ({ recipeDetail }) => {
                 </p>
               </div>
             </div>
-            <span>북마크</span>
+            <div>
+              {!(user.userId === recipeDetail.user_data.id) ? (
+                <div>
+                  <span>star : </span>
+                  {/* <input value={starRate} /> */}
+                  <select id="user_star_rate" className="user_star_rate_select">
+                    <option value={5}>5</option>
+                    <option value={4}>4</option>
+                    <option value={3}>3</option>
+                    <option value={2}>2</option>
+                    <option value={1}>1</option>
+                  </select>
+                  <button
+                    onClick={handleSubmitStarRate}
+                    className="detail_CU_btn"
+                  >
+                    제출
+                  </button>
+                  {/* <button onClick={handleBookmark} id="bookmark_btn">
+                    북마크 안 됨
+                  </button> */}
+                </div>
+              ) : (
+                <div>
+                  {user.userId === recipeDetail.user_data.id && (
+                    <button
+                      onClick={handleUpdateRecipe}
+                      className="detail_CU_btn"
+                    >
+                      수정
+                    </button>
+                  )}
+                  {user.userId === recipeDetail.user_data.id && (
+                    <button
+                      onClick={handleDeleteRecipe}
+                      className="detail_CU_btn"
+                    >
+                      삭제
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
           <div className="detail_sections_div">
             <p className="detail_sections_title">재료 :</p>
@@ -146,7 +216,7 @@ const RecipeDetail = ({ recipeDetail }) => {
             </span>
           </div>
           <div className="detail_sections_div">
-            <p className="detail_sections_title">조리 순서 :</p>
+            <p className="detail_sections_title">요리 순서 :</p>
             <div className="detail_all_recipe_orders">
               {recipeDetail.recipe_order.map((orderObject) => {
                 return (
@@ -155,24 +225,30 @@ const RecipeDetail = ({ recipeDetail }) => {
                     className="detail_each_recipe_order"
                   >
                     <span className="detail_recipe_orders">
-                      <span className="detail_recipe_orders_order">{orderObject.order}</span>
-                      <span className="detail_recipe_orders_content">{orderObject.content}</span>
+                      <span className="detail_recipe_orders_order">
+                        {orderObject.order}
+                      </span>
+                      <span className="detail_recipe_orders_content">
+                        {orderObject.content}
+                      </span>
                     </span>
-                    {recipeDetail.api_recipe ? orderObject.recipe_img_api && (
-                      <img
-                        src={`${orderObject.recipe_img_api}`}
-                        className="detail_recipe_order_img"
-                      />
-                    ) : orderObject.recipe_img && (
-                      <img
-                        src={
-                          orderObject.recipe_img
-                            ? `${urls.baseURL}${orderObject.recipe_img}`
-                            : ""
-                        }
-                        className="detail_recipe_order_img"
-                      />
-                    )}
+                    {recipeDetail.api_recipe
+                      ? orderObject.recipe_img_api && (
+                          <img
+                            src={`${orderObject.recipe_img_api}`}
+                            className="detail_recipe_order_img"
+                          />
+                        )
+                      : orderObject.recipe_img && (
+                          <img
+                            src={
+                              orderObject.recipe_img
+                                ? `${urls.baseURL}${orderObject.recipe_img}`
+                                : ""
+                            }
+                            className="detail_recipe_order_img"
+                          />
+                        )}
 
                     {/*content 뒤에 알파벳 붙어나오고(맨 앞 레시피만), 앞에 1. 이런 순서 번호가 붙음.*/}
                   </div>

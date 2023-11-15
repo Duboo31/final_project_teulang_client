@@ -107,7 +107,7 @@ const SearchResults = () => {
               >
                 <div className="search_recipe_left">
                   <div className="search_recipe_title_div">
-                    <p className="search_recipe_title">{recipe.title}</p>
+                    <p className="search_recipe_title">{recipe.title.length > 13 ? recipe.title.substr(0,13)+" ..." : recipe.title}</p>
                   </div>
                   <div className="search_recipe_desc_div">
                     <p className="search_recipe_desc">

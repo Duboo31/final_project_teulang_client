@@ -3,11 +3,13 @@ import React, { useEffect, useState } from "react";
 import urls from "../shared/url";
 import Loading from "./Loading";
 import "../styles/Comments.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Comments({ recipeComments, recipeId }) {
   const [commentContent, setCommentContent] = useState("");
   const [commentUpdateContent, setCommentUpdateContent] = useState("");
   const [comments, setComments] = useState(recipeComments);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setComments(recipeComments); // 처음에 새로고침하면 recipeComments가 undefined로 들어와서, 값이 들어왔을 때 comments에 넣고 화면에 띄우기 위해서 필요.
@@ -158,7 +160,7 @@ export default function Comments({ recipeComments, recipeId }) {
               // 이걸 안 하면 삭제했을 때 저 comment.id랑 comment.content 등만 사라지고 기존에 그냥 comment 이런 글자나 div는 남음.
               return (
                 <div key={comment.id} className="comments_each_div">
-                  <div className="comments_header">
+                  <div className="comments_header" onClick={() => {navigate(`/profile/${comment.user_data.id}`)}}>
                     <div className="comments_author">
                       <img
                         src={`${urls.baseURL}${comment.user_data.user_img}`}

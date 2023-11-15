@@ -4,7 +4,6 @@ import axios from "../api/recipes/axios";
 import requests from "../api/recipes/requests";
 
 // components
-import Bookmark from "./Bookmark";
 import RecipeDetail from "./RecipeDetail";
 import Comments from "./Comments";
 
@@ -28,7 +27,6 @@ export default function RecipeDetailForm({ recipeId }) {
 
   return (
     <div>
-      <Bookmark recipeId={recipeId} />
       <RecipeDetail recipeDetail={recipeDetail} />
       <Comments
         recipeComments={recipeDetail.article_recipe_comment}

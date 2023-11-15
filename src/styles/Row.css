@@ -5,6 +5,7 @@
     --main-color-op50 : rgb(237, 176, 62, 0.5);
     --main-color-op60 : rgb(237, 176, 62, 0.6);
     --main-color-op90 : rgb(237, 176, 62, 0.9);
+    --error-color: rgb(210, 36, 36);
   }
   .row {
     height: fit-content;
@@ -47,7 +48,8 @@
   .recipe_star_avg {
     margin-right: 0.5rem;
     font-size: small;
-    width: 1.8rem;
+    width: 2.5rem;
+    text-align: center;
   }
   .recipe_author{
     display: flex;
