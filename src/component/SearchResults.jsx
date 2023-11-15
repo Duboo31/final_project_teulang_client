@@ -6,6 +6,9 @@ import urls from "../shared/url";
 const SearchResults = () => {
   const [searchResults, setSearchResults] = useState([]);
   const navigate = useNavigate();
+  const [maxPage, setMaxPage] = useState(0);
+  const pagination_btn = []
+  const pagination_btn_show = []
 
   const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -16,6 +19,7 @@ const SearchResults = () => {
   const searchTerms = (searchTermString ? searchTermString.split(",") : []);
   let searchTerm = "";
   let updatedSearchTerm = "";
+  const curPage = query.get("page");
 
   for (let i = 0; i < searchTerms.length; i++) {
     if (i === searchTerms.length - 1) {
@@ -28,22 +32,47 @@ const SearchResults = () => {
   searchTerm = updatedSearchTerm;
 
   useEffect(() => {
-    if (searchTerms) {
-      fetchSearchRecipe(searchTerm);
+    if (searchTerms && curPage) {
+      fetchSearchRecipe(searchTerm, curPage);
     }
-  }, [searchTermString]);
+  }, [searchTermString, curPage]);
 
-  const fetchSearchRecipe = async (searchTerm) => {
+  const fetchSearchRecipe = async (searchTerm, curPage=1) => {
     try {
-      const request = await axios.get(`articles/recipe/search?q=${searchTerm}`);
-      setSearchResults(request.data);
+      const response = await axios.get(`articles/recipe/search?q=${searchTerm}&page=${curPage}`);
+      setSearchResults(response.data.serializer_data);
+      console.log(response.data.pagination_data)
+      setMaxPage(response.data.pagination_data.pages_num);
     } catch (error) {
       console.log("error", error);
     }
   };
 
+  const pagination = () => {
+    for (let i = 1; i<maxPage+1; i++) {
+      pagination_btn.push(<button name={`${i}`}>{i}</button>)
+    }
+    const start = parseInt(curPage/5) * 5;
+    const end = (maxPage > (start + 5) ? (start + 5) : maxPage);
+    return pagination_btn.slice(start, end);
+  }
+  
+  const handleMove = (e) => {
+    const {name} = e.target;
+    var go = 0;
+
+    if (name === "prev"){
+      go = (parseInt((curPage - 1)/5) - 1) * 5 + 1; // ex: 현재 6~10페이지라면, 1페이지로.
+    } else {
+      go = (parseInt((curPage - 1)/5) + 1) * 5 + 1; // ex: 현재 6~10페이지라면, 11페이지로.
+    }
+
+    if (go > 0 && go < maxPage) {
+      navigate(`/search?q=${searchTerm}&page=${go}`)
+    }
+  }
+
   const renderSearchRecipes = () => {
-    console.log(searchResults);
     return searchResults.length > 0 ? (
       <section>
         {searchResults.map((recipe, index) => {
@@ -64,6 +93,11 @@ const SearchResults = () => {
             </div>
           );
         })}
+        <div>
+          <button name="prev" onClick={handleMove}>{"<"}</button>
+          {pagination()}
+          <button name="next" onClick={handleMove}>{">"}</button>
+        </div>
       </section>
     ) : (
       <section className="no-results">
