@@ -1,0 +1,122 @@
+:root {
+    --main-color: rgb(237, 176, 62);  
+    --light-color: rgb(255, 234, 197);
+    --text-color: rgb(27, 14, 2);
+  }
+.recipe_detail {
+    width: 100%;
+    padding: 1rem 0.2rem;
+    padding-bottom: 0;
+    color: var(--text-color);
+}
+.detail_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    border-radius: 15px 15px 0 0;
+    background-color: var(--main-color);
+}
+.detail_title {
+    font-size: large;
+    font-weight: 620;
+}
+.detail_star_avg {
+    font-size: smaller;
+}
+.detail_recipe_thumbnail {
+    width: 100%;
+}
+.detail_footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.detail_author {
+    display: flex;
+    align-items: center;
+}
+.detail_author_img {
+    height: 3.5rem;
+}
+.detail_author_right{
+    display: block;
+    margin-left: 0.3rem;
+}
+.detail_created_at {
+    font-size: small;
+    margin-top: 0.3rem;
+    margin-bottom: 0.5rem;
+    color: gray;
+}
+.detail_author_nickname {
+    margin-bottom: 0;
+    margin-top: 0.5rem;
+    font-weight: 600;
+}
+.detail_sections_div {
+    display: block;
+    /* border: 1px solid; */
+    padding: 1rem 0.3rem;
+    border-top: 1px solid var(--light-color);
+}
+.detail_sections_title {
+    font-size: medium;
+    font-weight: 500;
+    margin: 0.3rem 0;
+}
+.detail_all_ingredients {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /* 요소들이 가로로 넘치는 경우를 대비하여 줄 바꿈 설정 */
+}
+.detail_each_ingredient {
+    background-color: var(--light-color);
+    border-radius: 1rem;
+    margin: 0.2rem;
+    font-size: small;
+    font-weight: 500;
+    padding: 0.5rem;
+}
+.detail_description {
+    margin: 0.7rem 0;
+    font-size: small;
+}
+.detail_all_recipe_orders {
+    margin: 0.7rem 0;
+}
+.detail_each_recipe_order {
+    /* border: 1px solid; */
+    min-height: 5rem;
+    display: flex;
+    justify-content: space-between;
+    margin: 0.2rem 0;
+    padding: 0.1rem;
+    border-bottom: 1px solid var(--light-color);
+}
+.detail_recipe_orders {
+    display: flex;
+}
+.detail_recipe_orders_order {
+    background-color: var(--light-color);
+    border-radius: 1rem;
+    width: fit-content;
+    height: fit-content;
+    padding: 0.3rem;
+    margin-top: 0.3rem;
+    box-shadow: inset;
+}
+.detail_recipe_orders_content {
+    padding: 0.5rem;
+    font-size: smaller;
+}
+.detail_recipe_order_img {
+    max-width: 8rem;
+    max-height: 8rem;
+    object-fit: cover;
+    border-radius: 0.2rem;
+    margin: 0.3rem;
+}
+.detail_each_recipe_order {
+    display: flex;
+}

@@ -30,16 +30,12 @@ const Row = ({ title, id, fetchUrl }) => {
 
   return (
     <section className="row">
-      <h2>{title}</h2>
+      <h2 className="row_title">{title}</h2>
       <Swiper
         // install Swiper modules
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         loop={true} // loop 기능을 사용할 것인지
         breakpoints={{
-          // 1378: {
-          //   slidesPerView: 6, // 한번에 보이는 슬라이드 개수
-          //   slidesPerGroup: 6, // 몇개씩 슬라이드 할지
-          // },
           998: {
             slidesPerView: 5,
             slidesPerGroup: 5,
@@ -49,8 +45,8 @@ const Row = ({ title, id, fetchUrl }) => {
             slidesPerGroup: 4,
           },
           0: {
-            slidesPerView: 3,
-            slidesPerGroup: 3,
+            slidesPerView: 2,
+            slidesPerGroup: 2,
           },
         }}
         navigation // arrow 버튼 사용 유무
@@ -59,17 +55,26 @@ const Row = ({ title, id, fetchUrl }) => {
         <div id={id}>
           {recipes.map((recipe) => (
             <SwiperSlide key={recipe.id}>
-              <p>title: {recipe.title}</p>
-              <img
-                key={recipe.id}
-                style={{ padding: "25px 0" }}
-                className={`row__poster`}
-                src={(recipe.api_recipe) ? `${recipe.recipe_thumbnail_api}` : `${urls.baseURL}${recipe.recipe_thumbnail}`}
-                alt={recipe.name}
-                onClick={() => navigate(`/recipe/${recipe.id}`)}
-              />
-              <p onClick={() => navigate(`/profile/${recipe.user_data.id}`)}>author: {recipe.author}</p>
-              <p>description: {recipe.description ? recipe.description : "-"}</p>
+              <div className="recipe_content">
+                <span className="recipe_top_span">
+                  <p className="recipe_title">{recipe.title}</p>
+                  <p className="recipe_star_avg">* {recipe.star_avg ? parseFloat(recipe.star_avg).toFixed(1) : "-"}</p>
+                </span>
+                <span >
+                  <img
+                    key={recipe.id}
+                    className={`recipe_thumbnail`}
+                    src={(recipe.api_recipe) ? `${recipe.recipe_thumbnail_api}` : `${urls.baseURL}${recipe.recipe_thumbnail}`}
+                    alt={recipe.name}
+                    onClick={() => navigate(`/recipe/${recipe.id}`)}
+                  />
+                </span>
+                <span className="recipe_author">
+                  <img src={`${urls.baseURL}${recipe.user_data.user_img}`} className="recipe_author_img"/>
+                  <p className="recipe_author_nickname" onClick={() => navigate(`/profile/${recipe.user_data.id}`)}>{recipe.author}</p>
+                </span>
+                <p className="recipe_desc">{recipe.description ? recipe.description : "-"}</p>
+              </div>
             </SwiperSlide>
           ))}
         </div>

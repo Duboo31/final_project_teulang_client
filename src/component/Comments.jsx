@@ -2,6 +2,7 @@ import axios from "../api/recipes/axios";
 import React, { useEffect, useState } from "react";
 import urls from "../shared/url";
 import Loading from "./Loading";
+import "../styles/Comments.css";
 
 export default function Comments({ recipeComments, recipeId }) {
   const [commentContent, setCommentContent] = useState("");
@@ -41,7 +42,9 @@ export default function Comments({ recipeComments, recipeId }) {
         // 이렇게 하기 위해서 원래 response로 오던 "댓글이 작성되었습니다"를 새로 작성된 데이터로 바꿨는데 이렇게 하는게 맞나?
 
         // 생성 인풋 값 지우기
-        const createInput = document.getElementById(`comment_create_input${recipeId}`);
+        const createInput = document.getElementById(
+          `comment_create_input${recipeId}`
+        );
         createInput.value = "";
       })
       .catch(function (error) {
@@ -61,22 +64,27 @@ export default function Comments({ recipeComments, recipeId }) {
     const updateInput = document.getElementById(
       `comment_update_input${updateCommentId}`
     );
+    const prevContentSpan = document.getElementById(
+      `comments_content${updateCommentId}`
+    );
     // 아래서 update btn / updateinput에 특정 id값 안 넣어주니까 아래에서 수정 버튼 눌러도 무조건 맨 위에 버튼이나 input이 지정되었음.
     // 그랬더니 수정도 맨 위에거만 됨. 왜 그랬는지.. 아래 findindex 로직을 더 깊게 이해해봐야할 듯.
     // updateCommentId는 그때도 클릭한 댓글의 id로 잘 지정되었는데!
 
     const accessToken = localStorage.getItem("access");
 
-    if (updateBtn.textContent === "수정하기") {
+    if (updateBtn.textContent === "수정") {
+      console.log(prevContentSpan);
       updateInput.style.display = "block";
+      prevContentSpan.style.display = "none";
       updateInput.value = prevCommentContent;
-      updateBtn.textContent = "수정";
+      updateBtn.textContent = "저장";
     } else {
       await axios
         .put(
           `/articles/recipe/${recipeId}/comment/${updateCommentId}/`,
           {
-            content: commentUpdateContent,
+            content: updateInput.value,
             article_recipe: recipeId,
           },
           {
@@ -95,7 +103,8 @@ export default function Comments({ recipeComments, recipeId }) {
           setComments(copiedComments);
 
           updateInput.style.display = "none";
-          updateBtn.textContent = "수정하기";
+          prevContentSpan.style.display = "block";
+          updateBtn.textContent = "수정";
         })
         .catch(function (error) {
           console.log(error);
@@ -128,50 +137,80 @@ export default function Comments({ recipeComments, recipeId }) {
   };
 
   return (
-    <section>
-      <div>
-        <input
+    <section className="comments">
+      <p className="comments_create_title">댓글 : </p>
+      <div className="comments_create">
+        <textarea
           onChange={handleCreateInputChange}
           id={`comment_create_input${recipeId}`}
+          className="comments_create_input"
         />
-        <button onClick={handleCreateComment}>create</button>
+        <button onClick={handleCreateComment} className="comments_create_btn">
+          작성
+        </button>
       </div>
 
       {/* 댓글 보여주기 */}
       {comments !== undefined ? (
-        <div>
+        <div className="comments_all_div">
           {comments.map((comment, index) => {
             if (comment.id) {
               // 이걸 안 하면 삭제했을 때 저 comment.id랑 comment.content 등만 사라지고 기존에 그냥 comment 이런 글자나 div는 남음.
               return (
-                <div key={comment.id} style={{ border: "1px solid" }}>
-                  <img
-                    src={`${urls.baseURL}${comment.user_data.user_img}`}
-                    style={{ width: "30px" }}
-                  />{" "}
-                  {/* 백에서 user_defalt.jpg 로 되어있음. user_default.jpg로 수정 필요 */}
-                  author: {comment.user_data.nickname} <br />
-                  comment{index}: {comment.content}{" "}
-                  <input
-                    onChange={handleUpdateInputChange}
-                    id={`comment_update_input${comment.id}`}
-                    style={{ display: "none" }}
-                  />
-                  <button
-                    onClick={() =>
-                      handleUpdateComment(comment.id, comment.content)
-                    }
-                    id={`comment_update_btn${comment.id}`}
-                  >
-                    수정하기
-                  </button>
-                  {/* comment에 작성한 유저의 아이디 등 유저 정보 필요 */}
-                  <button
-                    onClick={() => handleDeleteComment(comment.id)}
-                    id={`comment_delete_btn${comment.id}`}
-                  >
-                    삭제
-                  </button>
+                <div key={comment.id} className="comments_each_div">
+                  <div className="comments_header">
+                    <div className="comments_author">
+                      <img
+                        src={`${urls.baseURL}${comment.user_data.user_img}`}
+                        className="comments_author_img"
+                      />{" "}
+                      {/* 백에서 user_defalt.jpg 로 되어있음. user_default.jpg로 수정 필요 */}
+                      <span className="comments_author_nickname">
+                        {comment.user_data.nickname}
+                      </span>
+                    </div>
+                    <div className="comments_UD_btns">
+                      <button
+                        onClick={() =>
+                          handleUpdateComment(comment.id, comment.content)
+                        }
+                        id={`comment_update_btn${comment.id}`}
+                        className="comments_update_btn"
+                      >
+                        수정
+                      </button>
+                      <button
+                        onClick={() => handleDeleteComment(comment.id)}
+                        id={`comment_delete_btn${comment.id}`}
+                        className="comments_delete_btn"
+                      >
+                        삭제
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="comments_content_div">
+                    <div
+                      id={`comments_content${comment.id}`}
+                      className="comments_content"
+                    >
+                      {comment.content}
+                    </div>
+                    <textarea
+                      onChange={handleUpdateInputChange}
+                      id={`comment_update_input${comment.id}`}
+                      style={{ display: "none" }}
+                      className="comments_update_input"
+                    />
+                  </div>
+
+                  <div className="comments_footer">
+                    <span className="comments_create_at">
+                      {comment.created_at.split("T")[0] +
+                        " " +
+                        comment.created_at.split("T")[1].substr(0, 5)}
+                    </span>
+                  </div>
                 </div>
               );
             }
