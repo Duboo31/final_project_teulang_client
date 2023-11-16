@@ -3,13 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/modules/users";
 import { useNavigate } from "react-router-dom";
 
-const IsLoginNavi = ({ users }) => {
+// css
+import "../../styles/navigation/header.css";
+
+const IsLoginNavi = ({ users, setIsNaviActive }) => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
   const onClickLogoutBtnHandler = () => {
     dispatch(logout());
+    setIsNaviActive((cur) => !cur);
+    navigate("/");
   };
 
   // 리덕스 스토어의 현재 계정 정보
@@ -18,15 +23,25 @@ const IsLoginNavi = ({ users }) => {
   });
 
   const onClickUserNicknameHandler = () => {
-    console.log("유저 이름 클릭");
     navigate(`/profile/${user.userId}`);
+    setIsNaviActive((cur) => !cur);
   };
 
   return (
-    <span>
-      <span onClick={onClickUserNicknameHandler}>{users.userNickname}님</span>
-      <button onClick={onClickLogoutBtnHandler}>로그아웃</button>
-    </span>
+    <div className="navigation_header">
+      <div
+        className="navigation_header-item"
+        onClick={onClickUserNicknameHandler}
+      >
+        <p className="navigation_header-name">{users.userNickname}</p>님
+      </div>
+      <button
+        className="navigation_header-item"
+        onClick={onClickLogoutBtnHandler}
+      >
+        로그아웃
+      </button>
+    </div>
   );
 };
 

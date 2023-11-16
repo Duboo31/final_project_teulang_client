@@ -12,7 +12,6 @@ const Update = () => {
   const [profileActive, setProfileActive] = useState(false);
 
   const dispatch = useDispatch();
-
   // useForm - 폼 데이터의 정보 받기 및 유효성 검사
   const {
     register,
@@ -37,8 +36,6 @@ const Update = () => {
     }
   }, [watchProfile]);
 
-  console.log(watchProfile);
-
   // 리덕스 스토어의 현재 계정 정보
   const user = useSelector(({ users }) => {
     return users;
@@ -47,7 +44,6 @@ const Update = () => {
   const { mutate } = useMutation(userModify, {
     onSuccess: (result) => {
       if (result.status === 200) {
-        console.log("회원정보 수정 완료", result);
         reset({
           nickname: "",
           password: "",
