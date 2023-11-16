@@ -4,23 +4,19 @@
     box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
       0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12);
     background: #ffffff;
-    overflow: hidden;
+    overflow: scroll;
     border-radius: 8px;
     transition: all 400ms ease-in-out 2s;
     animation: fadeIn 400ms;
+    height: 30rem;
   }
   .modal__poster-img {
     width: 100%;
     height: auto;
   }
   .modal__content {
-    padding: 40px;
+    padding: 20px;
     color: black;
-  }
-  .modal__title {
-    padding: 0;
-    font-size: 40px;
-    margin: 16px 0;
   }
   .modal__details {
     font-weight: 600;
@@ -30,8 +26,11 @@
     font-size: 20px;
     line-height: 1.5;
   }
-  .modal__user-perc {
-    color: #46d369;
+  .modal__title {
+    padding: 0.3rem 0.5rem;
+    margin: 16px 0;
+    background-color: var(--light-color);
+    border-radius: 0.3rem;
   }
   .modal::-webkit-scrollbar {
     display: none;
@@ -50,6 +49,7 @@
     -webkit-tap-highlight-color: transparent;
     display: flex;
     justify-content: center;
+    align-items: center;
   }
   .presentation {
     z-index: 1200;
@@ -62,29 +62,6 @@
     cursor: pointer;
     z-index: 1000;
     color: black;
-  }
-  @media screen and (max-height: 768px) {
-    .wrapper-modal {
-      align-items: unset;
-      padding-top: 2rem;
-    }
-    .modal {
-      overflow-y: scroll;
-    }
-  }
-  @media screen and (max-width: 768px) {
-    .modal__overview {
-      font-size: 16px;
-    }
-    .modal__details {
-      font-size: 16px;
-    }
-    .wrapper-modal {
-      padding: 0;
-    }
-    .modal {
-      overflow-y: scroll !important;
-    }
   }
   @keyframes fadeIn {
     from {
