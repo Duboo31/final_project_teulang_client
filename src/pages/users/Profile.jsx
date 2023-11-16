@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getPorfile } from "../../api/user/GET/profile";
 import { useQuery } from "react-query";
 import { useSelector } from "react-redux";
@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 // css
 import "../../styles/user/profile.css";
 import "../../styles/recipe/recipe.css";
+import { faL } from "@fortawesome/free-solid-svg-icons";
 
 const Profile = () => {
   // 프로필 페이지에서 현재 로그인 유저와 페이지의 유저가 같은 유저인지 확인
@@ -98,18 +99,20 @@ const Profile = () => {
             {isSuccess &&
               data.data.articles_recipe.map((recipe) => {
                 return (
-                  <li key={recipe.id}>
-                    <div>
-                      <img
-                        src={`${process.env.REACT_APP_SERVER_LOCAL_URL}${recipe.recipe_thumbnail}`}
-                        alt="레시피 썸네일"
-                      />
-                    </div>
-                    <div className="recipe-detail">
-                      <div>{recipe.title}</div>
-                      <div>{recipe.description}</div>
-                    </div>
-                  </li>
+                  <Link to={`/recipe/${recipe.id}`}>
+                    <li key={recipe.id}>
+                      <div>
+                        <img
+                          src={`${process.env.REACT_APP_SERVER_LOCAL_URL}${recipe.recipe_thumbnail}`}
+                          alt="레시피 썸네일"
+                        />
+                      </div>
+                      <div className="recipe-detail">
+                        <div>{recipe.title}</div>
+                        <div>{recipe.description}</div>
+                      </div>
+                    </li>
+                  </Link>
                 );
               })}
           </ul>
@@ -118,29 +121,28 @@ const Profile = () => {
             {isSuccess &&
               data.data.bookmarked_articles.map((recipe) => {
                 return (
-                  <li key={recipe.id}>
-                    <div
-                      onClick={() => {
-                        navigate(`/profile/${recipe.article_recipe.author}`);
-                      }}
-                    >
-                      <img
-                        src={`${process.env.REACT_APP_SERVER_LOCAL_URL}${recipe.article_recipe.recipe_thumbnail}`}
-                        alt="레시피 썸네일"
-                      />
-                    </div>
-                    <div className="recipe-detail">
-                      <div>{recipe.article_recipe.title}</div>
-                      <div>{recipe.article_recipe.description}</div>
-                      <div
-                        onClick={() => {
-                          navigate(`/profile/${recipe.article_recipe.author}`);
-                        }}
-                      >
-                        {recipe.author_nickname}
+                  <Link
+                    onClick={() => {
+                      isBookmarkActive(false);
+                    }}
+                    to={`/profile/${recipe.article_recipe.author}`}
+                  >
+                    <li key={recipe.id}>
+                      <div>
+                        <img
+                          src={`${process.env.REACT_APP_SERVER_LOCAL_URL}${recipe.article_recipe.recipe_thumbnail}`}
+                          alt="레시피 썸네일"
+                        />
                       </div>
-                    </div>
-                  </li>
+                      <div className="recipe-detail">
+                        <div>{recipe.article_recipe.title}</div>
+                        <div>{recipe.article_recipe.description}</div>
+                        <div>
+                          <p>{recipe.author_nickname}</p>
+                        </div>
+                      </div>
+                    </li>
+                  </Link>
                 );
               })}
           </ul>

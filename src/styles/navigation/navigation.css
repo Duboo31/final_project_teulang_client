@@ -12,6 +12,7 @@
 
 .navigation-wrap.active {
   right: -100%;
+  width: 0;
 }
 
 .navigation-upper {
