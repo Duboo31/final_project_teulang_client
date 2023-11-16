@@ -141,15 +141,17 @@ export default function Comments({ recipeComments, recipeId }) {
   return (
     <section className="comments">
       <p className="comments_create_title">댓글 : </p>
-      <div className="comments_create">
-        <textarea
-          onChange={handleCreateInputChange}
-          id={`comment_create_input${recipeId}`}
-          className="comments_create_input"
-        />
-        <button onClick={handleCreateComment} className="comments_create_btn">
-          작성
-        </button>
+      <div className="comments_create_div">
+        <div className="comments_create">
+          <textarea
+            onChange={handleCreateInputChange}
+            id={`comment_create_input${recipeId}`}
+            className="comments_create_input"
+          />
+          <button onClick={handleCreateComment} className="comments_create_btn">
+            작성
+          </button>
+        </div>
       </div>
 
       {/* 댓글 보여주기 */}
@@ -160,8 +162,13 @@ export default function Comments({ recipeComments, recipeId }) {
               // 이걸 안 하면 삭제했을 때 저 comment.id랑 comment.content 등만 사라지고 기존에 그냥 comment 이런 글자나 div는 남음.
               return (
                 <div key={comment.id} className="comments_each_div">
-                  <div className="comments_header" onClick={() => {navigate(`/profile/${comment.user_data.id}`)}}>
-                    <div className="comments_author">
+                  <div className="comments_header">
+                    <div
+                      className="comments_author"
+                      onClick={() => {
+                        navigate(`/profile/${comment.user_data.id}`);
+                      }}
+                    >
                       <img
                         src={`${urls.baseURL}${comment.user_data.user_img}`}
                         className="comments_author_img"

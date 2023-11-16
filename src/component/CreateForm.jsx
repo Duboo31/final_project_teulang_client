@@ -539,7 +539,7 @@ export default function CreateForm({
             onChange={onChange}
             name="title"
             value={inputs.title}
-            placeholder="title"
+            placeholder="타이틀을 입력해주세요."
             className="form_title_input"
           />
           <label

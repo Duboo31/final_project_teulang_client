@@ -6,17 +6,34 @@ import Loading from "./Loading";
 import { useSelector } from "react-redux";
 import bookmarked_icon from "../images/bookmarked.png";
 import not_bookmarked_icon from "../images/not_bookmarked.png";
+import full_star from "../images/star_full.png";
+import empty_star from "../images/star_empty.png";
 
 import "../styles/RecipeDetail.css";
 
 const RecipeDetail = ({ recipeDetail }) => {
   const navigate = useNavigate();
   const [starAvg, setStarAvg] = useState(recipeDetail.star_avg);
+  let stars = [];
 
   useEffect(() => {
     console.log(recipeDetail);
     setStarAvg(recipeDetail.star_avg);
   }, [recipeDetail]);
+
+  // useEffect(() => {
+  //   for (let i = 1; i < 6; i++) {
+  //     stars.push(
+  //       <img
+  //         src={empty_star}
+  //         key={`${i}`}
+  //         name={`${i}`}
+  //         className="detail_rate_star"
+  //         onClick={handleSubmitStarRate}
+  //       />
+  //     );
+  //   }
+  // },[])
 
   // 로그인 된 유저 정보
   const user = useSelector(({ users }) => {
@@ -43,31 +60,6 @@ const RecipeDetail = ({ recipeDetail }) => {
 
   const handleUpdateRecipe = () => {
     navigate("/update", { state: { recipeDetail } });
-  };
-
-  const handleSubmitStarRate = async () => {
-    const accessToken = localStorage.getItem("access");
-
-    await axios
-      .post(
-        `/articles/recipe/${recipeDetail.id}/star_rate/`,
-        {
-          star_rate: document.getElementById("user_star_rate").value,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
-      .then(function (response) {
-        console.log("reponse.data ", response.data);
-        setStarAvg(response.data.star_avg);
-        window.location.reload();
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
   };
 
   const handleBookmark = async (e) => {
@@ -98,6 +90,61 @@ const RecipeDetail = ({ recipeDetail }) => {
       });
   };
 
+  const handleSubmitStarRate = async (e) => {
+    const value = e.target.name;
+
+    const accessToken = localStorage.getItem("access");
+
+    await axios
+      .post(
+        `/articles/recipe/${recipeDetail.id}/star_rate/`,
+        {
+          star_rate: value,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then(function (response) {
+        console.log("reponse.data ", response.data);
+        // console.log(response.data.star_avg);
+        window.location.reload();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const renderStar = (mine) => {
+    for (let i = 1; i < 6; i++) {
+      if (i <= mine) {
+        stars.push(
+          <img
+            src={full_star}
+            key={`${i}`}
+            name={`${i}`}
+            className="detail_rate_star"
+            onClick={handleSubmitStarRate}
+          />
+        );
+      } else {
+        stars.push(
+          <img
+            src={empty_star}
+            key={`${i}`}
+            name={`${i}`}
+            className="detail_rate_star"
+            onClick={handleSubmitStarRate}
+          />
+        );
+      }
+      
+    }
+    return stars;
+  };
+
   return (
     <div className="recipe_detail">
       {recipeDetail.id !== undefined ? (
@@ -106,15 +153,17 @@ const RecipeDetail = ({ recipeDetail }) => {
           <span className="detail_header">
             <p className="detail_title">{recipeDetail.title}</p>
             <div className="detail_header_rignt">
+              <img src={full_star} className="detail_star_avg_img" />
               <p className="detail_star_avg">
-                평균 별점 :{" "}
-                {starAvg
-                  ? parseFloat(recipeDetail.star_avg).toFixed(1)
-                  : "-"}
+                {starAvg ? parseFloat(starAvg).toFixed(1) : "-"}
               </p>
               {!(user.userId === recipeDetail.user_data.id) && (
                 <img
-                  src={bookmarked_icon}
+                  src={
+                    recipeDetail.request_user_article_data.is_bookmarked
+                      ? bookmarked_icon
+                      : not_bookmarked_icon
+                  }
                   id="bookmark"
                   onClick={handleBookmark}
                   className="detail_bookmark"
@@ -153,25 +202,12 @@ const RecipeDetail = ({ recipeDetail }) => {
             </div>
             <div>
               {!(user.userId === recipeDetail.user_data.id) ? (
-                <div>
-                  <span>star : </span>
-                  {/* <input value={starRate} /> */}
-                  <select id="user_star_rate" className="user_star_rate_select">
-                    <option value={5}>5</option>
-                    <option value={4}>4</option>
-                    <option value={3}>3</option>
-                    <option value={2}>2</option>
-                    <option value={1}>1</option>
-                  </select>
-                  <button
-                    onClick={handleSubmitStarRate}
-                    className="detail_CU_btn"
-                  >
-                    제출
-                  </button>
-                  {/* <button onClick={handleBookmark} id="bookmark_btn">
-                    북마크 안 됨
-                  </button> */}
+                <div className="detail_star_div">
+                  {recipeDetail.request_user_article_data.is_star_rated
+                    ? renderStar(
+                        recipeDetail.request_user_article_data.star_rate
+                      )
+                    : renderStar(0)}
                 </div>
               ) : (
                 <div>
@@ -196,7 +232,7 @@ const RecipeDetail = ({ recipeDetail }) => {
             </div>
           </div>
           <div className="detail_sections_div">
-            <p className="detail_sections_title">재료 :</p>
+            <p className="detail_sections_title">재료 : </p>
             <div className="detail_all_ingredients">
               {recipeDetail.recipe_ingredients.map((ingredientObject) => {
                 return (

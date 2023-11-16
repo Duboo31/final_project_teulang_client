@@ -12,21 +12,28 @@
     /* border-radius: 15px 15px 0 0; */
     /* background-color: var(--main-color-op90); */
     border-top: 3px solid var(--main-color);
+    height: 50px;
 }
 .detail_title {
-    font-size: large;
-    font-weight: 620;
+    font-size: 18px;
+    font-weight: 600;
 }
 .detail_header_rignt {
     display: flex;
     align-items: center;
+}.detail_star_avg_img {
+    height: 18px;
+    margin-right: 3px;
 }
 .detail_star_avg {
-    font-size: smaller;
+    font-size: 14px;
+    padding-left: 2px;
+    color: var(--main-color);
+    font-weight: bold;
 }
 .detail_bookmark {
-    margin: 0 -0.4rem 0 1rem ;
-    height: 1.7rem;
+    margin: 0 -5px 0 10px ;
+    height: 20px;
 }
 .detail_recipe_thumbnail {
     width: 100%;
@@ -53,7 +60,7 @@
     margin-left: 0.3rem;
 }
 .detail_created_at {
-    font-size: small;
+    font-size: 11.5px;
     margin-top: 0.3rem;
     margin-bottom: 0.5rem;
     color: gray;
@@ -61,6 +68,13 @@
 .user_star_rate_select {
     border: 0.3px solid var(--main-color);
     border-radius: 0.2rem;
+}
+.detail_star_div {
+    margin-right: 7px;
+}
+.detail_rate_star {
+    height: 18px;
+    margin-right: 0.5px;
 }
 .detail_author_nickname {
     margin-bottom: 0;
@@ -73,6 +87,7 @@
     margin: 0 0.2rem;
     border-radius: 1rem;
     background-color: var(--main-color-op60);
+    font-size: 13px;
 }
 .detail_sections_div {
     display: block;
@@ -81,9 +96,10 @@
     border-top: 1px solid var(--light-color);
 }
 .detail_sections_title {
-    font-size: medium;
+    font-size: 15px;
     font-weight: 500;
-    margin: 0.3rem 0;
+    margin-left: 5px;
+    margin-bottom: 15px;
 }
 .detail_all_ingredients {
     display: flex;
@@ -94,13 +110,14 @@
     background-color: var(--light-color);
     border-radius: 1rem;
     margin: 0.2rem;
-    font-size: small;
+    font-size: 12px;
     font-weight: 500;
     padding: 0.5rem;
 }
 .detail_description {
     margin: 0.7rem 0;
-    font-size: small;
+    font-size: 12px;
+    margin-left: 5px;
 }
 .detail_all_recipe_orders {
     margin: 0.7rem 0;
@@ -119,15 +136,19 @@
 }
 .detail_recipe_orders_order {
     background-color: var(--light-color);
-    border-radius: 1rem;
-    width: fit-content;
-    height: fit-content;
+    border-radius: 25px;
+    max-width: 25px;
+    max-height: 25px;
+    min-width: 25px;
+    min-height: 25px;
     padding: 0.3rem;
     margin-top: 0.3rem;
+    font-size: 14px;
+    text-align: center;
 }
 .detail_recipe_orders_content {
     padding: 0.5rem;
-    font-size: smaller;
+    font-size: 12px;
 }
 .detail_recipe_order_img {
     max-width: 8rem;

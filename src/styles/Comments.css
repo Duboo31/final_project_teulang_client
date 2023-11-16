@@ -4,6 +4,12 @@
     margin-bottom: 3rem;
     color: var(--text-color);
 }
+.comments_create_div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: min-content;
+}
 .comments_create {
     display: flex;
     height: 1.5rem;
@@ -11,11 +17,13 @@
     border: 1px solid var(--main-color-op60);
     border-radius: 0.2rem;
     margin-bottom: 2rem;
+    width: calc(100% - 30px);
 }
 .comments_create_title {
-    margin-top: 0;
-    font-size: medium;
+    font-size: 16px;
     font-weight: 500;
+    margin-left: 10px;
+    margin-bottom: 15px;
 }
 .comments_create_input {
     flex: 1;
@@ -23,20 +31,25 @@
     border: none;
     border-radius: 0.2rem 0 0 0.2rem;
     padding: 0.5rem;
+    font-size: 14px;
 }
 .comments_create_btn {
     width: fit-content;
     padding: 0 1rem;
     background-color: var(--main-color);
     border: none;
+    font-size: 13px;
 }
-/* .comments_all_div {
-    border: 1px solid;
-} */
+.comments_all_div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .comments_each_div{
     margin: 0.5rem 0 0rem 0;
     border: 0.1px solid var(--main-color);
     border-radius: 0.2rem;
+    width: calc(100% - 30px);
 }
 .comments_header {
     display: flex;
@@ -51,13 +64,16 @@
     align-items: center;
 }
 .comments_author_img {
-    height: 2rem;
-    border-radius: 2rem;
+    min-height: 25px;
+    min-width: 25px;
+    max-width: 25px;
+    max-height: 25px;
+    border-radius: 25px;
+    margin: 3px 9px 3px 3px;
 }
 .comments_author_nickname {
-    margin-left: 0.5rem;
-    font-size: medium;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 600;
 }
 /* .comments_UD_btns {
 
@@ -67,7 +83,7 @@
     height: fit-content;
     border: none;
     border-radius: 1rem;
-    font-size: 0.8rem;
+    font-size: 12px;
     background-color: var(--main-color-op60);
     padding: 0.3rem 0.4rem;
     margin-right: 0.1rem;
@@ -77,18 +93,18 @@
     height: fit-content;
     border: none;
     border-radius: 1rem;
-    font-size: 0.8rem;
+    font-size: 12px;
     background-color: var(--main-color-op60);
     padding: 0.3rem 0.4rem;
     margin-left: 0.1rem;
 }
 .comments_content_div {
     display: flex;
-    /* border: 1px solid; */
     border-bottom: 0.1px solid var(--main-color-op60);
+    min-height: 60px;
 }
 .comments_content {
-    margin: 0.6rem 0.4rem;
+    margin: 10px 8px;
     font-size: 0.9rem;
     /* border: 1px solid; */
 }
@@ -107,7 +123,7 @@
     /* border: 1px solid; */
 }
 .comments_create_at {
-    font-size: 0.8rem;
+    font-size: 11px;
     padding-top: 0.3rem;
     color: gray;
     /* border: 1px solid; */
