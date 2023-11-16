@@ -104,3 +104,9 @@ meter {
 :where(dialog:modal) {
   all: revert;
 }
+
+main {
+  max-width: 1024px;
+  margin: 0 auto;
+  height: 100vh;
+}

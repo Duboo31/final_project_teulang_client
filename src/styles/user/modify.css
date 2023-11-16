@@ -1,0 +1,135 @@
+.modify-wrap {
+  position: relative;
+  min-width: 300px;
+  max-width: 560px;
+  min-height: 300px;
+  margin: 2rem auto 0;
+  padding: 1px 10px 25px;
+  font-size: 12px;
+  line-height: 1.42857;
+  color: #222;
+}
+
+.hr-line {
+  font-weight: 500;
+  font-size: 18px;
+  width: 100%;
+  padding: 1rem 0;
+  border-top: 2px solid #1d293f;
+  border-bottom: 1px solid #ddd;
+  margin-top: 40px;
+}
+
+.updata-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.updata-container > div:nth-child(1) {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 30px auto;
+}
+
+.updata-container>div:nth-child(1) > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.picture-box > button {
+  background: #1d293f;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 8px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.picture-box>input {
+  border: 1px solid #1d293f;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.picture-box >button:hover,
+.picture-box >input:hover {
+  font-weight: bold;
+}
+
+.picture-box {
+  text-align: center;
+}
+
+.user-info,
+.nickname-box {
+  display: flex;
+  padding: .7rem 0;
+}
+
+.user-info div:nth-child(1){
+  width: 31%;
+  font-weight: bold;
+}
+.user-info div:nth-child(2) {
+  width: 69%;
+}
+
+.input-btn_submit {
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid rgb(185, 185, 185);
+  padding: .5rem 1rem;
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.info-input {
+  border: 1px solid rgb(185, 185, 185);
+  padding: .5rem 1rem;
+  width: 68%;
+  margin-right: 2%;
+  border-radius: 3px;
+  margin-bottom: 5px;
+}
+
+.info-input.pw {
+  width: 100%;
+}
+
+.info-input.pw:nth-child(2) {
+  margin-top: 20px;
+}
+
+.input-submit {
+  width: 30%;
+  border: 1px solid #1d293f;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.input-submit.pw {
+  width: 100%;
+}
+
+.del-user {
+  text-align: center;
+  width: 100%;
+  margin-top: 10px;
+  color: #727272;
+  cursor: pointer;
+}
+
+.err-pw {
+  margin: 5px;
+}
