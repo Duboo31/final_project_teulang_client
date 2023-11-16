@@ -209,8 +209,8 @@ const Register = () => {
               {...register("nickname", {
                 required: "닉네임: 필수 정보입니다.",
                 maxLength: {
-                  value: 12,
-                  message: "닉네임: 2글자 이상, 12글자 이하",
+                  value: 8,
+                  message: "닉네임: 2글자 이상, 8글자 이하",
                   shouldFocus: true,
                 },
                 minLength: {

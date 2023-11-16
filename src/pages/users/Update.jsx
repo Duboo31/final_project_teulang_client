@@ -119,8 +119,8 @@ const Update = () => {
                 type="text"
                 {...register("nickname", {
                   maxLength: {
-                    value: 12,
-                    message: "닉네임은 12 글자 이내로 작성하세요.",
+                    value: 8,
+                    message: "닉네임은 8 글자 이내로 작성하세요.",
                     shouldFocus: true,
                   },
                   minLength: {
