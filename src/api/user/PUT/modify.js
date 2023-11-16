@@ -1,13 +1,19 @@
 import axios from "axios";
 
-const userModify = async (obj) => {
-  const { nickname, userId } = obj;
+const userModify = async (modifyInfo) => {
+  let { nickname, profile, password, passwordConfirm, userId } = modifyInfo;
 
   const accessToken = localStorage.getItem("access");
 
-  const modifyData = {
-    nickname,
-  };
+  const modifyData = new FormData();
+
+  if (password !== "" && password !== undefined) {
+    modifyData.append("password", password);
+  } else if (nickname !== undefined && nickname !== "") {
+    modifyData.append("nickname", nickname);
+  } else if (profile.length > 0) {
+    modifyData.append("user_img", profile[0]);
+  }
 
   const config = {
     method: "put",
@@ -15,7 +21,6 @@ const userModify = async (obj) => {
     url: `${process.env.REACT_APP_SERVER_LOCAL_URL}/users/userModify/${userId}/`,
     headers: {
       Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
     },
     data: modifyData,
   };

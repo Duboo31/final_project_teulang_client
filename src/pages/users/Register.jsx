@@ -9,6 +9,17 @@ import { EMAIL_REGEX, PWD_REGEX } from "../../js/validation";
 import { isDuplicateEmail } from "../../api/user/POST/duplicateEmailCheck";
 import { isDuplicateNickname } from "../../api/user/POST/duplicateNicknameCheck";
 
+// css
+import logo from "../../image/logo.png";
+import "../../styles/form/form.css";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faEnvelope,
+  faLock,
+  faCircleUser,
+} from "@fortawesome/free-solid-svg-icons";
+
 const Register = () => {
   // 중복 검사 통과 확인을 위한 훅
   const [isPassedEmail, setIsPassedEmail] = useState(false);
@@ -34,17 +45,19 @@ const Register = () => {
 
   const { mutate } = useMutation(postRegister, {
     onSuccess: (result) => {
-      // api "요청!!"이 성공했을 경우
-      // 의미는 값을 받아오기를 실패해도 요청을 "보내는 것"을 성공
-      // 했을 경우 err 혹은 response을 받아옵니다.
-      console.log("회원가입 '요청' 성공", result);
-      alert(`가입한 이메일로 인증 요청을 보냈습니다.
-이메일을 확인하세요.`);
+      if (result.status === 201) {
+        console.log("회원가입 성공");
+      }
       navigate("/login");
       // if (status === 400) {
       // 이 부분에서 에러 메세지를 화면에 뿌려주면 됨
       // 즉, data를 뿌려주면 됨
       // }
+    },
+
+    onMutate: (result) => {
+      alert(`${result.email} 로 인증 요청을 보냈습니다.
+이메일을 확인하세요.`);
     },
     onError: (result) => {
       console.log("회원가입 요청을 실패했습니다.: ", result);
@@ -156,83 +169,107 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <h1>Register page</h1>
-      <form onSubmit={handleSubmit(onSubmitRegisterHandler)}>
-        <input
-          placeholder="email"
-          type="text"
-          {...register("email", {
-            required: "이메일을 필수로 입력해주세요.",
-            pattern: {
-              value: EMAIL_REGEX,
-              message: "이메일 형식을 맞춰서 작성하세요.",
-              shouldFocus: true,
-            },
-          })}
-        />
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            onClickEmailCheckHandler();
-          }}
-        >
-          이메일 중복 검사
-        </button>
-        <div>{errors?.email?.message}</div>
-        <input
-          placeholder="nickname"
-          type="text"
-          {...register("nickname", {
-            required: "닉네임을 필수로 입력해주세요.",
-            maxLength: {
-              value: 12,
-              message: "닉네임은 12 글자 이내로 작성하세요.",
-              shouldFocus: true,
-            },
-          })}
-        />
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            onClickNicknameCheckHandler();
-          }}
-        >
-          닉네임 중복 검사
-        </button>
-        <div>{errors?.nickname?.message}</div>
-        <input
-          placeholder="password"
-          type="text"
-          {...register("password", {
-            required: "비밀번호를 필수로 입력해주세요.",
-            pattern: {
-              value: PWD_REGEX,
-              message:
-                "패스워드는 문자, 숫자, 특수문자 조합 8글자 이상을 사용하세요.",
-              shouldFocus: true,
-            },
-          })}
-        />
-        <div>{errors?.password?.message}</div>
-        <input
-          placeholder="password"
-          type="text"
-          {...register("passwordConfirm", {
-            required: "비밀번호를 체크를 확인하세요.",
-            pattern: {
-              value: PWD_REGEX,
-              message: "패스워드는 문자, 숫자 조합 8글자 이상을 사용하세요.",
-              shouldFocus: true,
-            },
-          })}
-        />
-        <div>{errors?.passwordConfirm?.message}</div>
-        <input type="submit" value="회원가입" />
-      </form>
-      <div>
-        계정있음?
-        <Link to="/login">로그인하기</Link>
+    <div className="form-wrap">
+      <div className="form-container">
+        <Link to="/" className="logo-box">
+          <img className="logo-img_register" src={logo} alt="로고" />
+        </Link>
+        <p>회원가입 정보를 입력해주세요</p>
+        <form onSubmit={handleSubmit(onSubmitRegisterHandler)}>
+          <div className="input-box">
+            <FontAwesomeIcon className="form-icon" icon={faEnvelope} />
+            <input
+              placeholder="아이디(이메일)"
+              type="text"
+              {...register("email", {
+                required: "이메일: 필수 정보입니다.",
+                pattern: {
+                  value: EMAIL_REGEX,
+                  message: "이메일 형식을 맞춰서 작성하세요.",
+                  shouldFocus: true,
+                },
+              })}
+            />
+            <button
+              className="confirm-btn"
+              onClick={(e) => {
+                e.preventDefault();
+                onClickEmailCheckHandler();
+              }}
+            >
+              중복 체크
+            </button>
+          </div>
+          <div className="error-text">{errors?.email?.message}</div>
+          <div className="input-box">
+            <FontAwesomeIcon className="form-icon" icon={faCircleUser} />
+            <input
+              placeholder="이름(닉네임)"
+              type="text"
+              {...register("nickname", {
+                required: "닉네임: 필수 정보입니다.",
+                maxLength: {
+                  value: 12,
+                  message: "닉네임: 2글자 이상, 12글자 이하",
+                  shouldFocus: true,
+                },
+                minLength: {
+                  value: 2,
+                  message: "닉네임: 2글자 이상, 12글자 이하",
+                  shouldFocus: true,
+                },
+              })}
+            />
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                onClickNicknameCheckHandler();
+              }}
+              className="confirm-btn"
+            >
+              중복 체크
+            </button>
+          </div>
+          <div className="error-text">{errors?.nickname?.message}</div>
+          <div className="input-box noCheck">
+            <FontAwesomeIcon className="form-icon" icon={faLock} />
+            <input
+              placeholder="비밀번호"
+              type="password"
+              {...register("password", {
+                required: "비밀번호를 필수로 입력해주세요.",
+                pattern: {
+                  value: PWD_REGEX,
+                  message: "문자, 숫자, 특수문자 조합 8글자 이상을 사용하세요.",
+                  shouldFocus: true,
+                },
+              })}
+            />
+          </div>
+
+          <div className="error-text">{errors?.password?.message}</div>
+          <div className="input-box noCheck">
+            <FontAwesomeIcon className="form-icon" icon={faLock} />
+            <input
+              placeholder="비밀번호 확인"
+              type="password"
+              {...register("passwordConfirm", {
+                required: "비밀번호를 체크를 확인하세요.",
+                pattern: {
+                  value: PWD_REGEX,
+                  message: "문자, 숫자 조합 8글자 이상을 사용하세요.",
+                  shouldFocus: true,
+                },
+              })}
+            />
+          </div>
+          <div className="error-text">{errors?.passwordConfirm?.message}</div>
+          <input className="submit-btn" type="submit" value="가입하기" />
+        </form>
+        <div className="link-box">
+          계정이 있으신가요?
+          <Link to="/login">로그인하기</Link>
+        </div>
       </div>
     </div>
   );
