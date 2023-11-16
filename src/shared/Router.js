@@ -9,6 +9,7 @@ import CreatePage from "../pages/recipe/CreatePage";
 import MultiViewPage from "../pages/recipe/MultiViewPage";
 import Profile from "../pages/users/Profile";
 import Update from "../pages/users/Update";
+import UpdatePage from "../pages/recipe/UpdatePage";
 
 // components
 import Navigation from "../component/Navigation";
@@ -24,6 +25,7 @@ const Router = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/create" element={<CreatePage />} />
+          <Route path="/update" element={<UpdatePage />} />
           <Route path="/recipe/:recipeId" element={<DetailPage />} />
           <Route path="/multi" element={<MultiViewPage />} />
           <Route path="/profile/:userId" element={<Profile />} />

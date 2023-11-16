@@ -4,7 +4,6 @@ import axios from "../api/recipes/axios";
 import requests from "../api/recipes/requests";
 
 // components
-import Bookmark from "./Bookmark";
 import RecipeDetail from "./RecipeDetail";
 import Comments from "./Comments";
 
@@ -17,8 +16,15 @@ export default function RecipeDetailForm({ recipeId }) {
   }, [recipeId]);
 
   const fetchRecipeDetailData = async () => {
+    const accesstoken = localStorage.getItem("access");
+
+
     try {
-      const request = await axios.get(requests.fetchRecipeList + recipeId);
+      const request = await axios.get(requests.fetchRecipeListAll + recipeId, {
+        headers: {
+          Authorization: `Bearer ${accesstoken}`
+        },
+      });
       setRecipeDetail(request.data);
       console.log("fetchRecipeDetailData", request.data);
     } catch (error) {
@@ -28,7 +34,6 @@ export default function RecipeDetailForm({ recipeId }) {
 
   return (
     <div>
-      <Bookmark recipeId={recipeId} />
       <RecipeDetail recipeDetail={recipeDetail} />
       <Comments
         recipeComments={recipeDetail.article_recipe_comment}

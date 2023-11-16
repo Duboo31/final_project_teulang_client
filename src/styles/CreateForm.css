@@ -1,0 +1,223 @@
+.whole_form {
+    /* border: 1px solid; */
+    /* border-radius: 0.3rem; */
+    border-top: 3px solid var(--main-color);
+    border-bottom: 3px solid var(--main-color);
+    padding-bottom: 2rem;
+}
+.form_top {
+    /* border: 1px solid; */
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--main-color);
+}
+.form_top_content {
+    display: flex;
+    align-items: center;
+}
+.form_title_input {
+    /* border: 1px solid; */
+    min-height: 3rem;
+    width: 100%;
+    height: auto;
+    border: none;
+    padding: 0 0.5rem;
+    font-size: large;
+    font-weight: 600;
+}
+.form_title_error {
+    font-size: smaller;
+    color: var(--error-color);
+    border-top: 1px solid var(--light-color);
+    padding: 0.3rem;
+}
+.form_add_thumbnail_btn {
+    width: 7rem;
+    font-size: smaller;
+    text-align: center;
+    border-radius: 2rem;
+    padding: 0.2rem 0.5rem;
+    margin: 0 0.2rem;
+    background-color: var(--main-color-op60);
+}
+.form_add_thumbnail_preview {
+    width: 100%;
+}
+.form_desc {
+    /* border: 1px solid; */
+    padding: 1rem 0.3rem;
+    border-top: 1px solid var(--light-color);
+}
+.form_desc_top {
+    font-size: medium;
+    font-weight: 500;
+    margin: 0.3rem 0;
+}
+.form_desc_content {
+    margin: 0.7rem 0;
+    font-size: small;
+    width: 100%;
+    resize: none;
+    border: none;
+}
+.form_ingre {
+    /* border: 1px solid; */
+    padding: 1rem 0.3rem;
+    border-top: 1px solid var(--light-color);
+}
+.form_ingre_top {
+    margin: 0.3rem 0;
+}
+.form_ingre_top_title {
+    font-size: medium;
+    font-weight: 500;
+}
+.form_ingre_top_notice {
+    font-size: smaller;
+    font-weight: 400;
+    color: gray;
+}
+.form_ingre_input {
+    margin: 0.7rem 0;
+    font-size: small;
+    width: 100%;
+    resize: none;
+    border: none;
+}
+.form_ingre_update_body {
+    margin: 0.7rem 0;
+    /* border: 1px solid; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /* 요소들이 가로로 넘치는 경우를 대비하여 줄 바꿈 설정 */
+}
+.form_ingre_update_each {
+    /* border: 1px solid; */
+}
+.form_ingre_update_each_name {
+    background-color: var(--light-color);
+    border-radius: 1rem;
+    margin: 0.2rem;
+    font-size: small;
+    font-weight: 500;
+    padding: 0.5rem;
+    width: auto;
+    border: none;
+}
+.form_ingre_update_each_del_btn {
+    background-color: var(--main-color);
+    border-radius: 1rem;
+    border: none;
+    margin-left: -1rem;
+}
+.form_orders {
+    padding: 1rem 0.3rem;
+    border-top: 1px solid var(--light-color);
+}
+.form_orders_top {
+    /* border: 1px solid; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.3rem 0;
+}
+.form_orders_top_left {
+    display: flex;
+    align-items: center;
+}
+.form_orders_top_title {
+    font-size: medium;
+    font-weight: 500;
+}
+.form_orders_error {
+    margin: 0 0.3rem;
+    font-size: smaller;
+    font-weight: 400;
+    color: var(--error-color);
+}
+.form_add_btn {
+    border: none;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 1.5rem;
+    background-color: var(--main-color-op60);
+}
+.form_orders_body {
+    /* border: 1px solid; */
+    margin: 0.7rem 0;
+}
+.form_orders_each {
+    min-height: 5rem;
+    display: flex;
+    flex-direction: column;
+    margin: 0.2rem 0;
+    padding: 0.1rem;
+    border-bottom: 1px solid var(--light-color);
+    margin-top: 0.3rem;
+}
+.form_orders_each_top {
+    display: flex;
+    justify-content: end;
+}
+.form_orders_add_each_btn {
+    width: fit-content;
+    border: none;
+    border-radius: 1.5rem;
+    background-color: var(--light-color);
+    padding: 0.2rem 0.5rem;
+    font-size: smaller;
+    margin: 0 0.1rem;
+}
+.form_orders_each_body {
+    display: flex;
+}
+.form_orders_each_order {
+    background-color: var(--light-color);
+    border-radius: 1rem;
+    width: 1rem;
+    height: 1rem;
+    padding: 0.3rem;
+    margin-top: 0.3rem;
+    text-align: center;
+}
+.form_orders_each_content {
+    padding: 0.5rem;
+    font-size: medium;
+    width: 100%;
+    border: 0.5px solid var(--main-color-op60);
+    margin: 0.3rem;
+    resize: none;
+    border-radius: 0.2rem;
+}
+.form_orders_each_img_preview {
+    min-width: 8rem;
+    min-height: 8rem;
+    max-width: 8rem;
+    object-fit: cover;
+    border-radius: 0.2rem;
+    margin: 0.3rem;
+    background-color: var(--light-color);
+    border: 1px solid var(--light-color);
+}
+.form_error_div {
+    display: flex;
+    justify-content: center;
+}
+.form_error {
+    font-size: smaller;
+    color: var(--error-color);
+    display: none;
+}
+.form_submit_div {
+    display: flex;
+    justify-content: center;
+}
+.form_submit_btn {
+    width: fit-content;
+    border: none;
+    border-radius: 1.5rem;
+    background-color: var(--main-color);
+    padding: 0.2rem 0.5rem;
+    font-size: smaller;
+    margin-top: 1rem;
+}

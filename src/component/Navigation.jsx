@@ -61,7 +61,14 @@ const Navigation = () => {
           </h2>
           <Search setIsNaviActive={setIsNaviActive} />
           <div className="searchBar-container_multi">
-            <Link to="/multi">함께보기</Link>
+            <Link
+              to="/multi"
+              onClick={() => {
+                setIsNaviActive((cur) => !cur);
+              }}
+            >
+              함께보기
+            </Link>
           </div>
         </div>
         <nav className="navigation-lower">

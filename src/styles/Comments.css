@@ -1,0 +1,114 @@
+.comments {
+    width: 100%;
+    padding: 0 0.2rem;
+    margin-bottom: 3rem;
+    color: var(--text-color);
+}
+.comments_create {
+    display: flex;
+    height: 1.5rem;
+    height: fit-content;
+    border: 1px solid var(--main-color-op60);
+    border-radius: 0.2rem;
+    margin-bottom: 2rem;
+}
+.comments_create_title {
+    margin-top: 0;
+    font-size: medium;
+    font-weight: 500;
+}
+.comments_create_input {
+    flex: 1;
+    resize: none;
+    border: none;
+    border-radius: 0.2rem 0 0 0.2rem;
+    padding: 0.5rem;
+}
+.comments_create_btn {
+    width: fit-content;
+    padding: 0 1rem;
+    background-color: var(--main-color);
+    border: none;
+}
+/* .comments_all_div {
+    border: 1px solid;
+} */
+.comments_each_div{
+    margin: 0.5rem 0 0rem 0;
+    border: 0.1px solid var(--main-color);
+    border-radius: 0.2rem;
+}
+.comments_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 0.1px solid var(--light-color);
+    background-color: var(--light-color);
+    padding: 0.3rem;
+}
+.comments_author {
+    display: flex;
+    align-items: center;
+}
+.comments_author_img {
+    height: 2rem;
+    border-radius: 2rem;
+}
+.comments_author_nickname {
+    margin-left: 0.5rem;
+    font-size: medium;
+    font-weight: 500;
+}
+/* .comments_UD_btns {
+
+} */
+.comments_update_btn {
+    width: fit-content;
+    height: fit-content;
+    border: none;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    background-color: var(--main-color-op60);
+    padding: 0.3rem 0.4rem;
+    margin-right: 0.1rem;
+}
+.comments_delete_btn {
+    width: fit-content;
+    height: fit-content;
+    border: none;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    background-color: var(--main-color-op60);
+    padding: 0.3rem 0.4rem;
+    margin-left: 0.1rem;
+}
+.comments_content_div {
+    display: flex;
+    /* border: 1px solid; */
+    border-bottom: 0.1px solid var(--main-color-op60);
+}
+.comments_content {
+    margin: 0.6rem 0.4rem;
+    font-size: 0.9rem;
+    /* border: 1px solid; */
+}
+.comments_update_input {
+    flex: 1;
+    margin: 0.6rem 0.4rem;
+    border: none;
+    resize: none;
+    font-size: 0.8rem;
+}
+.comments_footer {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin: 0.2rem 0.4rem;
+    /* border: 1px solid; */
+}
+.comments_create_at {
+    font-size: 0.8rem;
+    padding-top: 0.3rem;
+    color: gray;
+    /* border: 1px solid; */
+}
