@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "../api/recipes/axios";
 import "../styles/CreateForm.css";
 import urls from "../shared/url";
-import default_thumbnail_img from "../images/default_thumbnail.jpg"
+import default_thumbnail_img from "../images/default_thumbnail.jpg";
 
 export default function CreateForm({
   article_id = "",
@@ -527,240 +527,242 @@ export default function CreateForm({
   };
 
   return (
-    <div className="whole_form">
-      {/** 개발 단계에서 필요한 버튼. */}
-      {/* <button onClick={showInputs}>input보기</button> */}
+    <section className="form_section">
+      <div className="whole_form">
+        {/** 개발 단계에서 필요한 버튼. */}
+        {/* <button onClick={showInputs}>input보기</button> */}
 
-      <div className="form_top">
-        {/* 레시피 타이틀 & 썸네일 추가 버튼 */}
-        <div className="form_top_content">
-          <input
-            id="title_input"
-            onChange={onChange}
-            name="title"
-            value={inputs.title}
-            placeholder="타이틀을 입력해주세요."
-            className="form_title_input"
-          />
-          <label
-            htmlFor="recipe_thumbnail_input"
-            className="form_add_thumbnail_btn"
-          >
-            대표 사진 추가
-          </label>
-          <input
-            type="file"
-            id="recipe_thumbnail_input"
-            onChange={(e) => {
-              onChange(e);
-              renderImagePreview(e);
-            }}
-            name="recipe_thumbnail"
+        <div className="form_top">
+          {/* 레시피 타이틀 & 썸네일 추가 버튼 */}
+          <div className="form_top_content">
+            <input
+              id="title_input"
+              onChange={onChange}
+              name="title"
+              value={inputs.title}
+              placeholder="타이틀을 입력해주세요."
+              className="form_title_input"
+            />
+            <label
+              htmlFor="recipe_thumbnail_input"
+              className="form_add_thumbnail_btn"
+            >
+              대표 사진 추가
+            </label>
+            <input
+              type="file"
+              id="recipe_thumbnail_input"
+              onChange={(e) => {
+                onChange(e);
+                renderImagePreview(e);
+              }}
+              name="recipe_thumbnail"
+              style={{ display: "none" }}
+            />
+          </div>
+
+          <span
+            id="recipe_title_error"
             style={{ display: "none" }}
+            className="form_title_error"
+          >
+            title은 필수 입력값입니다.
+          </span>
+        </div>
+
+        <img
+          id="recipe_thumbnail_preview"
+          src={
+            isForUpdate
+              ? `${urls.baseURL}${show_recipe_thumbnail}`
+              : default_thumbnail_img
+          }
+          className="form_add_thumbnail_preview"
+        />
+
+        {/* 레시피 설명 */}
+        <div className="form_desc">
+          <p className="form_desc_top">설명 : </p>
+          <textarea
+            ref={textRef}
+            id="desc_input"
+            onChange={onChange}
+            name="description"
+            value={inputs.description}
+            placeholder="레시피를 설명해주세요."
+            className="form_desc_content"
+            onInput={handleResizeHeight}
           />
         </div>
 
-        <span
-          id="recipe_title_error"
-          style={{ display: "none" }}
-          className="form_title_error"
-        >
-          title은 필수 입력값입니다.
-        </span>
-      </div>
+        {/* 레시피 재료 */}
+        {isForUpdate ? (
+          <div className="form_ingre">
+            <div className="form_orders_top">
+              <span className="form_ingre_top_title">재료 : </span>
+              <button onClick={addRecipeIngredients} className="form_add_btn">
+                +
+              </button>
+            </div>
+            <div className="form_ingre_update_body">
+              {recipeIngredients.map((recipeIngredient) => {
+                console.log("recipeIngredient", recipeIngredient);
+                return (
+                  <span
+                    key={recipeIngredient.id}
+                    id={`recipe_ingredient_input_form${recipeIngredient.id}`}
+                    className="form_ingre_update_each"
+                  >
+                    <input
+                      value={recipeIngredient.ingredients}
+                      onChange={(e) =>
+                        updateRecipeIngredients(e, recipeIngredient.id)
+                      }
+                      className="form_ingre_update_each_name"
+                    />
+                    <button
+                      onClick={() =>
+                        handleDeleteRecipeIngredients(recipeIngredient.id)
+                      }
+                      className="form_ingre_update_each_del_btn"
+                    >
+                      x
+                    </button>
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+        ) : (
+          <div className="form_ingre">
+            <div className="form_ingre_top">
+              <span className="form_ingre_top_title">재료 : </span>
+              <span className="form_ingre_top_notice">
+                각 재료는 쉼표로 구분해서 넣어주세요.
+              </span>
+            </div>
+            <textarea
+              id="ingredients_create_input"
+              placeholder="재료를 입력해주세요."
+              onChange={onChange}
+              name="recipe_ingredients_str"
+              value={inputs.recipe_ingredients_str}
+              className="form_ingre_input"
+              ref={textRef}
+              onInput={handleResizeHeight}
+            />
+          </div>
+        )}
 
-      <img
-        id="recipe_thumbnail_preview"
-        src={
-          isForUpdate
-            ? `${urls.baseURL}${show_recipe_thumbnail}`
-            : default_thumbnail_img
-        }
-        className="form_add_thumbnail_preview"
-      />
-
-      {/* 레시피 설명 */}
-      <div className="form_desc">
-        <p className="form_desc_top">설명 : </p>
-        <textarea
-          ref={textRef}
-          id="desc_input"
-          onChange={onChange}
-          name="description"
-          value={inputs.description}
-          placeholder="레시피를 설명해주세요."
-          className="form_desc_content"
-          onInput={handleResizeHeight}
-        />
-      </div>
-
-      {/* 레시피 재료 */}
-      {isForUpdate ? (
-        <div className="form_ingre">
+        {/* 조리 순서 */}
+        <div className="form_orders">
           <div className="form_orders_top">
-            <span className="form_ingre_top_title">재료 : </span>
-            <button onClick={addRecipeIngredients} className="form_add_btn">
+            <div className="form_orders_top_left">
+              <span className="form_orders_top_title">요리 순서 : </span>
+              <span
+                id="recipe_order_content_error"
+                style={{ display: "none" }}
+                className="form_orders_error"
+              >
+                조리 순서 내용은 필수 입력값입니다.
+              </span>
+            </div>
+            <button onClick={addRecipeOrder} className="form_add_btn">
               +
             </button>
           </div>
-          <div className="form_ingre_update_body">
-            {recipeIngredients.map((recipeIngredient) => {
-              console.log("recipeIngredient", recipeIngredient);
+
+          <div className="form_orders_body">
+            {recipeOrders.map((recipeorder) => {
+              let recipeOrderContent = "";
+              let recipeOrderImgSrc = "";
+
+              inputs.recipe_order_content.forEach((item) => {
+                if (item.order === recipeorder.order) {
+                  recipeOrderContent = item.content;
+                }
+              });
+
+              show_recipe_order_img.map((show_src_obj) => {
+                if (show_src_obj.order === recipeorder.order) {
+                  recipeOrderImgSrc = show_src_obj.img_src;
+                }
+              });
+
               return (
-                <span
-                  key={recipeIngredient.id}
-                  id={`recipe_ingredient_input_form${recipeIngredient.id}`}
-                  className="form_ingre_update_each"
+                <div
+                  key={recipeorder.order}
+                  id={`recipe_order_input_form${recipeorder.id}`}
+                  className="form_orders_each"
                 >
-                  <input
-                    value={recipeIngredient.ingredients}
-                    onChange={(e) =>
-                      updateRecipeIngredients(e, recipeIngredient.id)
-                    }
-                    className="form_ingre_update_each_name"
-                  />
-                  <button
-                    onClick={() =>
-                      handleDeleteRecipeIngredients(recipeIngredient.id)
-                    }
-                    className="form_ingre_update_each_del_btn"
-                  >
-                    x
-                  </button>
-                </span>
+                  <div className="form_orders_each_top">
+                    <label
+                      htmlFor={`recipe_order_img${recipeorder.order}`}
+                      className="form_orders_add_each_btn"
+                    >
+                      {recipeorder.order}번 이미지 추가
+                    </label>
+                    {isForUpdate && (
+                      <button
+                        onClick={() => handleDeleteRecipeOrders(recipeorder.id)}
+                        className="form_orders_add_each_btn"
+                      >
+                        삭제
+                      </button>
+                    )}
+                  </div>
+                  <div className="form_orders_each_body">
+                    <span className="form_orders_each_order">
+                      {recipeorder.order}
+                    </span>
+                    <textarea
+                      value={
+                        inputs.recipe_order_content[recipeorder.order - 1] &&
+                        recipeOrderContent
+                      }
+                      onChange={(e) =>
+                        onChange(e, recipeorder.order, recipeorder.id)
+                      }
+                      name="recipe_order_content"
+                      id={`recipe_order_content${recipeorder.id}`}
+                      className="form_orders_each_content"
+                      ref={textRef}
+                      onInput={handleResizeHeight}
+                    />
+                    <img
+                      id={`recipe_order_img_preview${recipeorder.order}`}
+                      src={
+                        recipeOrderImgSrc !== "" &&
+                        `${urls.baseURL}${recipeOrderImgSrc}`
+                      }
+                      className="form_orders_each_img_preview"
+                    />
+                    <input
+                      type="file"
+                      id={`recipe_order_img${recipeorder.order}`}
+                      onChange={(e) => {
+                        onChange(e, recipeorder.order, recipeorder.id);
+                        renderImagePreview(e, recipeorder.order);
+                      }}
+                      name="recipe_order_img"
+                      style={{ display: "none" }}
+                    />
+                  </div>
+                </div>
               );
             })}
           </div>
         </div>
-      ) : (
-        <div className="form_ingre">
-          <div className="form_ingre_top">
-            <span className="form_ingre_top_title">재료 : </span>
-            <span className="form_ingre_top_notice">
-              각 재료는 쉼표로 구분해서 넣어주세요.
-            </span>
-          </div>
-          <textarea
-            id="ingredients_create_input"
-            placeholder="재료를 입력해주세요."
-            onChange={onChange}
-            name="recipe_ingredients_str"
-            value={inputs.recipe_ingredients_str}
-            className="form_ingre_input"
-            ref={textRef}
-            onInput={handleResizeHeight}
-          />
-        </div>
-      )}
 
-      {/* 조리 순서 */}
-      <div className="form_orders">
-        <div className="form_orders_top">
-          <div className="form_orders_top_left">
-            <span className="form_orders_top_title">요리 순서 : </span>
-            <span
-              id="recipe_order_content_error"
-              style={{ display: "none" }}
-              className="form_orders_error"
-            >
-              조리 순서 내용은 필수 입력값입니다.
-            </span>
-          </div>
-          <button onClick={addRecipeOrder} className="form_add_btn">
-            +
+        <div className="form_error_div">
+          <p id="form_error" className="form_error"></p>
+        </div>
+        <div className="form_submit_div">
+          <button onClick={handleSubmit} className="form_submit_btn">
+            submit
           </button>
         </div>
-
-        <div className="form_orders_body">
-          {recipeOrders.map((recipeorder) => {
-            let recipeOrderContent = "";
-            let recipeOrderImgSrc = "";
-
-            inputs.recipe_order_content.forEach((item) => {
-              if (item.order === recipeorder.order) {
-                recipeOrderContent = item.content;
-              }
-            });
-
-            show_recipe_order_img.map((show_src_obj) => {
-              if (show_src_obj.order === recipeorder.order) {
-                recipeOrderImgSrc = show_src_obj.img_src;
-              }
-            });
-
-            return (
-              <div
-                key={recipeorder.order}
-                id={`recipe_order_input_form${recipeorder.id}`}
-                className="form_orders_each"
-              >
-                <div className="form_orders_each_top">
-                  <label
-                    htmlFor={`recipe_order_img${recipeorder.order}`}
-                    className="form_orders_add_each_btn"
-                  >
-                    {recipeorder.order}번 이미지 추가
-                  </label>
-                  {isForUpdate && (
-                    <button
-                      onClick={() => handleDeleteRecipeOrders(recipeorder.id)}
-                      className="form_orders_add_each_btn"
-                    >
-                      삭제
-                    </button>
-                  )}
-                </div>
-                <div className="form_orders_each_body">
-                  <span className="form_orders_each_order">
-                    {recipeorder.order}
-                  </span>
-                  <textarea
-                    value={
-                      inputs.recipe_order_content[recipeorder.order - 1] &&
-                      recipeOrderContent
-                    }
-                    onChange={(e) =>
-                      onChange(e, recipeorder.order, recipeorder.id)
-                    }
-                    name="recipe_order_content"
-                    id={`recipe_order_content${recipeorder.id}`}
-                    className="form_orders_each_content"
-                    ref={textRef}
-                    onInput={handleResizeHeight}
-                  />
-                  <img
-                    id={`recipe_order_img_preview${recipeorder.order}`}
-                    src={
-                      recipeOrderImgSrc !== "" &&
-                      `${urls.baseURL}${recipeOrderImgSrc}`
-                    }
-                    className="form_orders_each_img_preview"
-                  />
-                  <input
-                    type="file"
-                    id={`recipe_order_img${recipeorder.order}`}
-                    onChange={(e) => {
-                      onChange(e, recipeorder.order, recipeorder.id);
-                      renderImagePreview(e, recipeorder.order);
-                    }}
-                    name="recipe_order_img"
-                    style={{ display: "none" }}
-                  />
-                </div>
-              </div>
-            );
-          })}
-        </div>
       </div>
-
-      <div className="form_error_div">
-        <p id="form_error" className="form_error"></p>
-      </div>
-      <div className="form_submit_div">
-        <button onClick={handleSubmit} className="form_submit_btn">
-          submit
-        </button>
-      </div>
-    </div>
+    </section>
   );
 }

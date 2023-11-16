@@ -1,11 +1,17 @@
 .search_section {
     color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3rem;
 }
 .search_each_recipe {
     margin-bottom: 0.5rem;
     width: 100%;
     border-radius: 0.2rem;
     border: 0.5px solid var(--main-color);
+    max-width: 800px;
 }
 .search_recipe_content {
     display: flex;

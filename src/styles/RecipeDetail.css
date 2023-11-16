@@ -1,8 +1,15 @@
+.recipe_detail_whole {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 .recipe_detail {
     width: 100%;
     padding: 1rem 0.2rem;
     padding-bottom: 0;
     color: var(--text-color);
+    max-width: 800px;
 }
 .detail_header {
     display: flex;
@@ -159,4 +166,10 @@
 }
 .detail_each_recipe_order {
     display: flex;
+}
+@media screen and (min-width:769px) {
+    .detail_recipe_thumbnail{
+        max-height: 550px;
+        object-fit: contain;
+    }
 }

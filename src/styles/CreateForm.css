@@ -1,3 +1,9 @@
+.form_section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .whole_form {
     /* border: 1px solid; */
     /* border-radius: 0.3rem; */
@@ -5,6 +11,7 @@
     border-bottom: 3px solid var(--main-color);
     padding-bottom: 2rem;
     margin: 10px;
+    max-width: 800px;
 }
 .form_top {
     /* border: 1px solid; */
@@ -114,6 +121,11 @@
     border-radius: 1rem;
     border: none;
     margin-left: -1rem;
+    min-width: 20px;
+    min-height: 20px;
+    max-width: 20px;
+    max-height: 20px;
+    text-align: center;
 }
 .form_orders {
     padding: 1rem 0.3rem;
@@ -234,4 +246,11 @@
     padding: 0.2rem 0.5rem;
     font-size: smaller;
     margin-top: 1rem;
+}
+@media screen and (min-width:769px) {
+    .form_add_thumbnail_preview{
+        max-height: 550px;
+        object-fit: contain;
+        padding-top: 3px;
+    }
 }

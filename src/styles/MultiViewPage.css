@@ -67,6 +67,9 @@
     overflow: scroll;
 }
 @media screen and (min-width:769px) {
+    .multi_whole{
+        padding: 30px 100px;
+    }
 	.multi_sec1 {
         height: 100%;
         width: 50%;

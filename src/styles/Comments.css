@@ -1,8 +1,15 @@
+.comments_whole {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 .comments {
     width: 100%;
     padding: 0 0.2rem;
     margin-bottom: 3rem;
     color: var(--text-color);
+    max-width: 800px;
 }
 .comments_create_div {
     display: flex;

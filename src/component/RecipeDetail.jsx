@@ -84,6 +84,7 @@ const RecipeDetail = ({ recipeDetail }) => {
       )
       .then(function (response) {
         console.log("reponse.data ", response.data);
+        alert(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -114,6 +115,7 @@ const RecipeDetail = ({ recipeDetail }) => {
       })
       .catch(function (error) {
         console.log(error);
+        alert(error.response.data)
       });
   };
 
@@ -146,10 +148,10 @@ const RecipeDetail = ({ recipeDetail }) => {
   };
 
   return (
-    <div className="recipe_detail">
+    <div className="recipe_detail_whole">
       {recipeDetail.id !== undefined ? (
         // recipeDetail에 fetch 된 값이 담긴 경우.
-        <div>
+        <div className="recipe_detail">
           <span className="detail_header">
             <p className="detail_title">{recipeDetail.title}</p>
             <div className="detail_header_rignt">
