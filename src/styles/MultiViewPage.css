@@ -1,6 +1,6 @@
 .multi_whole {
-    padding-top: 5rem;
-    height: 90vh;
+    padding-top: 3rem;
+    height: 100vh;
     width: 100%;
     /* border: 1px solid; */
 }
@@ -34,10 +34,13 @@
 }
 .multi_sec_btn {
     border: none;
-    height: 1.5rem;
-    width: 1.5rem;
+    min-height: 25px;
+    min-width: 25px;
+    max-height: 25px;
+    max-width: 25px;
     border-radius: 1.5rem;
     background-color: var(--main-color-op60);
+    text-align: center;
 }
 .multi_detail_form {
     height: calc(100% - 1.5rem - 0.4rem);
