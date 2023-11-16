@@ -1,0 +1,29 @@
+.navigation_header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.navigation_header-item {
+  width: 50%;
+  text-align: center;
+  padding: 10px 0;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.navigation_header-item:nth-child(1) {
+  background: #1d293f;
+  color: #fff;
+  border: 1px solid #1d293f;
+}
+
+.navigation_header-item:nth-child(2) {
+  border: 1px solid #e1e1e1;
+}
+.navigation_header-name {
+  font-weight: bold;
+  display: inline-block;
+  margin-right: 2px;
+}

@@ -1,39 +1,93 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import IsLoginNavi from "./navigation/IsLoginNavi";
 import IsLogoutNavi from "./navigation/IsLogoutNavi";
 import Search from "./Search";
-import MultiViewPage from "../pages/recipe/MultiViewPage";
+
+import logo from "../image/logo.png";
+// css
+import "../styles/navigation/searchBar.css";
+import "../styles/navigation/navigation.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const Navigation = () => {
+  const [isNaviActive, setIsNaviActive] = useState(false);
+
   const users = useSelector(({ users }) => {
     return users;
   });
 
   return (
     <>
-      <div>
-        {users.isAuthorized ? <IsLoginNavi users={users} /> : <IsLogoutNavi />}
+      <div
+        className={isNaviActive ? "navigation-wrap" : "navigation-wrap active"}
+      >
+        <div className="navigation-upper">
+          {users.isAuthorized ? (
+            <IsLoginNavi setIsNaviActive={setIsNaviActive} users={users} />
+          ) : (
+            <IsLogoutNavi setIsNaviActive={setIsNaviActive} />
+          )}
+          <div
+            className={
+              isNaviActive
+                ? "navigation-icon_box"
+                : "navigation-icon_box active"
+            }
+          >
+            <FontAwesomeIcon
+              onClick={() => {
+                setIsNaviActive((cur) => !cur);
+              }}
+              icon={faXmark}
+              className="navigation-icon_item"
+            />
+          </div>
+        </div>
+        <div className="searchBar-container">
+          <h2 className="searchBar-container_title">
+            <Link to="/">
+              <img
+                onClick={() => {
+                  setIsNaviActive((cur) => !cur);
+                }}
+                className="logo-img"
+                src={logo}
+                alt="로고"
+              />
+            </Link>
+          </h2>
+          <Search setIsNaviActive={setIsNaviActive} />
+          <div className="searchBar-container_multi">
+            <Link to="/multi">함께보기</Link>
+          </div>
+        </div>
+        <nav className="navigation-lower">
+          <ul>
+            <li>
+              <Link
+                onClick={() => {
+                  setIsNaviActive((cur) => !cur);
+                }}
+                to="/create"
+              >
+                레시피 작성
+              </Link>
+            </li>
+            <li>게시글 작성(미구현)</li>
+          </ul>
+        </nav>
       </div>
-      <div>관리자 문의(미구현)</div>
-      <div>
-        <span>
-          <Link to="/">홈</Link>
-        </span>
-        <Search />
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <Link to="/multi">함께보기</Link>
-      </div>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/create">레시피 작성하기</Link>
-          </li>
-          <li>게시글 작성하기(미구현)</li>
-        </ul>
-      </nav>
       <main>
+        <FontAwesomeIcon
+          onClick={() => {
+            setIsNaviActive((cur) => !cur);
+          }}
+          icon={faBars}
+          className="navigation-icon_menu"
+        />
         <Outlet />
       </main>
     </>
