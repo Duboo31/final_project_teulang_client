@@ -1,9 +1,17 @@
+.form_section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .whole_form {
     /* border: 1px solid; */
     /* border-radius: 0.3rem; */
     border-top: 3px solid var(--main-color);
     border-bottom: 3px solid var(--main-color);
     padding-bottom: 2rem;
+    margin: 10px;
+    max-width: 800px;
 }
 .form_top {
     /* border: 1px solid; */
@@ -17,23 +25,23 @@
 }
 .form_title_input {
     /* border: 1px solid; */
-    min-height: 3rem;
+    min-height: 50px;
     width: 100%;
     height: auto;
     border: none;
     padding: 0 0.5rem;
-    font-size: large;
+    font-size: 17px;
     font-weight: 600;
 }
 .form_title_error {
-    font-size: smaller;
+    font-size: 12.5px;
     color: var(--error-color);
     border-top: 1px solid var(--light-color);
     padding: 0.3rem;
 }
 .form_add_thumbnail_btn {
-    width: 7rem;
-    font-size: smaller;
+    width: 120px;
+    font-size: 11.5px;
     text-align: center;
     border-radius: 2rem;
     padding: 0.2rem 0.5rem;
@@ -49,16 +57,18 @@
     border-top: 1px solid var(--light-color);
 }
 .form_desc_top {
-    font-size: medium;
+    font-size: 15px;
     font-weight: 500;
     margin: 0.3rem 0;
 }
 .form_desc_content {
     margin: 0.7rem 0;
-    font-size: small;
+    font-size: 12.5px;
     width: 100%;
     resize: none;
     border: none;
+    border-left: 2px solid var(--light-color);
+    padding-left: 5px;
 }
 .form_ingre {
     /* border: 1px solid; */
@@ -69,20 +79,22 @@
     margin: 0.3rem 0;
 }
 .form_ingre_top_title {
-    font-size: medium;
+    font-size: 15px;
     font-weight: 500;
 }
 .form_ingre_top_notice {
-    font-size: smaller;
+    font-size: 11.5px;
     font-weight: 400;
     color: gray;
 }
 .form_ingre_input {
     margin: 0.7rem 0;
-    font-size: small;
+    font-size: 12.5px;
     width: 100%;
     resize: none;
     border: none;
+    border-left: 2px solid var(--light-color);
+    padding-left: 5px;
 }
 .form_ingre_update_body {
     margin: 0.7rem 0;
@@ -109,6 +121,11 @@
     border-radius: 1rem;
     border: none;
     margin-left: -1rem;
+    min-width: 20px;
+    min-height: 20px;
+    max-width: 20px;
+    max-height: 20px;
+    text-align: center;
 }
 .form_orders {
     padding: 1rem 0.3rem;
@@ -126,20 +143,24 @@
     align-items: center;
 }
 .form_orders_top_title {
-    font-size: medium;
+    font-size: 15px;
     font-weight: 500;
 }
 .form_orders_error {
     margin: 0 0.3rem;
-    font-size: smaller;
+    font-size: 12.5px;
     font-weight: 400;
     color: var(--error-color);
 }
 .form_add_btn {
     border: none;
-    height: 1.5rem;
-    width: 1.5rem;
-    border-radius: 1.5rem;
+    min-width: 25px;
+    min-height: 25px;
+    max-width: 25px;
+    max-height: 25px;
+    font-size: 14px;
+    border-radius: 25px;
+    text-align: center;
     background-color: var(--main-color-op60);
 }
 .form_orders_body {
@@ -160,12 +181,13 @@
     justify-content: end;
 }
 .form_orders_add_each_btn {
-    width: fit-content;
+    width: 100px;
+    text-align: center;
     border: none;
     border-radius: 1.5rem;
     background-color: var(--light-color);
     padding: 0.2rem 0.5rem;
-    font-size: smaller;
+    font-size: 12px;
     margin: 0 0.1rem;
 }
 .form_orders_each_body {
@@ -174,8 +196,12 @@
 .form_orders_each_order {
     background-color: var(--light-color);
     border-radius: 1rem;
-    width: 1rem;
-    height: 1rem;
+    min-width: 25px;
+    min-height: 25px;
+    max-width: 25px;
+    max-height: 25px;
+    font-size: 14px;
+
     padding: 0.3rem;
     margin-top: 0.3rem;
     text-align: center;
@@ -220,4 +246,11 @@
     padding: 0.2rem 0.5rem;
     font-size: smaller;
     margin-top: 1rem;
+}
+@media screen and (min-width:769px) {
+    .form_add_thumbnail_preview{
+        max-height: 550px;
+        object-fit: contain;
+        padding-top: 3px;
+    }
 }

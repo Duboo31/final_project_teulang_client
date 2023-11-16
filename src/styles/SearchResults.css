@@ -1,11 +1,17 @@
 .search_section {
     color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3rem;
 }
 .search_each_recipe {
     margin-bottom: 0.5rem;
     width: 100%;
     border-radius: 0.2rem;
     border: 0.5px solid var(--main-color);
+    max-width: 800px;
 }
 .search_recipe_content {
     display: flex;
@@ -22,11 +28,12 @@
     border-bottom: 0.5px solid var(--main-color);
     width: 100%;
     overflow: hidden;
+    display: flex;
     align-items: center;
     /* background-color: var(--main-color-op60); */
 }
 .search_recipe_title {
-    font-size: large;
+    font-size: 15px;
     font-weight: 700;
     margin-left: 0.6rem;
 }
@@ -77,12 +84,17 @@
 .search_recipe_author_nickname {
     margin-left: 0.2rem;
     font-weight: 500;
+    font-size: 14px;
+    font-weight: 600;
 }
 .search_recipe_author_img {
-    width: 2rem;
-    height: 2rem;
+    min-width: 30px;
+    min-height: 30px;
+    max-width: 30px;
+    max-height: 30px;
+    object-fit: cover;
     border-radius: 2rem;
-    margin: 0.3rem;
+    margin: 5px;
 }
 .search_recipe_created_at {
     margin: 0.3rem;
@@ -101,6 +113,8 @@
     width: 2rem;
     background-color: var(--light-color);
     border-right: 0.5px solid var(--main-color-op60);
+    text-align: center;
+    font-size: 15px;
 }
 .search_pagination_btn_prev {
     border: none;
@@ -109,6 +123,9 @@
     width: 2rem;
     background-color: var(--main-color-op50);
     border-radius: 0.3rem 0 0 0.3rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 15px;
 }
 .search_pagination_btn_next {
     border: none;
@@ -117,4 +134,7 @@
     width: 2rem;
     background-color: var(--main-color-op50);
     border-radius: 0 0.3rem 0.3rem 0;
+    text-align: center;
+    font-weight: 600;
+    font-size: 15px;
 }

@@ -45,13 +45,14 @@ const SearchResults = () => {
       );
       setSearchResults(response.data.serializer_data);
       console.log(response.data.pagination_data);
-      setMaxPage(response.data.pagination_data.pages_num);
+      setMaxPage(response.data.pagenation_data.pages_num); // 백엔드에 pagenation_data -> pagination_data로 수정 요청..?
     } catch (error) {
       console.log("error", error);
     }
   };
 
   const pagination = () => {
+    console.log("maxPage",maxPage)
     for (let i = 1; i < maxPage + 1; i++) {
       pagination_btn.push(
         <button
@@ -63,6 +64,7 @@ const SearchResults = () => {
         </button>
       );
     }
+    console.log(pagination_btn)
     const start = parseInt(curPage / 5) * 5;
     const end = maxPage > start + 5 ? start + 5 : maxPage;
     return pagination_btn.slice(start, end);
@@ -107,7 +109,7 @@ const SearchResults = () => {
               >
                 <div className="search_recipe_left">
                   <div className="search_recipe_title_div">
-                    <p className="search_recipe_title">{recipe.title.length > 13 ? recipe.title.substr(0,13)+" ..." : recipe.title}</p>
+                    <p className="search_recipe_title">{recipe.title}</p>
                   </div>
                   <div className="search_recipe_desc_div">
                     <p className="search_recipe_desc">

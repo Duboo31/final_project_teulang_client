@@ -139,91 +139,103 @@ export default function Comments({ recipeComments, recipeId }) {
   };
 
   return (
-    <section className="comments">
-      <p className="comments_create_title">댓글 : </p>
-      <div className="comments_create">
-        <textarea
-          onChange={handleCreateInputChange}
-          id={`comment_create_input${recipeId}`}
-          className="comments_create_input"
-        />
-        <button onClick={handleCreateComment} className="comments_create_btn">
-          작성
-        </button>
-      </div>
+    <section className="comments_whole">
+      <section className="comments">
+        <p className="comments_create_title">댓글 : </p>
+        <div className="comments_create_div">
+          <div className="comments_create">
+            <textarea
+              onChange={handleCreateInputChange}
+              id={`comment_create_input${recipeId}`}
+              className="comments_create_input"
+            />
+            <button
+              onClick={handleCreateComment}
+              className="comments_create_btn"
+            >
+              작성
+            </button>
+          </div>
+        </div>
 
-      {/* 댓글 보여주기 */}
-      {comments !== undefined ? (
-        <div className="comments_all_div">
-          {comments.map((comment, index) => {
-            if (comment.id) {
-              // 이걸 안 하면 삭제했을 때 저 comment.id랑 comment.content 등만 사라지고 기존에 그냥 comment 이런 글자나 div는 남음.
-              return (
-                <div key={comment.id} className="comments_each_div">
-                  <div className="comments_header" onClick={() => {navigate(`/profile/${comment.user_data.id}`)}}>
-                    <div className="comments_author">
-                      <img
-                        src={`${urls.baseURL}${comment.user_data.user_img}`}
-                        className="comments_author_img"
-                      />{" "}
-                      {/* 백에서 user_defalt.jpg 로 되어있음. user_default.jpg로 수정 필요 */}
-                      <span className="comments_author_nickname">
-                        {comment.user_data.nickname}
+        {/* 댓글 보여주기 */}
+        {comments !== undefined ? (
+          <div className="comments_all_div">
+            {comments.map((comment, index) => {
+              if (comment.id) {
+                // 이걸 안 하면 삭제했을 때 저 comment.id랑 comment.content 등만 사라지고 기존에 그냥 comment 이런 글자나 div는 남음.
+                return (
+                  <div key={comment.id} className="comments_each_div">
+                    <div className="comments_header">
+                      <div
+                        className="comments_author"
+                        onClick={() => {
+                          navigate(`/profile/${comment.user_data.id}`);
+                        }}
+                      >
+                        <img
+                          src={`${urls.baseURL}${comment.user_data.user_img}`}
+                          className="comments_author_img"
+                        />{" "}
+                        {/* 백에서 user_defalt.jpg 로 되어있음. user_default.jpg로 수정 필요 */}
+                        <span className="comments_author_nickname">
+                          {comment.user_data.nickname}
+                        </span>
+                      </div>
+                      <div className="comments_UD_btns">
+                        <button
+                          onClick={() =>
+                            handleUpdateComment(comment.id, comment.content)
+                          }
+                          id={`comment_update_btn${comment.id}`}
+                          className="comments_update_btn"
+                        >
+                          수정
+                        </button>
+                        <button
+                          onClick={() => handleDeleteComment(comment.id)}
+                          id={`comment_delete_btn${comment.id}`}
+                          className="comments_delete_btn"
+                        >
+                          삭제
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="comments_content_div">
+                      <div
+                        id={`comments_content${comment.id}`}
+                        className="comments_content"
+                      >
+                        {comment.content}
+                      </div>
+                      <textarea
+                        onChange={handleUpdateInputChange}
+                        id={`comment_update_input${comment.id}`}
+                        style={{ display: "none" }}
+                        className="comments_update_input"
+                      />
+                    </div>
+
+                    <div className="comments_footer">
+                      <span className="comments_create_at">
+                        {comment.created_at.split("T")[0] +
+                          " " +
+                          comment.created_at.split("T")[1].substr(0, 5)}
                       </span>
                     </div>
-                    <div className="comments_UD_btns">
-                      <button
-                        onClick={() =>
-                          handleUpdateComment(comment.id, comment.content)
-                        }
-                        id={`comment_update_btn${comment.id}`}
-                        className="comments_update_btn"
-                      >
-                        수정
-                      </button>
-                      <button
-                        onClick={() => handleDeleteComment(comment.id)}
-                        id={`comment_delete_btn${comment.id}`}
-                        className="comments_delete_btn"
-                      >
-                        삭제
-                      </button>
-                    </div>
                   </div>
-
-                  <div className="comments_content_div">
-                    <div
-                      id={`comments_content${comment.id}`}
-                      className="comments_content"
-                    >
-                      {comment.content}
-                    </div>
-                    <textarea
-                      onChange={handleUpdateInputChange}
-                      id={`comment_update_input${comment.id}`}
-                      style={{ display: "none" }}
-                      className="comments_update_input"
-                    />
-                  </div>
-
-                  <div className="comments_footer">
-                    <span className="comments_create_at">
-                      {comment.created_at.split("T")[0] +
-                        " " +
-                        comment.created_at.split("T")[1].substr(0, 5)}
-                    </span>
-                  </div>
-                </div>
-              );
-            }
-          })}
-        </div>
-      ) : (
-        <div>
-          {/* 아직 recipeComments에 data가 fetch되지 않은 경우 */}
-          <Loading />
-        </div>
-      )}
+                );
+              }
+            })}
+          </div>
+        ) : (
+          <div>
+            {/* 아직 recipeComments에 data가 fetch되지 않은 경우 */}
+            <Loading />
+          </div>
+        )}
+      </section>
     </section>
   );
 }
