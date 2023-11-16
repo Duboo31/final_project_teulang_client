@@ -11,10 +11,11 @@ import "../styles/RecipeDetail.css";
 
 const RecipeDetail = ({ recipeDetail }) => {
   const navigate = useNavigate();
-  const [starRate, setStarRate] = useState(0);
+  const [starAvg, setStarAvg] = useState(recipeDetail.star_avg);
 
   useEffect(() => {
     console.log(recipeDetail);
+    setStarAvg(recipeDetail.star_avg);
   }, [recipeDetail]);
 
   // 로그인 된 유저 정보
@@ -46,7 +47,6 @@ const RecipeDetail = ({ recipeDetail }) => {
 
   const handleSubmitStarRate = async () => {
     const accessToken = localStorage.getItem("access");
-    setStarRate(document.getElementById("user_star_rate").value);
 
     await axios
       .post(
@@ -62,6 +62,7 @@ const RecipeDetail = ({ recipeDetail }) => {
       )
       .then(function (response) {
         console.log("reponse.data ", response.data);
+        setStarAvg(response.data.star_avg);
         window.location.reload();
       })
       .catch(function (error) {
@@ -107,7 +108,7 @@ const RecipeDetail = ({ recipeDetail }) => {
             <div className="detail_header_rignt">
               <p className="detail_star_avg">
                 평균 별점 :{" "}
-                {recipeDetail.star_avg
+                {starAvg
                   ? parseFloat(recipeDetail.star_avg).toFixed(1)
                   : "-"}
               </p>

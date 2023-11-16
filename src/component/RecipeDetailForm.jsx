@@ -16,8 +16,15 @@ export default function RecipeDetailForm({ recipeId }) {
   }, [recipeId]);
 
   const fetchRecipeDetailData = async () => {
+    const accesstoken = localStorage.getItem("access");
+
+
     try {
-      const request = await axios.get(requests.fetchRecipeListAll + recipeId);
+      const request = await axios.get(requests.fetchRecipeListAll + recipeId, {
+        headers: {
+          Authorization: `Bearer ${accesstoken}`
+        },
+      });
       setRecipeDetail(request.data);
       console.log("fetchRecipeDetailData", request.data);
     } catch (error) {
