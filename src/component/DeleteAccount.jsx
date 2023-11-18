@@ -98,7 +98,11 @@ const DeleteAccount = ({
                 (필수)회원탈퇴를 위해 회원님의 비밀번호를 확인 합니다.
               </p>
               <div className="pw-check-box">
-                <input type="password" {...register("password")} />
+                <input
+                  placeholder="비밀번호"
+                  type="password"
+                  {...register("password")}
+                />
                 <input type="submit" value="회원탈퇴" />
               </div>
               <div className="delete-err">{errors?.password?.message}</div>
