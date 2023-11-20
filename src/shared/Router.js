@@ -14,15 +14,17 @@ import UpdatePage from "../pages/recipe/UpdatePage";
 // components
 import Navigation from "../component/Navigation";
 import NotFound from "../component/NotFound";
+import PasswordReset from "../pages/users/PasswordReset";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/user/pwReset" element={<PasswordReset />} />
         <Route element={<Navigation />}>
           <Route index element={<Main />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/create" element={<CreatePage />} />
           <Route path="/update" element={<UpdatePage />} />

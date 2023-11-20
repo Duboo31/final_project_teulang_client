@@ -44,7 +44,7 @@
 }
 
 .navigation-lower ul li:hover {
-  background: #13397F;
+  background: #118DD3;
   color: #fff;  
 }
 
@@ -198,8 +198,8 @@
     display: inline;
   }
   .navigation-lower ul li a:hover {
-    border-bottom: 1px solid #13397F;
-    color: #13397F;
+    border-bottom: 1px solid #118DD3;
+    color: #118DD3;
   }
   .searchBar-container {
     border-bottom: none;
