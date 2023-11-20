@@ -44,7 +44,7 @@
 }
 
 .navigation-lower ul li:hover {
-  background: #1d293f;
+  background: #13397F;
   color: #fff;  
 }
 
@@ -100,10 +100,33 @@
 }
 
 @media screen and (min-width: 1023px) {
-  /* .navigation-wrap {
-      border: none
+  .navigation-wrap.active {
+    border: none;
+    position: relative;
+    right: 0;
+    width: 100%;
+    height: fit-content;
+    transition: none;
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px;
   }
-  .navigation-wrap.web-nav {
+  .navigation-wrap {
+    border: none;
+    position: relative;
+    right: 0;
+    width: 100%;
+    height: fit-content;
+    transition: none;
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px;
+  }
+  /* .web-nav {
       width: 100%;
       height: 150px;
       background-color: #fff;
@@ -114,17 +137,71 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-    }
+      position: relative;
+    } */
   .navigation-upper,
   .searchBar-container,
   .navigation-lower {
     max-width: 1024px;
+    min-width: 1024px;
+    width: 100%;
     background-color: #fff;
+  }
+  .navigation-lower {
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .navigation-icon_box {
     display: none;
   }
   .navigation-icon_menu {
     display: none;
-  } */
+  }
+  .navigation_header {
+    display: flex;
+    justify-content: end;
+  }
+  .navigation_header-item,
+  .navigation_header-item {
+    width: fit-content;
+  }
+  .navigation_header-item:nth-child(1) {
+    background: none;
+    color: #333;
+    border: none;
+    border-right: 1px solid rgb(217, 217, 217);
+    padding: 0;
+    padding-right: 10px;
+  }
+  .navigation_header-item:nth-child(2) {
+    border: none;
+    margin-left: 10px;
+  }
+  .navigation-lower ul {
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .navigation-lower ul li {
+    width: fit-content;
+    border-bottom: none;
+    font-size: 1rem;
+    margin-left: 30px;
+  }
+  .navigation-lower ul li:hover {
+    background: none;
+    color: #333;
+  }
+  .navigation-lower ul li a {
+    display: inline;
+  }
+  .navigation-lower ul li a:hover {
+    border-bottom: 1px solid #13397F;
+    color: #13397F;
+  }
+  .searchBar-container {
+    border-bottom: none;
+  }
 }
