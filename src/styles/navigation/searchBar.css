@@ -23,7 +23,7 @@
   justify-content: space-between;
   align-items: center;
   border-radius: 6px;
-  border: 1px solid #004972;
+  border: 1px solid #118DD3;
   box-shadow: rgb(247, 247, 247) 0px 0px 0px 1px inset;
 }
 
@@ -36,7 +36,7 @@
   text-align: center;
   font-weight: bold;
   cursor: pointer;
-  color: #004972;
+  color: #118DD3;
   font-size: 18px;
 }
 
@@ -50,7 +50,7 @@
   .logo-img_web {
     display: block;
     font-weight: 600;
-    color: #004972;
+    color: #13397F;
     display: flex;
     justify-content: center;
     align-items: center;
