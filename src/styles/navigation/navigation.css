@@ -100,7 +100,7 @@
 }
 
 @media screen and (min-width: 1023px) {
-  .navigation-wrap {
+  /* .navigation-wrap {
       border: none
   }
   .navigation-wrap.web-nav {
@@ -126,5 +126,5 @@
   }
   .navigation-icon_menu {
     display: none;
-  }
+  } */
 }
