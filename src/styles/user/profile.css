@@ -31,7 +31,7 @@
 }
 
 .profile-side_fst div:nth-child(2) {
-  background: #1d293f;
+  background: #13397F;
   padding: 3px 10px;
   border-radius: 8px;
   color: #fff;
@@ -69,11 +69,11 @@
 }
 
 .select-tab>li.active {
-  background: #1d293f;
+  background: #13397F;
   color: #fff;
   font-weight: bold;
-  border-bottom: 1px solid #1d293f;
-  border-left: 1px solid #1d293f;
-  border-right: 1px solid #1d293f;
-  border-top: 1px solid #1d293f;
+  border-bottom: 1px solid #13397F;
+  border-left: 1px solid #13397F;
+  border-right: 1px solid #13397F;
+  border-top: 1px solid #13397F;
 }
