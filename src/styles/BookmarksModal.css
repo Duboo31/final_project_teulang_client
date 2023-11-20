@@ -1,0 +1,76 @@
+.modal {
+    position: relative;
+    max-width: 800px;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+      0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12);
+    background: #ffffff;
+    overflow: scroll;
+    border-radius: 8px;
+    transition: all 400ms ease-in-out 2s;
+    animation: fadeIn 400ms;
+    height: 30rem;
+  }
+  .modal__poster-img {
+    width: 100%;
+    height: auto;
+  }
+  .modal__content {
+    padding: 20px;
+    color: black;
+  }
+  .modal__details {
+    font-weight: 600;
+    font-size: 18px;
+  }
+  .modal__overview {
+    font-size: 20px;
+    line-height: 1.5;
+  }
+  .modal__title {
+    padding: 0.3rem 0.5rem;
+    margin: 16px 0;
+    background-color: var(--light-color);
+    border-radius: 0.3rem;
+  }
+  .modal::-webkit-scrollbar {
+    display: none;
+    visibility: hidden;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .modal {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .wrapper-modal {
+    position: fixed;
+    inset: 0px;
+    background-color: rgb(0 0 0 / 71%);
+    -webkit-tap-highlight-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .presentation {
+    z-index: 1200;
+    position: absolute;
+  }
+  .modal-close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+    z-index: 1000;
+    color: black;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  

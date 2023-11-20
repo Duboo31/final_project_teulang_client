@@ -1,0 +1,95 @@
+.multi_whole {
+    padding-top: 3rem;
+    height: 100vh;
+    width: 100%;
+    /* border: 1px solid; */
+}
+.multi_sec1 {
+    height: 50%;
+    width: 100%;
+    /* float: "left", */
+    border: 1px solid var(--main-color-op60);
+    border-radius: 0.3rem;
+    box-sizing: border-box;
+    padding: 0.4rem;
+    /* backgroundColor: "lightgray", */
+    background-clip: content-box;
+    margin-bottom: 0.3rem;
+}
+.multi_sec1_div {
+    height: 100%;
+    /* overflow: scroll; */
+}
+.multi_header {
+    height: 1.5rem;
+    background-color: white;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: 0.4rem;
+}
+.multi_header_span {
+    margin-right: 0.3rem;
+    font-size: smaller;
+}
+.multi_sec_btn {
+    border: none;
+    min-height: 25px;
+    min-width: 25px;
+    max-height: 25px;
+    max-width: 25px;
+    border-radius: 1.5rem;
+    background-color: var(--main-color-op60);
+    text-align: center;
+}
+.multi_detail_form {
+    height: calc(100% - 1.5rem - 0.4rem);
+    overflow: scroll;
+}
+.multi_detail_none {
+    background-color: var(--light-color);
+    height: 100%;
+}
+.multi_sec2 {
+    height: 50%;
+    width: 100%;
+    /* float: right; */
+    border: 1px solid var(--main-color-op60);
+    border-radius: 0.3rem;
+    box-sizing: border-box;
+    padding: 0.4rem;
+    /* backgroundColor: "lightgray", */
+    background-clip: content-box;
+    margin-bottom: 0.3rem;
+}
+.multi_sec2_div {
+    height: 100%;
+    overflow: scroll;
+}
+@media screen and (min-width:769px) {
+    .multi_whole{
+        padding: 30px 100px;
+    }
+	.multi_sec1 {
+        height: 100%;
+        width: 50%;
+        float: left;
+        border: 1px solid var(--main-color-op60);
+        border-radius: 0.3rem;
+        box-sizing: border-box;
+        padding: 0.4rem;
+        background-clip: content-box;
+        margin-bottom: 0.3rem;
+    }
+    .multi_sec2 {
+        height: 100%;
+        width: 50%;
+        float: right;
+        border: 1px solid var(--main-color-op60);
+        border-radius: 0.3rem;
+        box-sizing: border-box;
+        padding: 0.4rem;
+        background-clip: content-box;
+        margin-bottom: 0.3rem;
+    }
+}

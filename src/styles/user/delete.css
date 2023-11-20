@@ -1,0 +1,69 @@
+.chekc-msg {
+  border: 1px solid rgb(186, 186, 186);
+  padding: 1rem;
+}
+
+.chekc-msg > li {
+  position: relative;
+  padding-left: 1em;
+  margin-bottom: .3rem;
+}
+
+.chekc-msg > li::before {
+  content: '-';
+  position: absolute;
+  left: 0;
+}
+
+.confirm-box {
+  padding: 1rem;
+  border: 1px solid rgb(186, 186, 186);
+  border-top: none;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+}
+
+.confirm-box > input {
+  border: 1px solid rgb(169, 169, 169);
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.confirm-box > input:checked {
+  background: #005CC8;
+  border: none;
+}
+
+.checkPW-text {
+  margin: .5rem 0;
+}
+
+.delete-err {
+  margin: .5rem 0;
+}
+
+.pw-check-box {
+  width: 100%;
+  border: 1px solid #b7b7b7;
+  border-radius: 5px;
+  padding: .5rem 1rem;
+}
+
+.pw-check-box input:nth-child(1) {
+  width: 70%;
+}
+
+.pw-check-box input:nth-child(2) {
+  width: 30%;
+  cursor: pointer;
+  text-align: center;
+  border-left: 1px solid #b7b7b7;
+}
+
+.notice {
+  margin: .5rem 0;
+}
