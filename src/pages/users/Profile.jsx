@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 // css
 import "../../styles/user/profile.css";
 import "../../styles/recipe/recipe.css";
-import { faL } from "@fortawesome/free-solid-svg-icons";
 
 const Profile = () => {
   // 프로필 페이지에서 현재 로그인 유저와 페이지의 유저가 같은 유저인지 확인
@@ -99,11 +98,15 @@ const Profile = () => {
             {isSuccess &&
               data.data.articles_recipe.map((recipe) => {
                 return (
-                  <Link to={`/recipe/${recipe.id}`}>
-                    <li key={recipe.id}>
+                  <Link key={recipe.id} to={`/recipe/${recipe.id}`}>
+                    <li>
                       <div>
                         <img
-                          src={`${process.env.REACT_APP_SERVER_LOCAL_URL}${recipe.recipe_thumbnail}`}
+                          src={
+                            recipe.api_recipe
+                              ? `${recipe.recipe_thumbnail_api}`
+                              : `${process.env.REACT_APP_SERVER_LOCAL_URL}${recipe.recipe_thumbnail}`
+                          }
                           alt="레시피 썸네일"
                         />
                       </div>
@@ -122,15 +125,20 @@ const Profile = () => {
               data.data.bookmarked_articles.map((recipe) => {
                 return (
                   <Link
+                    key={recipe.id}
                     onClick={() => {
                       isBookmarkActive(false);
                     }}
                     to={`/profile/${recipe.article_recipe.author}`}
                   >
-                    <li key={recipe.id}>
+                    <li>
                       <div>
                         <img
-                          src={`${process.env.REACT_APP_SERVER_LOCAL_URL}${recipe.article_recipe.recipe_thumbnail}`}
+                          src={
+                            recipe.article_recipe.api_recipe
+                              ? recipe.article_recipe.recipe_thumbnail_api
+                              : `${process.env.REACT_APP_SERVER_LOCAL_URL}${recipe.article_recipe.recipe_thumbnail}`
+                          }
                           alt="레시피 썸네일"
                         />
                       </div>

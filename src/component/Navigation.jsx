@@ -22,7 +22,9 @@ const Navigation = () => {
   return (
     <>
       <div
-        className={isNaviActive ? "navigation-wrap" : "navigation-wrap active"}
+        className={
+          isNaviActive ? "navigation-wrap web-nav" : "navigation-wrap active"
+        }
       >
         <div className="navigation-upper">
           {users.isAuthorized ? (
