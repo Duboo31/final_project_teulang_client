@@ -41,21 +41,23 @@ const RecipeDetail = ({ recipeDetail }) => {
   });
 
   const handleDeleteRecipe = async () => {
-    const accessToken = localStorage.getItem("access");
+    if (window.confirm("게시글을 삭제하시겠습니까?")) {
+      const accessToken = localStorage.getItem("access");
 
-    await axios
-      .delete(`/articles/recipe/${recipeDetail.id}/`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-      .then(function (response) {
-        console.log("reponse.data ", response.data);
-        navigate("/");
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      await axios
+        .delete(`/articles/recipe/${recipeDetail.id}/`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then(function (response) {
+          console.log("reponse.data ", response.data);
+          navigate("/");
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
   };
 
   const handleUpdateRecipe = () => {

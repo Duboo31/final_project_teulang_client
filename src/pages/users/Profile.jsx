@@ -171,7 +171,7 @@ const Profile = () => {
                   <Link
                     key={recipe.id}
                     onClick={() => {
-                      isBookmarkActive(false);
+                      setIsBookmarkActive(false);
                     }}
                     to={`/profile/${recipe.article_recipe.author}`}
                   >
