@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteUserAccount } from "../api/user/DELETE/account";
 
 // css
 import "../../src/styles/user/delete.css";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../redux/modules/users";
 
 const DeleteAccount = ({
   isBtnActve,
@@ -13,6 +15,10 @@ const DeleteAccount = ({
   onClickDeleteAccountBtnHandler,
 }) => {
   // 삭제 버튼 활성화
+
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const user = useSelector(({ users }) => {
     return users;
@@ -28,8 +34,12 @@ const DeleteAccount = ({
 
   const { mutate } = useMutation(deleteUserAccount, {
     onSuccess: (result) => {
-      console.log("회원탈퇴 요청 성공", result.response);
-      if (result.response.status === 403) {
+      console.log("회원탈퇴 요청 성공", result);
+      if (result.status === 204) {
+        alert("회원탈퇴 완료");
+        navigate("/");
+        dispatch(logout());
+      } else if (result.response.status === 403) {
         setError(
           "password",
           { message: "비밀번호가 일치하지 않습니다." },
@@ -62,7 +72,12 @@ const DeleteAccount = ({
       password,
       userId: user.userId,
     };
-    mutate(userInfo);
+    const isDelete = window.confirm("회원탈퇴를 진행하시겠습니까?");
+    if (isDelete) {
+      mutate(userInfo);
+    } else if (!isDelete) {
+      alert("회원탈퇴 취소");
+    }
   };
 
   return (
