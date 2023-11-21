@@ -116,6 +116,9 @@ export default function Comments({ recipeComments, recipeId }) {
 
   // handle delete comment
   const handleDeleteComment = async (deleteCommentId) => {
+    var result = window.confirm("댓글을 삭제하시겠습니까?")
+
+    if (result == true) {
     const accessToken = localStorage.getItem("access");
 
     await axios
@@ -136,6 +139,7 @@ export default function Comments({ recipeComments, recipeId }) {
       .catch(function (error) {
         console.log(error);
       });
+    }
   };
 
   return (
