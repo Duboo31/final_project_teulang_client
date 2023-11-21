@@ -90,7 +90,7 @@ const Navigation = () => {
                 onClick={() => {
                   setIsNaviActive((cur) => !cur);
                 }}
-                to="/create"
+                to={users.isAuthorized ? "/create" : "/login"}
               >
                 레시피 작성
               </Link>
