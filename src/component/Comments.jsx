@@ -53,6 +53,7 @@ export default function Comments({ recipeComments, recipeId }) {
           `comment_create_input${recipeId}`
         );
         createInput.value = "";
+        setCommentContent("");
       })
       .catch(function (error) {
         console.log(error);
