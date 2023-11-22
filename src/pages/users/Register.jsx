@@ -176,7 +176,11 @@ const Register = () => {
         </Link>
         <p>회원가입 정보를 입력해주세요</p>
         <form onSubmit={handleSubmit(onSubmitRegisterHandler)}>
-          <div className="input-box">
+          <div
+            className={`${
+              isPassedEmail ? "input-box valid" : "input-box invalid"
+            }`}
+          >
             <FontAwesomeIcon className="form-icon" icon={faEnvelope} />
             <input
               placeholder="아이디(이메일)"
@@ -201,7 +205,11 @@ const Register = () => {
             </button>
           </div>
           <div className="error-text">{errors?.email?.message}</div>
-          <div className="input-box">
+          <div
+            className={`${
+              isPassedNickname ? "input-box valid" : "input-box invalid"
+            }`}
+          >
             <FontAwesomeIcon className="form-icon" icon={faCircleUser} />
             <input
               placeholder="이름(닉네임)"
@@ -209,13 +217,13 @@ const Register = () => {
               {...register("nickname", {
                 required: "닉네임: 필수 정보입니다.",
                 maxLength: {
-                  value: 8,
-                  message: "닉네임: 2글자 이상, 8글자 이하",
+                  value: 10,
+                  message: "닉네임: 2글자 이상, 10글자 이하",
                   shouldFocus: true,
                 },
                 minLength: {
                   value: 2,
-                  message: "닉네임: 2글자 이상, 12글자 이하",
+                  message: "닉네임: 2글자 이상, 10글자 이하",
                   shouldFocus: true,
                 },
               })}
