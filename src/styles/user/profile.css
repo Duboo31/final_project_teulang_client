@@ -31,7 +31,7 @@
 }
 
 .profile-side_fst div:nth-child(2) {
-  background: #118DD3;
+  background: #0f79fd;
   padding: 3px 10px;
   border-radius: 8px;
   color: #fff;
@@ -43,12 +43,12 @@
   cursor: pointer;
 }
 
-.profile-side_sec div span {
+.profile-side_sec li span {
   font-weight: bold;
 }
 
-.profile-side_sec div:nth-child(1) {
-  margin-right: 10px;
+.profile-side_sec li {
+  margin-right: 20px;
 }
 
 .select-tab {
@@ -58,7 +58,7 @@
 }
 
 .select-tab > li {
-  width: 50%;
+  width: 100%;
   text-align: center;
   padding: .7rem 0;
   border-bottom: 1px solid #cfcfcf;

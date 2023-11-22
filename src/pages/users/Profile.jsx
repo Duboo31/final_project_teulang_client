@@ -17,6 +17,8 @@ const Profile = () => {
 
   // 팔로우 유무 확인
   const [isFollowUser, setIsFollowUser] = useState(false);
+  // 팔로워 카운트 실시간 확인
+  const [followerCnt, setFollwerCnt] = useState(0);
 
   // 리덕스 스토어의 현재 계정 정보
   const user = useSelector(({ users }) => {
@@ -43,6 +45,15 @@ const Profile = () => {
     setIsMyAccount(user.userId === Number(userId));
   }, [userId, user]);
 
+  useEffect(() => {
+    setFollwerCnt(serverUser.data?.data?.followers.length);
+    serverUser.data?.data?.followers.forEach((follower) => {
+      if (follower.nickname === myInfo.data?.data?.nickname) {
+        setIsFollowUser(true);
+      }
+    });
+  }, [myInfo, serverUser, followerCnt, setFollwerCnt]);
+
   const onClickProfileUpdateBtnHandler = () => {
     navigate(`/profile/userModify/`);
   };
@@ -56,12 +67,14 @@ const Profile = () => {
       ) {
         console.log("팔로우 취소");
         setIsFollowUser(false);
+        window.location.reload();
       } else if (
         result.status === 200 &&
         result.data.message === "팔로우 합니다."
       ) {
         console.log("팔로우 했음");
         setIsFollowUser(true);
+        window.location.reload();
       }
     },
     onError: () => {
@@ -101,19 +114,24 @@ const Profile = () => {
                 )}
                 {!isMyAccount && (
                   <div>
-                    <button onClick={onClickFollowBtnHandler}>팔로우</button>
+                    <button onClick={onClickFollowBtnHandler}>
+                      {isFollowUser ? "팔로잉" : "팔로우"}
+                    </button>
                   </div>
                 )}
               </div>
-              <div className="profile-side profile-side_sec">
-                <div>
-                  팔로잉 <span>{serverUser.data?.data?.following.length}</span>
-                </div>
-              </div>
-              <div>
-                레시피{" "}
-                <span>{serverUser.data.data.articles_recipe.length}</span>
-              </div>
+              <ul className="profile-side profile-side_sec">
+                <li>
+                  레시피{" "}
+                  <span>{serverUser.data.data.articles_recipe.length}</span>
+                </li>
+                <li>
+                  팔로워 <span>{followerCnt}</span>
+                </li>
+                <li>
+                  팔로우 <span>{serverUser.data?.data?.following.length}</span>
+                </li>
+              </ul>
             </div>
           </div>
         )}
@@ -127,14 +145,16 @@ const Profile = () => {
         >
           내 레시피
         </li>
-        <li
-          onClick={() => {
-            setIsBookmarkActive(true);
-          }}
-          className={isBookmarkActive ? "active" : ""}
-        >
-          북마크 레시피
-        </li>
+        {!serverUser.data?.data?.is_admin && (
+          <li
+            onClick={() => {
+              setIsBookmarkActive(true);
+            }}
+            className={isBookmarkActive ? "active" : ""}
+          >
+            북마크 레시피
+          </li>
+        )}
       </ul>
       <div>
         {!isBookmarkActive ? (
