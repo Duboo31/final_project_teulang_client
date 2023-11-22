@@ -48,6 +48,14 @@
   margin-top: 10px;
 }
 
+.input-box.valid{
+  border-bottom: 3px solid rgb(54, 54, 255);
+}
+
+.input-box.invalid {
+  border-bottom: 3px solid rgb(255, 53, 53);
+}
+
 .input-box > input {
   padding: 10px 0;
   width: 66%;
