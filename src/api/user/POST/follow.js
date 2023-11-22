@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const postFollow = async (userId) => {
-  console.log("userId???: 팔로우?", userId);
   const accessToken = localStorage.getItem("access");
 
   const config = {
@@ -15,7 +14,6 @@ const postFollow = async (userId) => {
 
   try {
     const response = await axios.request(config);
-    console.log(response);
     return response;
   } catch (err) {
     return err;
