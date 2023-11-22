@@ -39,6 +39,10 @@
   cursor: pointer;
 }
 
+.profile-side_fst div:nth-child(2).follow {
+  background: rgb(146, 146, 146);
+}
+
 .profile-side_fst div:nth-child(2) button {
   cursor: pointer;
 }
@@ -49,6 +53,7 @@
 
 .profile-side_sec li {
   margin-right: 20px;
+  cursor: pointer;
 }
 
 .select-tab {
