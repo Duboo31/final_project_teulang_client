@@ -31,7 +31,7 @@
 }
 
 .profile-side_fst div:nth-child(2) {
-  background: #1d293f;
+  background: #0f79fd;
   padding: 3px 10px;
   border-radius: 8px;
   color: #fff;
@@ -39,16 +39,21 @@
   cursor: pointer;
 }
 
+.profile-side_fst div:nth-child(2).follow {
+  background: rgb(146, 146, 146);
+}
+
 .profile-side_fst div:nth-child(2) button {
   cursor: pointer;
 }
 
-.profile-side_sec div span {
+.profile-side_sec li span {
   font-weight: bold;
 }
 
-.profile-side_sec div:nth-child(1) {
-  margin-right: 10px;
+.profile-side_sec li {
+  margin-right: 20px;
+  cursor: pointer;
 }
 
 .select-tab {
@@ -58,7 +63,7 @@
 }
 
 .select-tab > li {
-  width: 50%;
+  width: 100%;
   text-align: center;
   padding: .7rem 0;
   border-bottom: 1px solid #cfcfcf;
@@ -69,11 +74,11 @@
 }
 
 .select-tab>li.active {
-  background: #1d293f;
+  background: #118DD3;
   color: #fff;
   font-weight: bold;
-  border-bottom: 1px solid #1d293f;
-  border-left: 1px solid #1d293f;
-  border-right: 1px solid #1d293f;
-  border-top: 1px solid #1d293f;
+  border-bottom: 1px solid #118DD3;
+  border-left: 1px solid #118DD3;
+  border-right: 1px solid #118DD3;
+  border-top: 1px solid #118DD3;
 }

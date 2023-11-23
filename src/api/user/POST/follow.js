@@ -1,20 +1,15 @@
 import axios from "axios";
 
-const deleteUserAccount = async (userInfo) => {
-  const { password, userId } = userInfo;
+const postFollow = async (userId) => {
   const accessToken = localStorage.getItem("access");
 
   const config = {
-    method: "DELETE",
+    method: "post",
     maxBodyLength: Infinity,
-    url: `${process.env.REACT_APP_SERVER_URL}/users/api/signout/${userId}/`,
+    url: `${process.env.REACT_APP_SERVER_LOCAL_URL}/users/follow/${userId}/`,
     headers: {
       Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
     },
-    data: JSON.stringify({
-      password,
-    }),
   };
 
   try {
@@ -25,4 +20,4 @@ const deleteUserAccount = async (userInfo) => {
   }
 };
 
-export { deleteUserAccount };
+export { postFollow };

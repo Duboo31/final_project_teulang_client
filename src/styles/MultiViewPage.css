@@ -42,6 +42,9 @@
     background-color: var(--main-color-op60);
     text-align: center;
 }
+.multi_sec_btn:hover {
+    cursor: pointer;
+}
 .multi_detail_form {
     height: calc(100% - 1.5rem - 0.4rem);
     overflow: scroll;

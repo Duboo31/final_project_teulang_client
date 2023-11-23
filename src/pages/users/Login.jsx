@@ -117,6 +117,10 @@ const Login = () => {
               <input className="submit-btn" type="submit" value="로그인" />
             </form>
             <div className="link-box">
+              비밀번호를 잊으셨나요?
+              <Link to="/user/pwReset">비밀번호 재설정</Link>
+            </div>
+            <div className="link-box">
               계정이 없으신가요?
               <Link to="/register">회원가입</Link>
             </div>

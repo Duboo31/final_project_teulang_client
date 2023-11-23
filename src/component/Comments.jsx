@@ -4,6 +4,7 @@ import urls from "../shared/url";
 import Loading from "./Loading";
 import "../styles/Comments.css";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Comments({ recipeComments, recipeId }) {
   const [commentContent, setCommentContent] = useState("");
@@ -14,6 +15,10 @@ export default function Comments({ recipeComments, recipeId }) {
   useEffect(() => {
     setComments(recipeComments); // 처음에 새로고침하면 recipeComments가 undefined로 들어와서, 값이 들어왔을 때 comments에 넣고 화면에 띄우기 위해서 필요.
   }, [recipeComments]);
+
+  const user = useSelector(({ users }) => {
+    return users;
+  });
 
   // handle create comment
   const handleCreateInputChange = (e) => {
@@ -48,6 +53,7 @@ export default function Comments({ recipeComments, recipeId }) {
           `comment_create_input${recipeId}`
         );
         createInput.value = "";
+        setCommentContent("");
       })
       .catch(function (error) {
         console.log(error);
@@ -116,26 +122,30 @@ export default function Comments({ recipeComments, recipeId }) {
 
   // handle delete comment
   const handleDeleteComment = async (deleteCommentId) => {
-    const accessToken = localStorage.getItem("access");
+    var result = window.confirm("댓글을 삭제하시겠습니까?");
 
-    await axios
-      .delete(`/articles/recipe/${recipeId}/comment/${deleteCommentId}/`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-      .then(function (response) {
-        console.log("data ", response.data);
-        let findIndex = comments.findIndex(
-          (comment) => comment.id === deleteCommentId
-        );
-        let copiedComments = [...comments];
-        copiedComments[findIndex] = response.data;
-        setComments(copiedComments);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    if (result == true) {
+      const accessToken = localStorage.getItem("access");
+
+      await axios
+        .delete(`/articles/recipe/${recipeId}/comment/${deleteCommentId}/`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then(function (response) {
+          console.log("data ", response.data);
+          let findIndex = comments.findIndex(
+            (comment) => comment.id === deleteCommentId
+          );
+          let copiedComments = [...comments];
+          copiedComments[findIndex] = response.data;
+          setComments(copiedComments);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
   };
 
   return (
@@ -182,24 +192,26 @@ export default function Comments({ recipeComments, recipeId }) {
                           {comment.user_data.nickname}
                         </span>
                       </div>
-                      <div className="comments_UD_btns">
-                        <button
-                          onClick={() =>
-                            handleUpdateComment(comment.id, comment.content)
-                          }
-                          id={`comment_update_btn${comment.id}`}
-                          className="comments_update_btn"
-                        >
-                          수정
-                        </button>
-                        <button
-                          onClick={() => handleDeleteComment(comment.id)}
-                          id={`comment_delete_btn${comment.id}`}
-                          className="comments_delete_btn"
-                        >
-                          삭제
-                        </button>
-                      </div>
+                      {user.userId === comment.user_data.id && (
+                        <div className="comments_UD_btns">
+                          <button
+                            onClick={() =>
+                              handleUpdateComment(comment.id, comment.content)
+                            }
+                            id={`comment_update_btn${comment.id}`}
+                            className="comments_update_btn"
+                          >
+                            수정
+                          </button>
+                          <button
+                            onClick={() => handleDeleteComment(comment.id)}
+                            id={`comment_delete_btn${comment.id}`}
+                            className="comments_delete_btn"
+                          >
+                            삭제
+                          </button>
+                        </div>
+                      )}
                     </div>
 
                     <div className="comments_content_div">

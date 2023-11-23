@@ -1,38 +1,104 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* mobile first css*/
+/* 모바일 뷰포트 초과 */
+/* 스크린의 크기가 767을 넘게된다면 해당 스타일을 적용합니다. 테블릿 및 데스크탑의 공통 css 영역입니다. 테블릿을 위한 영역이기도 합니다. 테블릿 스크린에만 적용될 css를 작성합니다. */
+@media screen and (min-width: 767px) {
+  .navigation-wrap {
+    border-left: 1px solid #ddd;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media screen and (min-width: 1023px) {
+  .navigation-wrap.active {
+    border: none;
+    position: relative;
+    right: 0;
+    width: 100%;
+    height: fit-content;
+    transition: none;
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px;
   }
-  to {
-    transform: rotate(360deg);
+
+  /* .web-nav {
+      width: 100%;
+      height: 150px;
+      background-color: #fff;
+      z-index: 999;
+      transition: none;
+      max-width: 100%;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    } */
+  .navigation-upper,
+  .searchBar-container,
+  .navigation-lower {
+    max-width: 1024px;
+    min-width: 1024px;
+    width: 100%;
+    background-color: #fff;
+  }
+
+  .navigation-icon_box {
+    display: none;
+  }
+
+  .navigation-icon_menu {
+    display: none;
+  }
+
+  .navigation_header {
+    display: flex;
+    justify-content: end;
+  }
+
+  .navigation_header-item,
+  .navigation_header-item {
+    width: fit-content;
+  }
+
+  .navigation_header-item:nth-child(1) {
+    background: none;
+    color: #333;
+    border: none;
+  }
+
+  .navigation_header-item:nth-child(2) {
+    border: none;
+    margin-left: 10px;
+  }
+
+  .navigation-lower ul {
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .navigation-lower ul li {
+    width: fit-content;
+    border-bottom: none;
+  }
+
+  .navigation-lower ul li:hover {
+    background: none;
+    color: #333;
+  }
+
+  .navigation-lower ul li a {
+    display: inline;
+  }
+
+  .navigation-lower ul li a:hover {
+    border-bottom: 1px solid #3c73da;
+    color: #3c73da;
+  }
+
+  .searchBar-container {
+    border-bottom: none;
   }
 }

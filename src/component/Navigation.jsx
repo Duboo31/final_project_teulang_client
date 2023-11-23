@@ -6,11 +6,17 @@ import IsLogoutNavi from "./navigation/IsLogoutNavi";
 import Search from "./Search";
 
 import logo from "../image/logo.png";
+import logoWeb from "../image/logoWeb.png";
+
 // css
 import "../styles/navigation/searchBar.css";
 import "../styles/navigation/navigation.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faXmark,
+  faRectangleList,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Navigation = () => {
   const [isNaviActive, setIsNaviActive] = useState(false);
@@ -22,7 +28,9 @@ const Navigation = () => {
   return (
     <>
       <div
-        className={isNaviActive ? "navigation-wrap" : "navigation-wrap active"}
+        className={
+          isNaviActive ? "navigation-wrap web-nav" : "navigation-wrap active"
+        }
       >
         <div className="navigation-upper">
           {users.isAuthorized ? (
@@ -57,6 +65,10 @@ const Navigation = () => {
                 src={logo}
                 alt="로고"
               />
+              <h1 className="logo-img_web">
+                <span>털랭</span>
+                <span>우리집 냉장고 레시피</span>
+              </h1>
             </Link>
           </h2>
           <Search setIsNaviActive={setIsNaviActive} />
@@ -78,7 +90,7 @@ const Navigation = () => {
                 onClick={() => {
                   setIsNaviActive((cur) => !cur);
                 }}
-                to="/create"
+                to={users.isAuthorized ? "/create" : "/login"}
               >
                 레시피 작성
               </Link>
