@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-const AuthTimer = () => {
-  const [minutes, setMinutes] = useState(3);
+const AuthTimer = ({ timer }) => {
+  const [minutes, setMinutes] = useState(timer);
   const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {

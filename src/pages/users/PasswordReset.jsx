@@ -156,6 +156,7 @@ const PasswordReset = () => {
           </h1>
           <h1 className={order === 3 ? "view" : "noView"}>
             새로운 비밀번호를 입력하세요.
+            <AuthTimer timer={10} />
           </h1>
           <form onSubmit={handleSubmit(onClickNextBtnHandler)}>
             <div className="input-box noCheck">
@@ -193,7 +194,7 @@ const PasswordReset = () => {
                       required: "인증 코드를 입력하세요.",
                     })}
                   />
-                  <AuthTimer />
+                  <AuthTimer timer={3} />
                 </div>
                 <div className="error-text">{errors?.code?.message}</div>
               </>
