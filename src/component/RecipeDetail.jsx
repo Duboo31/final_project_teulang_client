@@ -21,20 +21,6 @@ const RecipeDetail = ({ recipeDetail }) => {
     setStarAvg(recipeDetail.star_avg);
   }, [recipeDetail]);
 
-  // useEffect(() => {
-  //   for (let i = 1; i < 6; i++) {
-  //     stars.push(
-  //       <img
-  //         src={empty_star}
-  //         key={`${i}`}
-  //         name={`${i}`}
-  //         className="detail_rate_star"
-  //         onClick={handleSubmitStarRate}
-  //       />
-  //     );
-  //   }
-  // },[])
-
   // 로그인 된 유저 정보
   const user = useSelector(({ users }) => {
     return users;
@@ -117,7 +103,7 @@ const RecipeDetail = ({ recipeDetail }) => {
       })
       .catch(function (error) {
         console.log(error);
-        alert(error.response.data)
+        alert(error.response.data);
       });
   };
 
@@ -144,7 +130,6 @@ const RecipeDetail = ({ recipeDetail }) => {
           />
         );
       }
-      
     }
     return stars;
   };
@@ -161,18 +146,20 @@ const RecipeDetail = ({ recipeDetail }) => {
               <p className="detail_star_avg">
                 {starAvg ? parseFloat(starAvg).toFixed(1) : "-"}
               </p>
-              {!(user.userId === recipeDetail.user_data.id) && (
-                <img
-                  src={
-                    recipeDetail.request_user_article_data.is_bookmarked
-                      ? bookmarked_icon
-                      : not_bookmarked_icon
-                  }
-                  id="bookmark"
-                  onClick={handleBookmark}
-                  className="detail_bookmark"
-                />
-              )}
+              {console.log("user", user)}
+              {user.isAuthorized &&
+                !(user.userId === recipeDetail.user_data.id) && (
+                  <img
+                    src={
+                      recipeDetail.request_user_article_data.is_bookmarked
+                        ? bookmarked_icon
+                        : not_bookmarked_icon
+                    }
+                    id="bookmark"
+                    onClick={handleBookmark}
+                    className="detail_bookmark"
+                  />
+                )}
             </div>
           </span>
           <img
@@ -207,11 +194,12 @@ const RecipeDetail = ({ recipeDetail }) => {
             <div>
               {!(user.userId === recipeDetail.user_data.id) ? (
                 <div className="detail_star_div">
-                  {recipeDetail.request_user_article_data.is_star_rated
-                    ? renderStar(
-                        recipeDetail.request_user_article_data.star_rate
-                      )
-                    : renderStar(0)}
+                  {user.isAuthorized &&
+                    (recipeDetail.request_user_article_data.is_star_rated
+                      ? renderStar(
+                          recipeDetail.request_user_article_data.star_rate
+                        )
+                      : renderStar(0))}
                 </div>
               ) : (
                 <div>

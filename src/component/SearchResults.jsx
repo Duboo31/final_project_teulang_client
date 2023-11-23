@@ -138,7 +138,7 @@ const SearchResults = () => {
 
               <div className="search_recipe_footer">
                 <div
-                  onClick={() => navigate(`/profile/${recipe.user_data_id}`)}
+                  onClick={() => navigate(`/profile/${recipe.user_data.id}`)}
                   className="search_recipe_author"
                 >
                   <img

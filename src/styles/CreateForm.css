@@ -48,6 +48,9 @@
     margin: 0 0.2rem;
     background-color: var(--main-color-op60);
 }
+.form_add_thumbnail_btn:hover {
+    cursor: pointer;
+}
 .form_add_thumbnail_preview {
     width: 100%;
 }
@@ -127,6 +130,9 @@
     max-height: 20px;
     text-align: center;
 }
+.form_ingre_update_each_del_btn:hover {
+    cursor: pointer;
+}
 .form_orders {
     padding: 1rem 0.3rem;
     border-top: 1px solid var(--light-color);
@@ -163,6 +169,9 @@
     text-align: center;
     background-color: var(--main-color-op60);
 }
+.form_add_btn:hover {
+    cursor: pointer;
+}
 .form_orders_body {
     /* border: 1px solid; */
     margin: 0.7rem 0;
@@ -189,6 +198,9 @@
     padding: 0.2rem 0.5rem;
     font-size: 12px;
     margin: 0 0.1rem;
+}
+.form_orders_add_each_btn:hover {
+    cursor: pointer;
 }
 .form_orders_each_body {
     display: flex;
@@ -246,6 +258,9 @@
     padding: 0.2rem 0.5rem;
     font-size: smaller;
     margin-top: 1rem;
+}
+.form_submit_btn:hover {
+    cursor: pointer;
 }
 @media screen and (min-width:769px) {
     .form_add_thumbnail_preview{
