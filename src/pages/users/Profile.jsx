@@ -59,11 +59,9 @@ const Profile = () => {
     for (let i = 0; i < myInfo.data?.data?.following.length; i++) {
       const nickname = myInfo.data?.data?.following[i].nickname;
       if (nickname === targetNickname) {
-        console.log("내가 팔로우 한 사람임");
         setIsFollowUser(true);
         return;
       } else {
-        console.log("누군데 너");
         setIsFollowUser(false);
       }
     }
@@ -101,9 +99,6 @@ const Profile = () => {
     mutate(userId);
   };
 
-  // console.log("serverUser: ", serverUser);
-  // console.log("myInfo: ", myInfo);
-
   return (
     <div>
       <div>
@@ -125,7 +120,7 @@ const Profile = () => {
                     </button>
                   </div>
                 )}
-                {!isMyAccount && (
+                {!isMyAccount && myInfo?.data?.data?.nickname && (
                   <div className={isFollowUser ? "follow" : ""}>
                     <button onClick={onClickFollowBtnHandler}>
                       {isFollowUser ? "팔로잉" : "팔로우"}
@@ -218,7 +213,7 @@ const Profile = () => {
                     onClick={() => {
                       setIsBookmarkActive(false);
                     }}
-                    to={`/profile/${recipe.article_recipe.author}`}
+                    to={`/recipe/${recipe.article_recipe_id}`}
                   >
                     <li>
                       <div>
