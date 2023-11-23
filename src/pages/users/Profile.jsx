@@ -45,7 +45,7 @@ const Profile = () => {
           <div className="profile-wrap">
             <div className="profile_picture-container">
               <img
-                src={`${process.env.REACT_APP_SERVER_LOCAL_URL}${data?.data?.user_img}`}
+                src={`${process.env.REACT_APP_SERVER_URL}${data?.data?.user_img}`}
                 alt="프로필 이미지"
               />
             </div>
@@ -103,7 +103,7 @@ const Profile = () => {
                     <li key={recipe.id}>
                       <div>
                         <img
-                          src={`${process.env.REACT_APP_SERVER_LOCAL_URL}${recipe.recipe_thumbnail}`}
+                          src={`${process.env.REACT_APP_SERVER_URL}${recipe.recipe_thumbnail}`}
                           alt="레시피 썸네일"
                         />
                       </div>
@@ -130,7 +130,7 @@ const Profile = () => {
                     <li key={recipe.id}>
                       <div>
                         <img
-                          src={`${process.env.REACT_APP_SERVER_LOCAL_URL}${recipe.article_recipe.recipe_thumbnail}`}
+                          src={`${process.env.REACT_APP_SERVER_URL}${recipe.article_recipe.recipe_thumbnail}`}
                           alt="레시피 썸네일"
                         />
                       </div>

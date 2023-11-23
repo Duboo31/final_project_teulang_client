@@ -115,3 +115,5 @@ sketch
 
 # token
 token.js
+# Local Netlify folder
+.netlify

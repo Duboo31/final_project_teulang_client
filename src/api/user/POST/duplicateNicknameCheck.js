@@ -4,7 +4,7 @@ const isDuplicateNickname = async (nickname) => {
   const config = {
     method: "post",
     maxBodyLength: Infinity,
-    url: `${process.env.REACT_APP_SERVER_LOCAL_URL}/users/nickname-confirm/`,
+    url: `${process.env.REACT_APP_SERVER_URL}/users/nickname-confirm/`,
     headers: {
       "Content-Type": "application/json",
     },
