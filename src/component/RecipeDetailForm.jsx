@@ -18,15 +18,24 @@ export default function RecipeDetailForm({ recipeId }) {
   const fetchRecipeDetailData = async () => {
     const accesstoken = localStorage.getItem("access");
 
+    console.log("accesstoken",accesstoken);
+
 
     try {
-      const request = await axios.get(requests.fetchRecipeListAll + recipeId, {
-        headers: {
-          Authorization: `Bearer ${accesstoken}`
-        },
-      });
-      setRecipeDetail(request.data);
-      console.log("fetchRecipeDetailData", request.data);
+      if (accesstoken) {
+        const request = await axios.get(requests.fetchRecipeListAll + recipeId, {
+          headers: {
+            Authorization: `Bearer ${accesstoken}`
+          },
+        })
+        setRecipeDetail(request.data);
+        console.log("fetchRecipeDetailData", request.data);
+      }
+      else {
+        const request = await axios.get(requests.fetchRecipeListAll + recipeId)
+        setRecipeDetail(request.data);
+        console.log("fetchRecipeDetailData", request.data);
+      };
     } catch (error) {
       navigate("/*"); // NotFound 페이지로 이동.
     }

@@ -47,6 +47,9 @@
     border: none;
     font-size: 13px;
 }
+.comments_create_btn:hover {
+    cursor: pointer;
+}
 .comments_all_div {
     display: flex;
     flex-direction: column;
@@ -70,6 +73,9 @@
     display: flex;
     align-items: center;
 }
+.comments_author:hover {
+    cursor: pointer;
+}
 .comments_author_img {
     min-height: 25px;
     min-width: 25px;
@@ -83,7 +89,7 @@
     font-weight: 600;
 }
 /* .comments_UD_btns {
-
+    
 } */
 .comments_update_btn {
     width: fit-content;
@@ -95,6 +101,9 @@
     padding: 0.3rem 0.4rem;
     margin-right: 0.1rem;
 }
+.comments_update_btn:hover {
+    cursor: pointer;
+}
 .comments_delete_btn {
     width: fit-content;
     height: fit-content;
@@ -104,6 +113,9 @@
     background-color: var(--main-color-op60);
     padding: 0.3rem 0.4rem;
     margin-left: 0.1rem;
+}
+.comments_delete_btn:hover {
+    cursor: pointer;
 }
 .comments_content_div {
     display: flex;

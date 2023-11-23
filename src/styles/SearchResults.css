@@ -13,6 +13,9 @@
     border: 0.5px solid var(--main-color);
     max-width: 800px;
 }
+.search_each_recipe:hover {
+    cursor: pointer;
+}
 .search_recipe_content {
     display: flex;
     justify-content: space-between;

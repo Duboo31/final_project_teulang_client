@@ -42,6 +42,9 @@
     margin: 0 -5px 0 10px ;
     height: 20px;
 }
+.detail_bookmark:hover {
+    cursor: pointer;
+}
 .detail_recipe_thumbnail {
     width: 100%;
 }
@@ -53,6 +56,9 @@
 .detail_author {
     display: flex;
     align-items: center;
+}
+.detail_author:hover {
+    cursor: pointer;
 }
 .detail_author_img {
     max-height: 3rem;
@@ -83,6 +89,9 @@
     height: 18px;
     margin-right: 0.5px;
 }
+.detail_rate_star:hover {
+    cursor: pointer;
+}
 .detail_author_nickname {
     margin-bottom: 0;
     margin-top: 0.5rem;
@@ -95,6 +104,9 @@
     border-radius: 1rem;
     background-color: var(--main-color-op60);
     font-size: 13px;
+}
+.detail_CU_btn:hover {
+    cursor: pointer;
 }
 .detail_sections_div {
     display: block;
