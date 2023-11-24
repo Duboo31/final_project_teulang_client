@@ -47,7 +47,6 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
         console.log("reponse.data ", response.data); // response로 추가된 데이터를 보내달라고 해서 그걸 아래서 바로 setComments로 comments에 할당해야하나?
         // setComments(recipeComments); -> 이렇게 하면 안 됨!!
         setComments((prevComments) => [...prevComments, response.data]); // comments 값을 바꿔서 아래 추가된 코멘트가 렌더링되게끔.
-        // 이렇게 하기 위해서 원래 response로 오던 "댓글이 작성되었습니다"를 새로 작성된 데이터로 바꿨는데 이렇게 하는게 맞나?
 
         // 생성 인풋 값 지우기
         const createInput = document.getElementById(
