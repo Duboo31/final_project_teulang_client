@@ -57,7 +57,7 @@ export default function ArticleCreateForm({
       postArticle(formData);
     } else {
       if (delete_image.length > 0) {
-        formData.append("delete_image", delete_image);
+        formData.append("delete_image", JSON.stringify(delete_image));
       }
       updateArticle(formData);
     }
