@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "../api/recipes/axios";
 import urls from "../shared/url";
 import "../styles/Row.css";
 import star from "../images/star_full.png";
+import default_thumbnail from "../images/default_thumbnail.jpg"
 
 // import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
@@ -15,23 +16,24 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
-const Row = ({ title, id, fetchUrl }) => {
-  const [recipes, setRecipes] = useState([]);
+const ArticleRow = ({ title, id, fetchUrl }) => {
+  const [articles, setArticles] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchRecipeData();
+    fetchArticleData();
   }, []);
 
-  const fetchRecipeData = async () => {
+  const fetchArticleData = async () => {
     const request = await axios.get(fetchUrl);
-    console.log("fetchRecipeDataRow: ", request.data);
-    setRecipes(request.data);
+    console.log("fetchArticleDataRow: ", request.data.serializer_data);
+    setArticles(request.data.serializer_data);
   };
 
   return (
     <section className="row">
       <h2 className="row_title">{title}</h2>
+      <Link to={`/article`}>전체 보기</Link>
       <Swiper
         // install Swiper modules
         modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -54,49 +56,48 @@ const Row = ({ title, id, fetchUrl }) => {
         pagination={{ clickable: true }} // 페이지 버튼 보이게 할지
       >
         <div id={id}>
-          {recipes.map((recipe) => (
-            <SwiperSlide key={recipe.id}>
+          {articles.map((article) => (
+            <SwiperSlide key={article.id}>
               <div className="recipe_content">
                 <span className="recipe_top_span">
-                  <p className="recipe_title">{recipe.title}</p>
-                  <span className="recipe_star_avg_span">
+                  <p className="recipe_title">{article.title}</p>
+                  {/* <span className="recipe_star_avg_span">
                     <img src={star} className="recipe_star_img" />
                     <span className="recipe_star_avg">
                       {recipe.star_avg
                         ? parseFloat(recipe.star_avg).toFixed(1)
                         : "-"}
                     </span>
-                  </span>
+                  </span> */}
                 </span>
                 <span>
                   <img
-                    key={recipe.id}
+                    key={article.id}
                     className={`recipe_thumbnail`}
                     src={
-                      recipe.api_recipe
-                        ? `${recipe.recipe_thumbnail_api}`
-                        : `${urls.baseURL}${recipe.recipe_thumbnail}`
+                        article.images
+                        ? `${urls.baseURL}${article.images[0].free_image}`
+                        : default_thumbnail
                     }
-                    alt={recipe.name}
-                    onClick={() => navigate(`/recipe/${recipe.id}`)}
+                    onClick={() => navigate(`/article/${article.id}`)}
                   />
                 </span>
                 <span
                   className="recipe_author"
-                  onClick={() => navigate(`/profile/${recipe.user_data.id}`)}
+                  onClick={() => navigate(`/profile/${article.user_data.id}`)}
                 >
                   <img
-                    src={`${urls.baseURL}${recipe.user_data.user_img}`}
+                    src={`${urls.baseURL}${article.user_data.user_img}`}
                     className="recipe_author_img"
                   />
-                  <p className="recipe_author_nickname">{recipe.author}</p>
+                  <p className="recipe_author_nickname">{article.user_data.nickname}</p>
                 </span>
                 <div className="recipe_desc_div">
                   <p className="recipe_desc">
-                    {recipe.description
-                      ? recipe.description.length > 13
-                        ? recipe.description.substr(0, 13) + " ..."
-                        : recipe.description
+                    {article.content
+                      ? article.content.length > 13
+                        ? article.content.substr(0, 13) + " ..."
+                        : article.content
                       : "-"}
                   </p>
                 </div>
@@ -109,4 +110,4 @@ const Row = ({ title, id, fetchUrl }) => {
   );
 };
 
-export default Row;
+export default ArticleRow;

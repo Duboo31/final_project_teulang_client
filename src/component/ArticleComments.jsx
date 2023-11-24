@@ -6,7 +6,7 @@ import "../styles/Comments.css";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-export default function Comments({ recipeComments, recipeId, fetchUrl }) {
+export default function ArticleComments({ recipeComments, recipeId }) {
   const [commentContent, setCommentContent] = useState("");
   const [commentUpdateContent, setCommentUpdateContent] = useState("");
   const [comments, setComments] = useState(recipeComments);
@@ -32,7 +32,7 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
 
     await axios
       .post(
-        fetchUrl,
+        `/articles/recipe/${recipeId}/comment/`,
         {
           content: commentContent,
           article_recipe: recipeId,
@@ -47,6 +47,7 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
         console.log("reponse.data ", response.data); // response로 추가된 데이터를 보내달라고 해서 그걸 아래서 바로 setComments로 comments에 할당해야하나?
         // setComments(recipeComments); -> 이렇게 하면 안 됨!!
         setComments((prevComments) => [...prevComments, response.data]); // comments 값을 바꿔서 아래 추가된 코멘트가 렌더링되게끔.
+        // 이렇게 하기 위해서 원래 response로 오던 "댓글이 작성되었습니다"를 새로 작성된 데이터로 바꿨는데 이렇게 하는게 맞나?
 
         // 생성 인풋 값 지우기
         const createInput = document.getElementById(
@@ -57,9 +58,6 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
       })
       .catch(function (error) {
         console.log(error);
-        if (error.response.status === 401) {
-          alert("인증되지 않은 사용자입니다. 로그인 해주세요.")
-        }
       });
   };
 
@@ -93,7 +91,7 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
     } else {
       await axios
         .put(
-          `${fetchUrl}${updateCommentId}/`,
+          `/articles/recipe/${recipeId}/comment/${updateCommentId}/`,
           {
             content: updateInput.value,
             article_recipe: recipeId,
@@ -119,9 +117,6 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
         })
         .catch(function (error) {
           console.log(error);
-          if (error.response.status === 401) {
-            alert("인증되지 않은 사용자입니다. 로그인 해주세요.")
-          }
         });
     }
   };
@@ -134,7 +129,7 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
       const accessToken = localStorage.getItem("access");
 
       await axios
-        .delete(`${fetchUrl}${deleteCommentId}/`, {
+        .delete(`/articles/recipe/${recipeId}/comment/${deleteCommentId}/`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
@@ -149,10 +144,7 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
           setComments(copiedComments);
         })
         .catch(function (error) {
-          console.log(error.response);
-          if (error.response.status === 401) {
-            alert("인증되지 않은 사용자입니다. 로그인 해주세요.")
-          }
+          console.log(error);
         });
     }
   };

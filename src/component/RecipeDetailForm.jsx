@@ -37,6 +37,7 @@ export default function RecipeDetailForm({ recipeId }) {
         console.log("fetchRecipeDetailData", request.data);
       };
     } catch (error) {
+      console.log(error);
       navigate("/*"); // NotFound 페이지로 이동.
     }
   };
@@ -47,6 +48,7 @@ export default function RecipeDetailForm({ recipeId }) {
       <Comments
         recipeComments={recipeDetail.article_recipe_comment}
         recipeId={recipeId}
+        fetchUrl={`/articles/recipe/${recipeId}/comment/`}
       />
     </div>
   );
