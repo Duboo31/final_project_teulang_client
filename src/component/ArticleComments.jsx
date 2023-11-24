@@ -6,7 +6,7 @@ import "../styles/Comments.css";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-export default function Comments({ recipeComments, recipeId, fetchUrl }) {
+export default function ArticleComments({ recipeComments, recipeId }) {
   const [commentContent, setCommentContent] = useState("");
   const [commentUpdateContent, setCommentUpdateContent] = useState("");
   const [comments, setComments] = useState(recipeComments);
@@ -32,7 +32,7 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
 
     await axios
       .post(
-        fetchUrl,
+        `/articles/recipe/${recipeId}/comment/`,
         {
           content: commentContent,
           article_recipe: recipeId,
@@ -58,9 +58,6 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
       })
       .catch(function (error) {
         console.log(error);
-        if (error.response.status === 401) {
-          alert("인증되지 않은 사용자입니다. 로그인 해주세요.")
-        }
       });
   };
 
@@ -94,7 +91,7 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
     } else {
       await axios
         .put(
-          `${fetchUrl}${updateCommentId}/`,
+          `/articles/recipe/${recipeId}/comment/${updateCommentId}/`,
           {
             content: updateInput.value,
             article_recipe: recipeId,
@@ -120,9 +117,6 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
         })
         .catch(function (error) {
           console.log(error);
-          if (error.response.status === 401) {
-            alert("인증되지 않은 사용자입니다. 로그인 해주세요.")
-          }
         });
     }
   };
@@ -135,7 +129,7 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
       const accessToken = localStorage.getItem("access");
 
       await axios
-        .delete(`${fetchUrl}${deleteCommentId}/`, {
+        .delete(`/articles/recipe/${recipeId}/comment/${deleteCommentId}/`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
@@ -150,10 +144,7 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
           setComments(copiedComments);
         })
         .catch(function (error) {
-          console.log(error.response);
-          if (error.response.status === 401) {
-            alert("인증되지 않은 사용자입니다. 로그인 해주세요.")
-          }
+          console.log(error);
         });
     }
   };

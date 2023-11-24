@@ -10,6 +10,10 @@ import MultiViewPage from "../pages/recipe/MultiViewPage";
 import Profile from "../pages/users/Profile";
 import Update from "../pages/users/Update";
 import UpdatePage from "../pages/recipe/UpdatePage";
+import FreeAllPage from "../pages/recipe/FreeAllPage";
+import FreeDetailPage from "../pages/recipe/FreeDetailPage";
+import ArticleCreatePage from "../pages/recipe/ArticleCreatePage";
+import ArticleUpdatePage from "../pages/recipe/ArticleUpdatePage";
 
 // components
 import Navigation from "../component/Navigation";
@@ -32,6 +36,10 @@ const Router = () => {
           <Route path="/multi" element={<MultiViewPage />} />
           <Route path="/profile/:userId" element={<Profile />} />
           <Route path="/profile/userModify" element={<Update />} />
+          <Route path="/article" element={<FreeAllPage />} />
+          <Route path="/article/:articleId" element={<FreeDetailPage />} />
+          <Route path="/article/create" element={<ArticleCreatePage />} />
+          <Route path="/article/update" element={<ArticleUpdatePage />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
