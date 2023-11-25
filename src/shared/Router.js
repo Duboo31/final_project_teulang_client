@@ -13,13 +13,13 @@ import UpdatePage from "../pages/recipe/UpdatePage";
 import FreeDetailPage from "../pages/recipe/FreeDetailPage";
 import ArticleCreatePage from "../pages/recipe/ArticleCreatePage";
 import ArticleUpdatePage from "../pages/recipe/ArticleUpdatePage";
+import FreeAllPage from "../pages/recipe/FreeAllPage";
+import RecipeAllPage from "../pages/recipe/RecipeAllPage";
 
 // components
 import Navigation from "../component/Navigation";
 import NotFound from "../component/NotFound";
 import PasswordReset from "../pages/users/PasswordReset";
-import FreeAllPage from "../pages/recipe/FreeAllPage";
-import RecipeAllPage from "../pages/recipe/RecipeAllPage";
 
 const Router = () => {
   return (

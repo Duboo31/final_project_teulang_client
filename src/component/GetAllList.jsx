@@ -20,8 +20,10 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
   console.log("option:", option);
 
   useEffect(() => {
-    if (curPage) {
+    if (curPage !== null) {
       fetchArticlesList(curPage);
+    } else {
+        fetchArticlesList();
     }
   }, [curPage, option]);
 
