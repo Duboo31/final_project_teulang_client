@@ -1,7 +1,25 @@
 import { useNavigate } from "react-router-dom";
 import axios from "../api/recipes/axios";
-import React, { createElement, useRef, useState } from "react";
+import React, {
+  createElement,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import urls from "../shared/url";
+import "../styles/CreateForm.css";
+import "../styles/ArticleCreateForm.css";
+
+// import Swiper core and required modules
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 
 export default function ArticleCreateForm({
   article_id = "",
@@ -13,7 +31,37 @@ export default function ArticleCreateForm({
   isForUpdate = false,
 }) {
   const navigate = useNavigate();
-  const delete_image = [];
+  const delete_image = useRef([]);
+  const [slidingImages, setSlidingImages] = useState([]);
+  var update_cnt = useRef(0);
+
+  const textRef = useRef();
+  const handleResizeHeight = useCallback(() => {
+    textRef.current.style.height = "auto";
+    textRef.current.style.height = textRef.current.scrollHeight + "px";
+  }, []);
+
+  useEffect(() => {
+    const new_slidingImages = [];
+    if (cur_article_imgs.length > 0) {
+      cur_article_imgs.map((img) => {
+        // console.log("img: ", img);
+        new_slidingImages.push(
+          <SwiperSlide key={img.id}>
+            <div id={`cur_img_${img.id}`} className="article_create_img_div">
+              <img
+                style={{ width: "200px" }}
+                src={`${urls.baseURL}${img.free_image}`}
+              />
+              <button onClick={() => handleDeletePrevImage(img.id)} className="form_ingre_update_each_del_btn">x</button>
+            </div>
+          </SwiperSlide>
+        );
+      });
+    }
+    console.log("new_slidingImages", new_slidingImages);
+    setSlidingImages(new_slidingImages);
+  }, []);
 
   const [inputs, setInputs] = useState({
     title: title,
@@ -56,8 +104,9 @@ export default function ArticleCreateForm({
     if (!isForUpdate) {
       postArticle(formData);
     } else {
-      if (delete_image.length > 0) {
-        formData.append("delete_image", delete_image);
+      console.log("update_delete_image", delete_image.current);
+      if (delete_image.current.length > 0) {
+        formData.append("delete_image", JSON.stringify(delete_image.current));
       }
       updateArticle(formData);
     }
@@ -106,40 +155,57 @@ export default function ArticleCreateForm({
 
   const renderImagePreview = (e) => {
     const { files } = e.target;
-    console.log(files);
     const prevNewImages = document.getElementsByName("new_image");
-    console.log("gEbN", prevNewImages.length)
-    const prevNewImagesDiv = document.createElement("div");
-    for (let i=0; i<prevNewImages.length; i++) {
-        console.log("prevNewImages", prevNewImages[i]);
-        prevNewImages[i].style.display = "none";
-    }
+    console.log("gEbN", prevNewImages.length);
+    let prev_slidingImages = [...slidingImages]; // 배열 복제
+
     if (files && files.length > 0) {
+      const updatedImages = []; // 업데이트된 이미지를 담을 배열
+
       for (let i = 0; i < files.length; i++) {
         const reader = new FileReader();
         reader.onload = function (event) {
-          const imagePreview = document.createElement("img");
-          imagePreview.src = event.target.result;
-          imagePreview.style.width = "200px";
+          const new_slidingImage = (
+            <SwiperSlide
+              name="new_image"
+              key={`new_image_${update_cnt.current}`}
+            >
+              <div className="article_create_img_div">
+                <img src={event.target.result} style={{ width: "200px" }} />
+              </div>
+            </SwiperSlide>
+          );
+          updatedImages.push(new_slidingImage);
 
-          // 이미지를 표시할 요소에 추가
-          const newImage = document.createElement("div");
-          newImage.setAttribute("name", "new_image");
-          const previewContainer = document.getElementById("preview_container");
+          if (updatedImages.length === files.length) {
+            // 기존의 new_image인 요소들을 제외하고 필터링
+            const filteredImages = prev_slidingImages.filter(
+              (image) => image.props.name !== "new_image"
+            );
 
-          newImage.appendChild(imagePreview);
-          previewContainer.appendChild(newImage);
+            const combinedImages = [...filteredImages, ...updatedImages];
+            setSlidingImages(combinedImages);
+          }
+          update_cnt.current += 1;
         };
         reader.readAsDataURL(files[i]);
       }
+    } else {
+      // 파일이 없을 때 new_image 요소만 삭제한 새 배열 설정
+      const filteredImages = prev_slidingImages.filter(
+        (image) => image.props.name !== "new_image"
+      );
+      setSlidingImages(filteredImages);
     }
   };
 
   const handleDeletePrevImage = (id) => {
-    delete_image.push(id);
-    document.getElementById(`prev_image${id}`).style.display = "none";
-    console.log(delete_image);
-    console.log(delete_image.length);
+    delete_image.current.push(id);
+    let selected_img = document.getElementById(`cur_img_${id}`);
+    selected_img.style.display = "none";
+
+    console.log(delete_image.current);
+    console.log(delete_image.current.length);
   };
 
   const showInputs = () => {
@@ -147,64 +213,85 @@ export default function ArticleCreateForm({
   };
 
   return (
-    <div>
-      <button onClick={showInputs}>inputs</button>
-      <p>
-        title:{" "}
-        <input
-          name="title"
-          value={inputs.title}
-          onChange={onChange}
-          style={{ border: "1px solid" }}
-        />
-      </p>
-      <p>
-        content:{" "}
-        <input
-          name="content"
-          value={inputs.content}
-          onChange={onChange}
-          style={{ border: "1px solid" }}
-        />
-      </p>
-      <div>
-        category:
-        <select name="category" onChange={onChange} value={inputs.category}>
-          <option value="chat">chat</option>
-          <option value="review">review</option>
-        </select>
-      </div>
-      <p>
-        imgs:{" "}
-        <input
-          multiple
-          type="file"
-          name="article_imgs"
-          files={inputs.article_imgs}
-          onChange={(e) => {
-            onChange(e);
-            renderImagePreview(e);
-          }}
-        />
-      </p>
-      <div id="preview_container">
-        {/* 기존에 있던 이미지들 띄워주기 */}
-        {cur_article_imgs.length > 0 &&
-          cur_article_imgs.map((img) => {
-            console.log("img: ", img);
-            return (
-              <div key={img.id} id={`prev_image${img.id}`}>
-                <img
-                  style={{ width: "200px" }}
-                  src={`${urls.baseURL}${img.free_image}`}
-                />
-                <button onClick={() => handleDeletePrevImage(img.id)}>x</button>
-              </div>
-            );
-          })}
-      </div>
+    <section className="form_section">
+      <div className="whole_form">
+        {/* <button onClick={showInputs}>inputs</button> */}
 
-      <button onClick={handleCreateFreeArticle}>submit</button>
-    </div>
+        <div className="form_top">
+          <div className="form_top_content">
+            <input
+              name="title"
+              value={inputs.title}
+              onChange={onChange}
+              placeholder="타이틀을 입력해주세요."
+              className="form_title_input"
+            />
+            <label
+              htmlFor="article_imgs_input"
+              className="form_add_thumbnail_btn"
+            >
+              사진 추가
+            </label>
+            <input
+              multiple
+              type="file"
+              name="article_imgs"
+              files={inputs.article_imgs}
+              id="article_imgs_input"
+              onChange={(e) => {
+                onChange(e);
+                renderImagePreview(e);
+              }}
+              style={{ display: "none" }}
+            />
+          </div>
+        </div>
+        <div id="preview_container" className="form_add_thumbnail_preview">
+          {/* 기존에 있던 이미지들 띄워주기 */}
+          <Swiper
+            // install Swiper modules
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            loop={true} // loop 기능을 사용할 것인지
+            breakpoints={{
+              0: {
+                slidesPerView: 1,
+                slidesPerGroup: 1,
+              },
+            }}
+            navigation // arrow 버튼 사용 유무
+            pagination={{ clickable: true }} // 페이지 버튼 보이게 할지
+          >
+            {console.log("slidingImages", slidingImages)}
+            {slidingImages}
+          </Swiper>
+        </div>
+        <select
+          name="category"
+          onChange={onChange}
+          value={inputs.category}
+          className="article_select_category"
+        >
+          <option value="chat">{"> "}chat</option>
+          <option value="review">{"> "}review</option>
+        </select>
+        <div className="form_desc">
+          <textarea
+            ref={textRef}
+            name="content"
+            value={inputs.content}
+            onChange={onChange}
+            placeholder="내용을 입력하세요."
+            className="form_desc_content"
+            onInput={handleResizeHeight}
+          />
+        </div>
+
+        <div className="form_submit_div">
+          <button onClick={handleCreateFreeArticle} className="form_submit_btn">
+            submit
+          </button>
+        </div>
+      </div>
+    </section>
   );
 }

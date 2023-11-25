@@ -33,7 +33,7 @@ const ArticleRow = ({ title, id, fetchUrl }) => {
   return (
     <section className="row">
       <h2 className="row_title">{title}</h2>
-      <Link to={`/article`}>전체 보기</Link>
+      <Link to={`/article?page=1`}>{"> "}전체 보기</Link>
       <Swiper
         // install Swiper modules
         modules={[Navigation, Pagination, Scrollbar, A11y]}

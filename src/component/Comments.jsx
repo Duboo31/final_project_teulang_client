@@ -160,7 +160,7 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
   return (
     <section className="comments_whole">
       <section className="comments">
-        <p className="comments_create_title">댓글 : </p>
+        <p className="comments_create_title"></p>
         <div className="comments_create_div">
           <div className="comments_create">
             <textarea
