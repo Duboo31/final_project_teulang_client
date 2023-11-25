@@ -7,6 +7,7 @@ import urls from "../../shared/url";
 import default_thumbnail from "../../images/default_thumbnail.jpg";
 import Comments from "../../component/Comments";
 import { useSelector } from "react-redux";
+import "../../styles/FreeDetailPage.css";
 
 // import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
@@ -67,31 +68,12 @@ export default function FreeDetailPage() {
   return (
     <div>
       {freeArticleDetail.id ? (
-        <div>
-          <div>
-            {!(user.userId === freeArticleDetail.user_data.id) ? (
-              <div className="detail_star_div">
-                {/* {user.isAuthorized &&
-                    (recipeDetail.request_user_article_data.is_star_rated
-                      ? renderStar(
-                          recipeDetail.request_user_article_data.star_rate
-                        )
-                      : renderStar(0))} */}
-              </div>
-            ) : (
-              <div>
-                <button onClick={handleUpdateArticle} className="detail_CU_btn">
-                  수정
-                </button>
-                <button onClick={handleDeleteArticle} className="detail_CU_btn">
-                  삭제
-                </button>
-              </div>
-            )}
+        <div className="free_detail_whole">
+          <div className="free_detail_header">
+            <p className="free_detail_header_title">
+              {freeArticleDetail.title}
+            </p>
           </div>
-          <p>title: {freeArticleDetail.title}</p>
-          <span>author: {freeArticleDetail.user_data.nickname}</span> <br />
-          <span>content: {freeArticleDetail.content}</span> <br />
           <Swiper
             // install Swiper modules
             modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -109,10 +91,11 @@ export default function FreeDetailPage() {
               freeArticleDetail.images.map((image) => {
                 return (
                   <SwiperSlide key={image.id}>
-                    <div key={image.id}>
+                    <div key={image.id} className="free_detail_img_div">
                       <img
                         src={urls.baseURL + image.free_image}
                         style={{ width: "200px" }}
+                        className="free_detail_img"
                       />
                     </div>
                   </SwiperSlide>
@@ -124,6 +107,35 @@ export default function FreeDetailPage() {
               </div>
             )}
           </Swiper>
+          <div className="free_detail_footer">
+            <div className="free_detail_author" onClick={() => navigate(`/profile/${freeArticleDetail.user_data.id}`)}>
+              <img src={urls.baseURL+freeArticleDetail.user_data.user_img} className="free_detail_author_img"/>
+              <div className="free_detail_author_right">
+                <p className="free_detail_author_nickname">{freeArticleDetail.user_data.nickname}</p>
+                <p className="free_detail_created_at">
+                  {freeArticleDetail.created_at.split("T")[0] +
+                    " " +
+                    freeArticleDetail.created_at.split("T")[1].substr(0, 5)}
+                </p>
+              </div>
+            </div>
+            {user.userId === freeArticleDetail.user_data.id && (
+              <div>
+                <button onClick={handleUpdateArticle} className="detail_CU_btn">
+                  수정
+                </button>
+                <button onClick={handleDeleteArticle} className="detail_CU_btn">
+                  삭제
+                </button>
+              </div>
+            )}
+          </div>
+          <div className="free_detail_desc_div">
+            <span className="free_detail_desc">
+              {freeArticleDetail.content ? freeArticleDetail.content : "내용이 없습니다."}
+            </span>
+          </div>
+          {/* <span>content: {freeArticleDetail.content}</span> <br /> */}
           <div>
             <Comments
               recipeComments={freeArticleComments}
