@@ -8,6 +8,16 @@ import default_thumbnail from "../../images/default_thumbnail.jpg";
 import Comments from "../../component/Comments";
 import { useSelector } from "react-redux";
 
+// import Swiper core and required modules
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+
 export default function FreeDetailPage() {
   const { articleId } = useParams();
   const navigate = useNavigate();
@@ -59,51 +69,61 @@ export default function FreeDetailPage() {
       {freeArticleDetail.id ? (
         <div>
           <div>
-          {!(user.userId === freeArticleDetail.user_data.id) ? (
-                <div className="detail_star_div">
-                  {/* {user.isAuthorized &&
+            {!(user.userId === freeArticleDetail.user_data.id) ? (
+              <div className="detail_star_div">
+                {/* {user.isAuthorized &&
                     (recipeDetail.request_user_article_data.is_star_rated
                       ? renderStar(
                           recipeDetail.request_user_article_data.star_rate
                         )
                       : renderStar(0))} */}
-                </div>
-              ) : (
-                <div>
-                    <button
-                      onClick={handleUpdateArticle}
-                      className="detail_CU_btn"
-                    >
-                      수정
-                    </button>
-                    <button
-                      onClick={handleDeleteArticle}
-                      className="detail_CU_btn"
-                    >
-                      삭제
-                    </button>
-                </div>
-              )}
+              </div>
+            ) : (
+              <div>
+                <button onClick={handleUpdateArticle} className="detail_CU_btn">
+                  수정
+                </button>
+                <button onClick={handleDeleteArticle} className="detail_CU_btn">
+                  삭제
+                </button>
+              </div>
+            )}
           </div>
           <p>title: {freeArticleDetail.title}</p>
           <span>author: {freeArticleDetail.user_data.nickname}</span> <br />
           <span>content: {freeArticleDetail.content}</span> <br />
-          {freeArticleDetail.images ? (
-            freeArticleDetail.images.map((image) => {
-              return (
-                <div key={image.id}>
-                  <img
-                    src={urls.baseURL + image.free_image}
-                    style={{ width: "200px" }}
-                  />
-                </div>
-              );
-            })
-          ) : (
-            <div>
-              <img src={default_thumbnail} />
-            </div>
-          )}
+          <Swiper
+            // install Swiper modules
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            loop={true} // loop 기능을 사용할 것인지
+            breakpoints={{
+              0: {
+                slidesPerView: 1,
+                slidesPerGroup: 1,
+              },
+            }}
+            navigation // arrow 버튼 사용 유무
+            pagination={{ clickable: true }} // 페이지 버튼 보이게 할지
+          >
+            {freeArticleDetail.images ? (
+              freeArticleDetail.images.map((image) => {
+                return (
+                  <SwiperSlide key={image.id}>
+                    <div key={image.id}>
+                      <img
+                        src={urls.baseURL + image.free_image}
+                        style={{ width: "200px" }}
+                      />
+                    </div>
+                  </SwiperSlide>
+                );
+              })
+            ) : (
+              <div>
+                <img src={default_thumbnail} />
+              </div>
+            )}
+          </Swiper>
           <div>
             <Comments
               recipeComments={freeArticleComments}

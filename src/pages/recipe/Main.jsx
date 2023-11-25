@@ -17,8 +17,9 @@ const Main = () => {
         title="인기 레시피"
         id="PR"
         fetchUrl={requests.fetchRecipeListBookmarks}
+        option="bookmark"
       />
-      <Row title="최신 레시피" id="LR" fetchUrl={requests.fetchRecipeListLatest} />
+      <Row title="최신 레시피" id="LR" fetchUrl={requests.fetchRecipeListLatest} option="latest"/>
       <ArticleRow title="게시글" id="Article" fetchUrl={requests.fetchFreeList}/>
     </div>
   );

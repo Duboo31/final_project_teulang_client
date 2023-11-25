@@ -108,11 +108,11 @@ export default function ArticleCreateForm({
     const { files } = e.target;
     console.log(files);
     const prevNewImages = document.getElementsByName("new_image");
-    console.log("gEbN", prevNewImages.length)
+    console.log("gEbN", prevNewImages.length);
     const prevNewImagesDiv = document.createElement("div");
-    for (let i=0; i<prevNewImages.length; i++) {
-        console.log("prevNewImages", prevNewImages[i]);
-        prevNewImages[i].style.display = "none";
+    for (let i = 0; i < prevNewImages.length; i++) {
+      console.log("prevNewImages", prevNewImages[i]);
+      prevNewImages[i].style.display = "none";
     }
     if (files && files.length > 0) {
       for (let i = 0; i < files.length; i++) {
@@ -138,6 +138,7 @@ export default function ArticleCreateForm({
   const handleDeletePrevImage = (id) => {
     delete_image.push(id);
     document.getElementById(`prev_image${id}`).style.display = "none";
+    // document.getElementById(`prev_image${id}`).remove();
     console.log(delete_image);
     console.log(delete_image.length);
   };
@@ -148,7 +149,7 @@ export default function ArticleCreateForm({
 
   return (
     <div>
-      <button onClick={showInputs}>inputs</button>
+      {/* <button onClick={showInputs}>inputs</button> */}
       <p>
         title:{" "}
         <input
@@ -193,7 +194,7 @@ export default function ArticleCreateForm({
           cur_article_imgs.map((img) => {
             console.log("img: ", img);
             return (
-              <div key={img.id} id={`prev_image${img.id}`}>
+              <div key={img.id}>
                 <img
                   style={{ width: "200px" }}
                   src={`${urls.baseURL}${img.free_image}`}

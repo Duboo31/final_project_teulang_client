@@ -10,7 +10,6 @@ import MultiViewPage from "../pages/recipe/MultiViewPage";
 import Profile from "../pages/users/Profile";
 import Update from "../pages/users/Update";
 import UpdatePage from "../pages/recipe/UpdatePage";
-import FreeAllPage from "../pages/recipe/FreeAllPage";
 import FreeDetailPage from "../pages/recipe/FreeDetailPage";
 import ArticleCreatePage from "../pages/recipe/ArticleCreatePage";
 import ArticleUpdatePage from "../pages/recipe/ArticleUpdatePage";
@@ -19,6 +18,8 @@ import ArticleUpdatePage from "../pages/recipe/ArticleUpdatePage";
 import Navigation from "../component/Navigation";
 import NotFound from "../component/NotFound";
 import PasswordReset from "../pages/users/PasswordReset";
+import FreeAllPage from "../pages/recipe/FreeAllPage";
+import RecipeAllPage from "../pages/recipe/RecipeAllPage";
 
 const Router = () => {
   return (
@@ -32,6 +33,7 @@ const Router = () => {
           <Route path="/search" element={<SearchPage />} />
           <Route path="/create" element={<CreatePage />} />
           <Route path="/update" element={<UpdatePage />} />
+          <Route path="/recipe" element={<RecipeAllPage />} />
           <Route path="/recipe/:recipeId" element={<DetailPage />} />
           <Route path="/multi" element={<MultiViewPage />} />
           <Route path="/profile/:userId" element={<Profile />} />
