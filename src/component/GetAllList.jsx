@@ -4,6 +4,10 @@ import Loading from "./Loading";
 import axios from "../api/recipes/axios";
 import urls from "../shared/url";
 import default_thumbnail from "../images/default_thumbnail.jpg";
+import bookmarked_icon from "../images/bookmarked.png";
+import full_star from "../images/star_full.png";
+import "../styles/GetAllList.css";
+import "../styles/SearchResults.css";
 
 export default function GetAllList({ fetchUrl, isRecipe = false }) {
   const [articlesList, setArticlesList] = useState([]);
@@ -16,20 +20,22 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
   let query = useQuery();
   const curPage = query.get("page");
   const option = query.get("option");
-  const optionUrl = (option && isRecipe) ? `&option=${option}` : "";
+  const optionUrl = option && isRecipe ? `&option=${option}` : "";
   console.log("option:", option);
 
   useEffect(() => {
     if (curPage !== null) {
       fetchArticlesList(curPage);
     } else {
-        fetchArticlesList();
+      fetchArticlesList();
     }
   }, [curPage, option]);
 
   const fetchArticlesList = async (curPage = 1) => {
     try {
-      const request = await axios.get(fetchUrl + `?page=${curPage}` + optionUrl);
+      const request = await axios.get(
+        fetchUrl + `?page=${curPage}` + optionUrl
+      );
       console.log(
         "fetchFreeArticlesList-pagenation_data: ",
         request.data.pagenation_data
@@ -76,27 +82,27 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
 
     if (go > 0 && go <= maxPage) {
       isRecipe
-        ? navigate(`/recipe?page=${go}`+optionUrl)
-        : navigate(`/article?page=${go}`+optionUrl);
+        ? navigate(`/recipe?page=${go}` + optionUrl)
+        : navigate(`/article?page=${go}` + optionUrl);
     }
   };
 
   const handleSort = (e) => {
     const { value } = e.target;
-    navigate(`/recipe?page=1&option=${value}`)
-  }
+    navigate(`/recipe?page=1&option=${value}`);
+  };
 
   return (
     <div>
       {articlesList.length > 0 ? (
         <div>
-            {isRecipe &&
-            <select value={option ? option : "bookmark"} onChange={handleSort}>
-                <option value="bookmark">인기순</option>
-                <option value="latest">최신순</option>
+          {isRecipe && (
+            <select value={option ? option : "bookmark"} onChange={handleSort} className="all_list_sort_option">
+              <option value="bookmark">{"> "}인기순</option>
+              <option value="latest">{"> "}최신순</option>
             </select>
-            }
-        {console.log("articlesList", articlesList)}
+          )}
+          {console.log("articlesList", articlesList)}
           {articlesList.map((article) => {
             // thumbnail 설정
             let thumbnail = "";
@@ -110,31 +116,77 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
                 : default_thumbnail;
             }
             // content(description) 설정
-            const all_content = isRecipe ? article.description : article.content;
+            const all_content = isRecipe
+              ? article.description
+              : article.content;
             const content = all_content
-            ? all_content.length > 13
-              ? all_content.substr(0, 13) + " ..."
-              : all_content
-            : "-"
+              ? all_content.length > 13
+                ? all_content.substr(0, 13) + " ..."
+                : all_content
+              : "내용이 없습니다.";
             return (
-              <div
-                onClick={() => {
-                  isRecipe
-                    ? navigate(`/recipe/${article.id}`)
-                    : navigate(`/article/${article.id}`);
-                }}
-                key={article.id}
-              >
-                <p>title : {article.title}</p>
-                <img src={thumbnail} style={{ width: "200px" }} />
-                <span>author: {article.user_data.nickname}</span>
-                <br />
-                {!isRecipe && <span>category: {article.category}</span>}
-                {isRecipe && <span>
-                    <span>star_avg: {article.star_avg}</span>
-                    <span>bookmarks: {article.bookmark_count}</span>
-                    </span>}
-                <span>content: {content}</span>
+              <div key={article.id} className="each_article">
+                <div className="each_article_header">
+                  <p className="each_article_header_title">{article.title}</p>
+                  {!isRecipe ? (
+                    <div className="each_article_header_right">
+                      <span className="each_article_header_category">{article.category}</span>
+                    </div>
+                  ) : (
+                    <span className="each_article_header_right">
+                      <div className="each_article_header_star_div">
+                        <img
+                          src={full_star}
+                          className="each_article_header_star_img"
+                        />
+                        <span className="each_article_header_star">
+                          {article.star_av ? article.star_avg : "-"}
+                        </span>
+                      </div>
+                      <div className="each_article_header_bookmark_div">
+                        <img
+                          src={bookmarked_icon}
+                          className="each_article_header_bookmark_img"
+                        />
+                        <span className="each_article_header_bookmark">
+                          {article.bookmark_count}
+                        </span>
+                      </div>
+                    </span>
+                  )}
+                </div>
+                <div
+                  className="each_article_body"
+                  onClick={() => {
+                    isRecipe
+                      ? navigate(`/recipe/${article.id}`)
+                      : navigate(`/article/${article.id}`);
+                  }}
+                >
+                  <span className="each_article_content">{content}</span>
+                  <img src={thumbnail} className="each_article_thumbnail" />
+                </div>
+                <div className="each_article_footer">
+                  <span
+                    className="each_article_author"
+                    onClick={() => {
+                      navigate(`/profile/${article.user_data.id}`);
+                    }}
+                  >
+                    <img
+                      src={urls.baseURL + article.user_data.user_img}
+                      className="each_article_author_img"
+                    />
+                    <span className="each_article_author_nickname">
+                      {article.user_data.nickname}
+                    </span>
+                  </span>
+                  <p className="each_article_created_at">
+                    {article.created_at.split("T")[0] +
+                      " " +
+                      article.created_at.split("T")[1].substr(0, 5)}
+                  </p>
+                </div>
               </div>
             );
           })}
