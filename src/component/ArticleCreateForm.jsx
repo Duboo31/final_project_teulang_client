@@ -1,7 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import axios from "../api/recipes/axios";
-import React, { createElement, useEffect, useRef, useState } from "react";
+import React, {
+  createElement,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import urls from "../shared/url";
+import "../styles/CreateForm.css";
+import "../styles/ArticleCreateForm.css";
 
 // import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
@@ -27,6 +35,12 @@ export default function ArticleCreateForm({
   const [slidingImages, setSlidingImages] = useState([]);
   var update_cnt = useRef(0);
 
+  const textRef = useRef();
+  const handleResizeHeight = useCallback(() => {
+    textRef.current.style.height = "auto";
+    textRef.current.style.height = textRef.current.scrollHeight + "px";
+  }, []);
+
   useEffect(() => {
     const new_slidingImages = [];
     if (cur_article_imgs.length > 0) {
@@ -34,12 +48,12 @@ export default function ArticleCreateForm({
         // console.log("img: ", img);
         new_slidingImages.push(
           <SwiperSlide key={img.id}>
-            <div id={`cur_img_${img.id}`}>
+            <div id={`cur_img_${img.id}`} className="article_create_img_div">
               <img
                 style={{ width: "200px" }}
                 src={`${urls.baseURL}${img.free_image}`}
               />
-              <button onClick={() => handleDeletePrevImage(img.id)}>x</button>
+              <button onClick={() => handleDeletePrevImage(img.id)} className="form_ingre_update_each_del_btn">x</button>
             </div>
           </SwiperSlide>
         );
@@ -156,7 +170,9 @@ export default function ArticleCreateForm({
               name="new_image"
               key={`new_image_${update_cnt.current}`}
             >
-              <img style={{ width: "200px" }} src={event.target.result} />
+              <div className="article_create_img_div">
+                <img src={event.target.result} style={{ width: "200px" }} />
+              </div>
             </SwiperSlide>
           );
           updatedImages.push(new_slidingImage);
@@ -197,67 +213,85 @@ export default function ArticleCreateForm({
   };
 
   return (
-    <div>
-      {/* <button onClick={showInputs}>inputs</button> */}
-      <p>
-        title:{" "}
-        <input
-          name="title"
-          value={inputs.title}
-          onChange={onChange}
-          style={{ border: "1px solid" }}
-        />
-      </p>
-      <p>
-        content:{" "}
-        <input
-          name="content"
-          value={inputs.content}
-          onChange={onChange}
-          style={{ border: "1px solid" }}
-        />
-      </p>
-      <div>
-        category:
-        <select name="category" onChange={onChange} value={inputs.category}>
-          <option value="chat">chat</option>
-          <option value="review">review</option>
-        </select>
-      </div>
-      <p>
-        imgs:{" "}
-        <input
-          multiple
-          type="file"
-          name="article_imgs"
-          files={inputs.article_imgs}
-          onChange={(e) => {
-            onChange(e);
-            renderImagePreview(e);
-          }}
-        />
-      </p>
-      <div id="preview_container">
-        {/* 기존에 있던 이미지들 띄워주기 */}
-        <Swiper
-          // install Swiper modules
-          modules={[Navigation, Pagination, Scrollbar, A11y]}
-          loop={true} // loop 기능을 사용할 것인지
-          breakpoints={{
-            0: {
-              slidesPerView: 1,
-              slidesPerGroup: 1,
-            },
-          }}
-          navigation // arrow 버튼 사용 유무
-          pagination={{ clickable: true }} // 페이지 버튼 보이게 할지
-        >
-          {console.log("slidingImages", slidingImages)}
-          {slidingImages}
-        </Swiper>
-      </div>
+    <section className="form_section">
+      <div className="whole_form">
+        {/* <button onClick={showInputs}>inputs</button> */}
 
-      <button onClick={handleCreateFreeArticle}>submit</button>
-    </div>
+        <div className="form_top">
+          <div className="form_top_content">
+            <input
+              name="title"
+              value={inputs.title}
+              onChange={onChange}
+              placeholder="타이틀을 입력해주세요."
+              className="form_title_input"
+            />
+            <label
+              htmlFor="article_imgs_input"
+              className="form_add_thumbnail_btn"
+            >
+              사진 추가
+            </label>
+            <input
+              multiple
+              type="file"
+              name="article_imgs"
+              files={inputs.article_imgs}
+              id="article_imgs_input"
+              onChange={(e) => {
+                onChange(e);
+                renderImagePreview(e);
+              }}
+              style={{ display: "none" }}
+            />
+          </div>
+        </div>
+        <div id="preview_container" className="form_add_thumbnail_preview">
+          {/* 기존에 있던 이미지들 띄워주기 */}
+          <Swiper
+            // install Swiper modules
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            loop={true} // loop 기능을 사용할 것인지
+            breakpoints={{
+              0: {
+                slidesPerView: 1,
+                slidesPerGroup: 1,
+              },
+            }}
+            navigation // arrow 버튼 사용 유무
+            pagination={{ clickable: true }} // 페이지 버튼 보이게 할지
+          >
+            {console.log("slidingImages", slidingImages)}
+            {slidingImages}
+          </Swiper>
+        </div>
+        <select
+          name="category"
+          onChange={onChange}
+          value={inputs.category}
+          className="article_select_category"
+        >
+          <option value="chat">{"> "}chat</option>
+          <option value="review">{"> "}review</option>
+        </select>
+        <div className="form_desc">
+          <textarea
+            ref={textRef}
+            name="content"
+            value={inputs.content}
+            onChange={onChange}
+            placeholder="내용을 입력하세요."
+            className="form_desc_content"
+            onInput={handleResizeHeight}
+          />
+        </div>
+
+        <div className="form_submit_div">
+          <button onClick={handleCreateFreeArticle} className="form_submit_btn">
+            submit
+          </button>
+        </div>
+      </div>
+    </section>
   );
 }
