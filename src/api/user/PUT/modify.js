@@ -18,7 +18,7 @@ const userModify = async (modifyInfo) => {
   const config = {
     method: "put",
     maxBodyLength: Infinity,
-    url: `${process.env.REACT_APP_SERVER_URL}/users/userModify/${userId}/`,
+    url: `${process.env.REACT_APP_SERVER_LOCAL_URL}/users/userModify/${userId}/`,
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
