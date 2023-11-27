@@ -1,0 +1,8 @@
+.article_create_img_div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.article_select_category {
+    border: 1px solid;
+}
