@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "../api/recipes/axios";
 import urls from "../shared/url";
 import "../styles/Row.css";
@@ -15,8 +15,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
-const Row = ({ title, id, fetchUrl, option }) => {
-  const [recipes, setRecipes] = useState(null);
+const Row = ({ title, id, fetchUrl }) => {
+  const [recipes, setRecipes] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,14 +25,13 @@ const Row = ({ title, id, fetchUrl, option }) => {
 
   const fetchRecipeData = async () => {
     const request = await axios.get(fetchUrl);
-    console.log("fetchRecipeDataRow: ", request.data);
-    setRecipes(request.data.serializer_data);
+    console.log("request.data: ", request.data);
+    setRecipes(request.data);
   };
 
   return (
     <section className="row">
       <h2 className="row_title">{title}</h2>
-      <Link to={`/recipe?page=1&option=${option}`}>{"> "}전체 보기</Link>
       <Swiper
         // install Swiper modules
         modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -55,7 +54,7 @@ const Row = ({ title, id, fetchUrl, option }) => {
         pagination={{ clickable: true }} // 페이지 버튼 보이게 할지
       >
         <div id={id}>
-          {recipes !== null && recipes.map((recipe) => (
+          {recipes.map((recipe) => (
             <SwiperSlide key={recipe.id}>
               <div className="recipe_content">
                 <span className="recipe_top_span">

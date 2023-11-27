@@ -9,6 +9,7 @@ const SearchResults = () => {
   const navigate = useNavigate();
   const [maxPage, setMaxPage] = useState(0);
   const pagination_btn = [];
+  const pagination_btn_show = [];
 
   const useQuery = () => {
     return new URLSearchParams(useLocation().search);
