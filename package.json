@@ -51,5 +51,6 @@
   },
   "devDependencies": {
     "json-server": "^0.17.4"
-  }
+  },
+  "homepage": "./"
 }

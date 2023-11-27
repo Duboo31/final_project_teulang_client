@@ -1,6 +1,6 @@
 const urls = {
-    baseURL : "http://127.0.0.1:8000",
-    foodSafetyKoreaURL : "https://www.foodsafetykorea.go.kr"
+    baseURL: "https://teulang.shop",
+    foodSafetyKoreaURL: "https://www.foodsafetykorea.go.kr"
 }
 
-export default urls;
+export default urls;    
