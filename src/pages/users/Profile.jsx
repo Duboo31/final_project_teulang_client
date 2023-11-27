@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 
 // components
 // import Follow from "../../component/follow/Follow";
+import Ingredients from "../../component/user/Ingredients";
 
 // api
 import { getPorfile } from "../../api/user/GET/profile";
@@ -17,7 +18,12 @@ const Profile = () => {
   const queryClient = useQueryClient();
   // 프로필 페이지에서 현재 로그인 유저와 페이지의 유저가 같은 유저인지 확인
   const [isMyAccount, setIsMyAccount] = useState(false);
-  const [isBookmarkActive, setIsBookmarkActive] = useState(false);
+
+  // const [isBookmarkActive, setIsBookmarkActive] = useState(false);
+
+  // 프로필에서 하단 탭 활성화 여부 / 순서
+  // 내 레시피 1, 북마크 레시피 2, 내 냉장고 3
+  const [tabPages, setTabPages] = useState(1);
 
   // 팔로우 유무 확인
   const [isFollowUser, setIsFollowUser] = useState(false);
@@ -80,14 +86,11 @@ const Profile = () => {
         result.data.message === "팔로우 취소합니다."
       ) {
         console.log("팔로우 취소");
-        // window.location.reload();
-        // setIsFollowUser((cur) => !cur);
       } else if (
         result.status === 200 &&
         result.data.message === "팔로우 합니다."
       ) {
         console.log("팔로우 했음");
-        // setIsFollowUser((cur) => !cur);
       }
     },
     onError: () => {
@@ -159,25 +162,35 @@ const Profile = () => {
       <ul className="select-tab">
         <li
           onClick={() => {
-            setIsBookmarkActive(false);
+            setTabPages(1);
           }}
-          className={isBookmarkActive ? "" : "active"}
+          className={tabPages === 1 ? "active" : ""}
         >
           내 레시피
         </li>
         {!serverUser.data?.data?.is_admin && (
           <li
             onClick={() => {
-              setIsBookmarkActive(true);
+              setTabPages(2);
             }}
-            className={isBookmarkActive ? "active" : ""}
+            className={tabPages === 2 ? "active" : ""}
           >
             북마크 레시피
           </li>
         )}
+        {isMyAccount && (
+          <li
+            onClick={() => {
+              setTabPages(3);
+            }}
+            className={tabPages === 3 ? "active" : ""}
+          >
+            내 냉장고
+          </li>
+        )}
       </ul>
       <div>
-        {!isBookmarkActive ? (
+        {tabPages === 1 && (
           <ul className="recipes-wrap">
             {serverUser.isSuccess &&
               serverUser.data.data.articles_recipe.map((recipe) => {
@@ -203,16 +216,17 @@ const Profile = () => {
                 );
               })}
           </ul>
-        ) : (
+        )}
+        {tabPages === 2 && (
           <ul className="recipes-wrap">
             {serverUser.isSuccess &&
               serverUser.data.data.bookmarked_articles.map((recipe) => {
                 return (
                   <Link
                     key={recipe.id}
-                    onClick={() => {
-                      setIsBookmarkActive(false);
-                    }}
+                    // onClick={() => {
+                    //   setIsBookmarkActive(false);
+                    // }}
                     to={`/recipe/${recipe.article_recipe_id}`}
                   >
                     <li>
@@ -239,6 +253,7 @@ const Profile = () => {
               })}
           </ul>
         )}
+        {tabPages === 3 && isMyAccount && <Ingredients />}
       </div>
     </div>
   );
