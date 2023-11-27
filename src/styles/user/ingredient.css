@@ -26,9 +26,10 @@
 }
 .recipe-banner > div > div > p > a {
   font-weight: bold;
-  color: #df2424;
+  color: rgb(15, 121, 243);
   cursor: pointer;
   padding: 0 5px;
+  margin-left: 3px;
 }
 
 .header-chart_list {
@@ -104,7 +105,7 @@
   text-align: center;
 }
 .header-chart.clicked {
-  background-color: #eaf5fa;
+  background-color: #b6e8ff;
 }
 .header-chart li:nth-child(1) {
   width: 20%;
@@ -132,12 +133,12 @@
 }
 
 .add-btn {
+  font-size: 18px;
   display: inline-block;
   text-align: center;
   justify-content: center;
   width: 100px;
-  height: 37px;
-  line-height: 37px;
+  padding: .5rem;
   cursor: pointer;
   position: relative;
   border: 1px solid rgb(182, 182, 182);
@@ -194,6 +195,7 @@
   left: 0;
   background: #fff;
   border-top: 1px solid rgb(189, 189, 189);
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
 @media screen and (min-width: 1023px) {

@@ -118,13 +118,6 @@ const Ingredients = () => {
             재료추가
           </p>
         </div>
-        {/* {!isAddBtnActive && (
-          <AddBtn
-            setIsAddBtnActive={setIsAddBtnActive}
-            setIsAddInputActive={setIsAddInputActive}
-            isAddBtnActive={isAddBtnActive}
-          />
-        )} */}
       </div>
       <ul className="header-chart header-chart_list">
         <li>재료명</li>
