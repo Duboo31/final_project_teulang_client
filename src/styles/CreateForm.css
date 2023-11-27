@@ -52,11 +52,7 @@
     cursor: pointer;
 }
 .form_add_thumbnail_preview {
-    width : 100vw;
-    min-height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
 }
 .form_desc {
     /* border: 1px solid; */

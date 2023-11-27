@@ -203,18 +203,22 @@ const RecipeDetail = ({ recipeDetail }) => {
                 </div>
               ) : (
                 <div>
+                  {user.userId === recipeDetail.user_data.id && (
                     <button
                       onClick={handleUpdateRecipe}
                       className="detail_CU_btn"
                     >
                       수정
                     </button>
+                  )}
+                  {user.userId === recipeDetail.user_data.id && (
                     <button
                       onClick={handleDeleteRecipe}
                       className="detail_CU_btn"
                     >
                       삭제
                     </button>
+                  )}
                 </div>
               )}
             </div>
