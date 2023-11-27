@@ -106,7 +106,7 @@ const Profile = () => {
           <div className="profile-wrap">
             <div className="profile_picture-container">
               <img
-                src={`${process.env.REACT_APP_SERVER_URL}${serverUser.data?.data?.user_img}`}
+                src={`${process.env.REACT_APP_SERVER_LOCAL_URL}${serverUser.data?.data?.user_img}`}
                 alt="프로필 이미지"
               />
             </div>
@@ -189,7 +189,7 @@ const Profile = () => {
                           src={
                             recipe.api_recipe
                               ? `${recipe.recipe_thumbnail_api}`
-                              : `${process.env.REACT_APP_SERVER_URL}${recipe.recipe_thumbnail}`
+                              : `${process.env.REACT_APP_SERVER_LOCAL_URL}${recipe.recipe_thumbnail}`
                           }
                           alt="레시피 썸네일"
                         />
@@ -221,7 +221,7 @@ const Profile = () => {
                           src={
                             recipe.article_recipe.api_recipe
                               ? recipe.article_recipe.recipe_thumbnail_api
-                              : `${process.env.REACT_APP_SERVER_URL}${recipe.article_recipe.recipe_thumbnail}`
+                              : `${process.env.REACT_APP_SERVER_LOCAL_URL}${recipe.article_recipe.recipe_thumbnail}`
                           }
                           alt="레시피 썸네일"
                         />

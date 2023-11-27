@@ -5,7 +5,7 @@ const postLogin = async (loginData) => {
   const config = {
     method: "post",
     maxBodyLength: Infinity,
-    url: `${process.env.REACT_APP_SERVER_URL}/users/login/`,
+    url: `${process.env.REACT_APP_SERVER_LOCAL_URL}/users/login/`,
     data: loginData,
   };
 
