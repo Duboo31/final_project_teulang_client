@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from "../api/recipes/axios";
 import { useNavigate } from "react-router-dom";
-import "../styles/SearchImageModal.css"
+import "../styles/SearchImageModal.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
 export default function SearchImageModal({
   setModalOpen,
@@ -90,7 +92,7 @@ export default function SearchImageModal({
       <div className="wrapper-modal">
         <div className="modal">
           <span onClick={() => setModalOpen(false)} className="modal-close">
-            X
+            <FontAwesomeIcon icon={faCircleXmark} />
           </span>
 
           <div className="modal__content">
@@ -102,20 +104,37 @@ export default function SearchImageModal({
                   id="image_input_for_detection"
                   style={{ display: "none" }}
                 />
-                <img id="search_img_preview" className="search_img_preview"/>
-                <label htmlFor="image_input_for_detection" className="search_modal_btn">
-                  감지할 사진 등록
+                <img id="search_img_preview" className="search_img_preview" />
+                <label
+                  htmlFor="image_input_for_detection"
+                  className="search_modal_btn"
+                >
+                  사진 등록
                 </label>
-
-                
               </div>
               <div className="search_modal_right">
-                <div>감지된 식재료: <span id="detected_ingredients" className="search_modal_detected_ingres"></span></div>
-                <button onClick={handleDetectIngredients} className="search_modal_btn">감지</button>
+                <div>
+                  분석된 식재료
+                  <span
+                    id="detected_ingredients"
+                    className="search_modal_detected_ingres"
+                  ></span>
+                </div>
+                <button
+                  onClick={handleDetectIngredients}
+                  className="search_modal_btn"
+                >
+                  분석 하기
+                </button>
               </div>
             </div>
             <div className="search_modal_footer">
-              <button onClick={handleSearchIngredients} className="search_modal_btn">검색</button>
+              <button
+                onClick={handleSearchIngredients}
+                className="search_modal_btn"
+              >
+                레시피 찾기
+              </button>
             </div>
           </div>
         </div>

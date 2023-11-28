@@ -9,6 +9,9 @@ import full_star from "../images/star_full.png";
 import "../styles/GetAllList.css";
 import "../styles/SearchResults.css";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+
 export default function GetAllList({ fetchUrl, isRecipe = false }) {
   const [articlesList, setArticlesList] = useState([]);
   const navigate = useNavigate();
@@ -96,12 +99,6 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
     <div className="all-article_wrap">
       {articlesList.length > 0 ? (
         <div>
-          <ul className="article-header_list">
-            <li className="article-header_item">카테고리</li>
-            <li className="article-header_item">제목</li>
-            <li className="article-header_item">닉네임</li>
-            <li className="article-header_item">작성시간</li>
-          </ul>
           {isRecipe && (
             <select
               value={option ? option : "bookmark"}
@@ -113,6 +110,13 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
             </select>
           )}
           {console.log("articlesList", articlesList)}
+          <ul className="article-header_list">
+            {!isRecipe && <li className="article-header_item">카테고리</li>}
+            {isRecipe && <li className="article-header_item">별점</li>}
+            <li className="article-header_item">제목</li>
+            <li className="article-header_item">닉네임</li>
+            <li className="article-header_item">작성시간</li>
+          </ul>
           {articlesList.map((article) => {
             // thumbnail 설정
             let thumbnail = "";
@@ -152,10 +156,10 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
                             className="each_article_header_star_img"
                           />
                           <span className="each_article_header_star">
-                            {article.star_av ? article.star_avg : "-"}
+                            {article?.star_avg}
                           </span>
                         </div>
-                        <div className="each_article_header_bookmark_div">
+                        {/* <div className="each_article_header_bookmark_div">
                           <img
                             src={bookmarked_icon}
                             className="each_article_header_bookmark_img"
@@ -163,7 +167,7 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
                           <span className="each_article_header_bookmark">
                             {article.bookmark_count}
                           </span>
-                        </div>
+                        </div> */}
                       </span>
                     )}
                     <p
