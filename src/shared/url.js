@@ -1,5 +1,5 @@
 const urls = {
-  baseURL: "https://www.teulang.shop",
+  baseURL: "http://localhost:8000",
   foodSafetyKoreaURL: "https://www.foodsafetykorea.go.kr",
 };
 

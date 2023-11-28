@@ -90,11 +90,22 @@ const Navigation = () => {
                 onClick={() => {
                   setIsNaviActive((cur) => !cur);
                 }}
+                to="/recipe"
+              >
+                전체 레시피
+              </Link>
+            </li>
+            <li>
+              <Link
+                onClick={() => {
+                  setIsNaviActive((cur) => !cur);
+                }}
                 to="/article"
               >
                 자유 게시판
               </Link>
             </li>
+
             <li>
               <Link
                 onClick={() => {

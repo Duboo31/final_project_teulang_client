@@ -236,6 +236,7 @@
     border-radius: 0.2rem;
     padding: 1rem;
     background: rgb(245, 245, 245);
+    overflow-wrap: break-word;
 }
 .form_orders_each_img_preview {
     min-width: 8rem;
