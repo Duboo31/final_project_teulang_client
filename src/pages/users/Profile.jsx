@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 // components
 // import Follow from "../../component/follow/Follow";
 import Ingredients from "../../component/user/Ingredients";
+import Follow from "../../component/follow/Follow";
 
 // api
 import { getPorfile } from "../../api/user/GET/profile";
@@ -152,10 +153,11 @@ const Profile = () => {
                 </li>
               </ul>
             </div>
-            {/* <Follow
+            <Follow
               followData={serverUser.data.data}
               openFollowerPopup={openFollowerPopup}
-            /> */}
+              setOpenFollowerPopup={setOpenFollowerPopup}
+            />
           </div>
         )}
       </div>
