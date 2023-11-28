@@ -170,6 +170,9 @@
 .detail_recipe_orders_content {
     padding: 0.5rem;
     font-size: 12px;
+    width: 100%;
+    display: inline-block;
+    overflow-wrap: anywhere;
 }
 .detail_recipe_order_img {
     max-width: 8rem;

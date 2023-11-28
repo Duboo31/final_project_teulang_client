@@ -36,9 +36,16 @@ export default function Search({ setIsNaviActive }) {
     setSearchValue(e.target.value);
   };
 
+  const activeEnter = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <div className="searchBar-wrap">
       <input
+        onKeyDown={activeEnter}
         value={searchValue}
         className="search__input"
         type="text"

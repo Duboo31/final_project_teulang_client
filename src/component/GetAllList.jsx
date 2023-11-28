@@ -145,7 +145,7 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
                     {!isRecipe ? (
                       <div className="each_article_header_right">
                         <span className="each_article_header_category">
-                          {article.category === "review" ? "리뷰" : "게시글"}
+                          {article.category === "review" ? "리뷰" : "자유"}
                         </span>
                       </div>
                     ) : (
