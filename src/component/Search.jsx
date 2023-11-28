@@ -43,7 +43,7 @@ export default function Search({ setIsNaviActive }) {
         className="search__input"
         type="text"
         onChange={handleChange}
-        placeholder="요리 재료 검색"
+        placeholder=",로 구분해 검색"
       />
       <button className="search__btn" onClick={handleSearch}>
         <FontAwesomeIcon icon={faMagnifyingGlass} />

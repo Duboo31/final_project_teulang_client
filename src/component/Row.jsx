@@ -106,7 +106,7 @@ const Row = ({ title, id, fetchUrl, option }) => {
                           ? recipe.description.length > 13
                             ? recipe.description.substr(0, 13) + " ..."
                             : recipe.description
-                          : "-"}
+                          : "설명이 없습니다."}
                       </p>
                     </div>
                   </div>
