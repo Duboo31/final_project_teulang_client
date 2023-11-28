@@ -4,5 +4,11 @@
     align-items: center;
 }
 .article_select_category {
-    border: 1px solid;
+    border: 1px solid #a2a2a2;
+    padding: .5rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    width: 110px;
+    text-align: center;
+    cursor: pointer;
 }

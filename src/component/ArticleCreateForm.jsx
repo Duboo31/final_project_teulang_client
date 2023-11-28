@@ -53,7 +53,12 @@ export default function ArticleCreateForm({
                 style={{ width: "200px" }}
                 src={`${urls.baseURL}${img.free_image}`}
               />
-              <button onClick={() => handleDeletePrevImage(img.id)} className="form_ingre_update_each_del_btn">x</button>
+              <button
+                onClick={() => handleDeletePrevImage(img.id)}
+                className="form_ingre_update_each_del_btn"
+              >
+                x
+              </button>
             </div>
           </SwiperSlide>
         );
@@ -230,7 +235,7 @@ export default function ArticleCreateForm({
               htmlFor="article_imgs_input"
               className="form_add_thumbnail_btn"
             >
-              사진 추가
+              사진 등록
             </label>
             <input
               multiple
@@ -271,8 +276,8 @@ export default function ArticleCreateForm({
           value={inputs.category}
           className="article_select_category"
         >
-          <option value="chat">{"> "}chat</option>
-          <option value="review">{"> "}review</option>
+          <option value="chat">자유 게시판</option>
+          <option value="review">레시피 리뷰</option>
         </select>
         <div className="form_desc">
           <textarea
@@ -288,7 +293,7 @@ export default function ArticleCreateForm({
 
         <div className="form_submit_div">
           <button onClick={handleCreateFreeArticle} className="form_submit_btn">
-            submit
+            게시글 등록
           </button>
         </div>
       </div>

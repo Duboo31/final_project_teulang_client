@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     padding: 0 1rem;
-    border-top: 3px solid var(--main-color);
+    border-top: 3px solid #e5e5e5;
     height: 50px;
 }
 .free_detail_header_title {
@@ -58,8 +58,8 @@
 .free_detail_desc_div {
     display: block;
     padding: 1rem 0.3rem;
-    border-top: 1px solid var(--light-color);
-    border-bottom: 1px solid var(--light-color);
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
     min-height: 100px;
 }
 .free_detail_desc {

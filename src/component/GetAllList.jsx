@@ -93,13 +93,23 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
   };
 
   return (
-    <div>
+    <div className="all-article_wrap">
       {articlesList.length > 0 ? (
         <div>
+          <ul className="article-header_list">
+            <li className="article-header_item">카테고리</li>
+            <li className="article-header_item">제목</li>
+            <li className="article-header_item">닉네임</li>
+            <li className="article-header_item">작성시간</li>
+          </ul>
           {isRecipe && (
-            <select value={option ? option : "bookmark"} onChange={handleSort} className="all_list_sort_option">
-              <option value="bookmark">{"> "}인기순</option>
-              <option value="latest">{"> "}최신순</option>
+            <select
+              value={option ? option : "bookmark"}
+              onChange={handleSort}
+              className="all_list_sort_option"
+            >
+              <option value="bookmark">인기순</option>
+              <option value="latest">최신순</option>
             </select>
           )}
           {console.log("articlesList", articlesList)}
@@ -126,66 +136,75 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
               : "내용이 없습니다.";
             return (
               <div key={article.id} className="each_article">
-                <div className="each_article_header">
-                  <p className="each_article_header_title">{article.title}</p>
-                  {!isRecipe ? (
-                    <div className="each_article_header_right">
-                      <span className="each_article_header_category">{article.category}</span>
-                    </div>
-                  ) : (
-                    <span className="each_article_header_right">
-                      <div className="each_article_header_star_div">
-                        <img
-                          src={full_star}
-                          className="each_article_header_star_img"
-                        />
-                        <span className="each_article_header_star">
-                          {article.star_av ? article.star_avg : "-"}
+                <div className="each_article_container">
+                  <div className="each_article_header">
+                    {!isRecipe ? (
+                      <div className="each_article_header_right">
+                        <span className="each_article_header_category">
+                          {article.category === "review" ? "리뷰" : "게시글"}
                         </span>
                       </div>
-                      <div className="each_article_header_bookmark_div">
-                        <img
-                          src={bookmarked_icon}
-                          className="each_article_header_bookmark_img"
-                        />
-                        <span className="each_article_header_bookmark">
-                          {article.bookmark_count}
-                        </span>
-                      </div>
+                    ) : (
+                      <span className="each_article_header_right">
+                        <div className="each_article_header_star_div">
+                          <img
+                            src={full_star}
+                            className="each_article_header_star_img"
+                          />
+                          <span className="each_article_header_star">
+                            {article.star_av ? article.star_avg : "-"}
+                          </span>
+                        </div>
+                        <div className="each_article_header_bookmark_div">
+                          <img
+                            src={bookmarked_icon}
+                            className="each_article_header_bookmark_img"
+                          />
+                          <span className="each_article_header_bookmark">
+                            {article.bookmark_count}
+                          </span>
+                        </div>
+                      </span>
+                    )}
+                    <p
+                      onClick={() => {
+                        isRecipe
+                          ? navigate(`/recipe/${article.id}`)
+                          : navigate(`/article/${article.id}`);
+                      }}
+                      className="each_article_header_title"
+                    >
+                      {article.title}
+                    </p>
+                  </div>
+                  <div className="each_article_footer">
+                    <span
+                      className="each_article_author"
+                      onClick={() => {
+                        navigate(`/profile/${article.user_data.id}`);
+                      }}
+                    >
+                      {/* <img
+                        src={urls.baseURL + article.user_data.user_img}
+                        className="each_article_author_img"
+                      /> */}
+                      <span className="each_article_author_nickname">
+                        {article.user_data.nickname}
+                      </span>
                     </span>
-                  )}
+                    <p className="each_article_created_at">
+                      {
+                        article.created_at.split("T")[0]
+                        //   " " +
+                        // article.created_at.split("T")[1].substr(0, 5)
+                      }
+                    </p>
+                  </div>
                 </div>
-                <div
-                  className="each_article_body"
-                  onClick={() => {
-                    isRecipe
-                      ? navigate(`/recipe/${article.id}`)
-                      : navigate(`/article/${article.id}`);
-                  }}
-                >
+
+                <div className="each_article_body">
                   <span className="each_article_content">{content}</span>
-                  <img src={thumbnail} className="each_article_thumbnail" />
-                </div>
-                <div className="each_article_footer">
-                  <span
-                    className="each_article_author"
-                    onClick={() => {
-                      navigate(`/profile/${article.user_data.id}`);
-                    }}
-                  >
-                    <img
-                      src={urls.baseURL + article.user_data.user_img}
-                      className="each_article_author_img"
-                    />
-                    <span className="each_article_author_nickname">
-                      {article.user_data.nickname}
-                    </span>
-                  </span>
-                  <p className="each_article_created_at">
-                    {article.created_at.split("T")[0] +
-                      " " +
-                      article.created_at.split("T")[1].substr(0, 5)}
-                  </p>
+                  {/* <img src={thumbnail} className="each_article_thumbnail" /> */}
                 </div>
               </div>
             );

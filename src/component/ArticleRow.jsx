@@ -4,7 +4,7 @@ import axios from "../api/recipes/axios";
 import urls from "../shared/url";
 import "../styles/Row.css";
 import star from "../images/star_full.png";
-import default_thumbnail from "../images/default_thumbnail.jpg"
+import default_thumbnail from "../images/default_thumbnail.jpg";
 
 // import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
@@ -32,8 +32,10 @@ const ArticleRow = ({ title, id, fetchUrl }) => {
 
   return (
     <section className="row">
-      <h2 className="row_title">{title}</h2>
-      <Link to={`/article?page=1`}>{"> "}전체 보기</Link>
+      <h2 className="row_title">
+        <Link to={`/article?page=1`}>{title}</Link>
+      </h2>
+
       <Swiper
         // install Swiper modules
         modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -75,7 +77,7 @@ const ArticleRow = ({ title, id, fetchUrl }) => {
                     key={article.id}
                     className={`recipe_thumbnail`}
                     src={
-                        article.images
+                      article.images
                         ? `${urls.baseURL}${article.images[0].free_image}`
                         : default_thumbnail
                     }
@@ -90,7 +92,9 @@ const ArticleRow = ({ title, id, fetchUrl }) => {
                     src={`${urls.baseURL}${article.user_data.user_img}`}
                     className="recipe_author_img"
                   />
-                  <p className="recipe_author_nickname">{article.user_data.nickname}</p>
+                  <p className="recipe_author_nickname">
+                    {article.user_data.nickname}
+                  </p>
                 </span>
                 <div className="recipe_desc_div">
                   <p className="recipe_desc">

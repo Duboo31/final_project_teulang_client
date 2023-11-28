@@ -25,11 +25,11 @@ const Main = () => {
         fetchUrl={requests.fetchRecipeListLatest}
         option="latest"
       />
-      <ArticleRow
+      {/* <ArticleRow
         title="게시글"
         id="Article"
         fetchUrl={requests.fetchFreeList}
-      />
+      /> */}
     </div>
   );
 };

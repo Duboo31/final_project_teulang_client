@@ -5,13 +5,13 @@
 .recipe-banner {
   width: 100%;
   height: fit-content;
-  background: #FFF5EB;
-  border: 1px solid #ffba76;
+  background: #fff;
+  border: 1px solid #a3a3a3;
   display: flex;
   flex-flow: column;
-  padding: 1rem;
   font-size: 18px;
   margin: 1rem 0;
+  border-radius: 5px;
 }
 .recipe-banner>div {
   display: flex;
@@ -33,7 +33,7 @@
 }
 
 .header-chart_list {
-  background: #EAF5FA;
+  background: #f3f3f3;
   color: #313131;
   font-weight: bold;
 }
@@ -80,7 +80,7 @@
   display: inline-block;
   width: 49%;
   text-align: center;
-  background: #57C1F2;
+  background: var(--main-color);
   color: #fff;
   padding: 1rem;
   border-radius: 10px;
@@ -105,11 +105,12 @@
   text-align: center;
 }
 .header-chart.clicked {
-  background-color: #b6e8ff;
+  background-color: #e3f6ff;
 }
 .header-chart li:nth-child(1) {
   width: 20%;
   text-align: left;
+  font-weight: bold;
 }
 .header-chart li:nth-child(2) {
   width: 16%;
@@ -142,8 +143,10 @@
   cursor: pointer;
   position: relative;
   border: 1px solid rgb(182, 182, 182);
-  border-radius: 10px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  border-radius: 5px;
+}
+.add-btn:hover {
+  font-weight: bold;
 }
 
 .add-btn_list {

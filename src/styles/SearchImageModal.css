@@ -16,9 +16,8 @@
     scrollbar-width: none; /* Firefox */
 }
 .modal__content {
-    padding: 20px;
-    color: black;
-    min-width: 90vw;
+    padding: 1rem;
+    color: #333;
   }
 .search_modal_content {
     display: flex;
@@ -30,10 +29,10 @@
     align-items: center;
 }
 .search_modal_btn {
-    /* border: 1px solid; */
-    border-radius: 20px;
-    background-color: var(--main-color-op50);
+    border: 1px solid rgb(186, 186, 186);
+    border-radius: 15px;
     padding: 10px;
+    cursor: pointer;
 }
 .search_img_preview {
     width: 150px;
@@ -47,8 +46,9 @@
     align-items: center;
 }
 .search_modal_detected_ingres {
-    border: 1px solid var(--main-color-op90);
+    border: 1px solid #828282;
     min-width: 100px;
+    padding: .3rem;
 }
 .search_modal_footer {
     display: flex;

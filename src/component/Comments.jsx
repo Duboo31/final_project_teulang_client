@@ -58,7 +58,7 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
       .catch(function (error) {
         console.log(error);
         if (error.response.status === 401) {
-          alert("인증되지 않은 사용자입니다. 로그인 해주세요.")
+          alert("인증되지 않은 사용자입니다. 로그인 해주세요.");
         }
       });
   };
@@ -120,7 +120,7 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
         .catch(function (error) {
           console.log(error);
           if (error.response.status === 401) {
-            alert("인증되지 않은 사용자입니다. 로그인 해주세요.")
+            alert("인증되지 않은 사용자입니다. 로그인 해주세요.");
           }
         });
     }
@@ -151,7 +151,7 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
         .catch(function (error) {
           console.log(error.response);
           if (error.response.status === 401) {
-            alert("인증되지 않은 사용자입니다. 로그인 해주세요.")
+            alert("인증되지 않은 사용자입니다. 로그인 해주세요.");
           }
         });
     }
@@ -164,17 +164,15 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
         <div className="comments_create_div">
           <div className="comments_create">
             <textarea
+              placeholder="댓글을 입력하세요."
               onChange={handleCreateInputChange}
               id={`comment_create_input${recipeId}`}
               className="comments_create_input"
             />
-            <button
-              onClick={handleCreateComment}
-              className="comments_create_btn"
-            >
-              작성
-            </button>
           </div>
+          <button onClick={handleCreateComment} className="comments_create_btn">
+            댓글 등록
+          </button>
         </div>
 
         {/* 댓글 보여주기 */}

@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 // css
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass, faImage } from "@fortawesome/free-solid-svg-icons";
 import SearchImageModal from "./SearchImageModal";
 
 export default function Search({ setIsNaviActive }) {
@@ -29,7 +29,7 @@ export default function Search({ setIsNaviActive }) {
 
   const handleClickImageSearch = () => {
     setModalOpen(true);
-  }
+  };
 
   // input에 입력될 때마다 serachValue값 변경
   const handleChange = (e) => {
@@ -48,8 +48,8 @@ export default function Search({ setIsNaviActive }) {
       <button className="search__btn" onClick={handleSearch}>
         <FontAwesomeIcon icon={faMagnifyingGlass} />
       </button>
-      <button onClick={handleClickImageSearch}>
-        <FontAwesomeIcon icon={faMagnifyingGlass} />
+      <button className="search__btn" onClick={handleClickImageSearch}>
+        <FontAwesomeIcon icon={faImage} />
       </button>
 
       <div>

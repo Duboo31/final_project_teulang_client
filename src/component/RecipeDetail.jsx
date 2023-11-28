@@ -203,24 +203,24 @@ const RecipeDetail = ({ recipeDetail }) => {
                 </div>
               ) : (
                 <div>
-                    <button
-                      onClick={handleUpdateRecipe}
-                      className="detail_CU_btn"
-                    >
-                      수정
-                    </button>
-                    <button
-                      onClick={handleDeleteRecipe}
-                      className="detail_CU_btn"
-                    >
-                      삭제
-                    </button>
+                  <button
+                    onClick={handleUpdateRecipe}
+                    className="detail_CU_btn"
+                  >
+                    수정
+                  </button>
+                  <button
+                    onClick={handleDeleteRecipe}
+                    className="detail_CU_btn"
+                  >
+                    삭제
+                  </button>
                 </div>
               )}
             </div>
           </div>
           <div className="detail_sections_div">
-            <p className="detail_sections_title">재료 : </p>
+            <p className="detail_sections_title">재료</p>
             <div className="detail_all_ingredients">
               {recipeDetail.recipe_ingredients.map((ingredientObject) => {
                 return (
@@ -235,13 +235,13 @@ const RecipeDetail = ({ recipeDetail }) => {
             </div>
           </div>
           <div className="detail_sections_div">
-            <p className="detail_sections_title">설명 : </p>
+            <p className="detail_sections_title">설명</p>
             <span className="detail_description">
               {recipeDetail.description ? recipeDetail.description : "-"}
             </span>
           </div>
           <div className="detail_sections_div">
-            <p className="detail_sections_title">요리 순서 :</p>
+            <p className="detail_sections_title">요리 순서</p>
             <div className="detail_all_recipe_orders">
               {recipeDetail.recipe_order.map((orderObject) => {
                 return (

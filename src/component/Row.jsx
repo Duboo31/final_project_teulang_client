@@ -31,8 +31,12 @@ const Row = ({ title, id, fetchUrl, option }) => {
 
   return (
     <section className="row">
-      <h2 className="row_title">{title}</h2>
-      <Link to={`/recipe?page=1&option=${option}`}>{"> "}전체 보기</Link>
+      <h2 className="row_title">
+        <Link to={`/recipe?page=1&option=${option}`} className="all-view_btn">
+          {title}
+        </Link>
+      </h2>
+
       <Swiper
         // install Swiper modules
         modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -55,55 +59,60 @@ const Row = ({ title, id, fetchUrl, option }) => {
         pagination={{ clickable: true }} // 페이지 버튼 보이게 할지
       >
         <div id={id}>
-          {recipes !== null && recipes.map((recipe) => (
-            <SwiperSlide key={recipe.id}>
-              <div className="recipe_content">
-                <span className="recipe_top_span">
-                  <p className="recipe_title">{recipe.title}</p>
-                  <span className="recipe_star_avg_span">
-                    <img src={star} className="recipe_star_img" />
-                    <span className="recipe_star_avg">
-                      {recipe.star_avg
-                        ? parseFloat(recipe.star_avg).toFixed(1)
-                        : "-"}
-                    </span>
+          {recipes !== null &&
+            recipes.map((recipe) => (
+              <SwiperSlide key={recipe.id}>
+                <div className="recipe_content">
+                  <span>
+                    <img
+                      key={recipe.id}
+                      className={`recipe_thumbnail`}
+                      src={
+                        recipe.api_recipe
+                          ? `${recipe.recipe_thumbnail_api}`
+                          : `${urls.baseURL}${recipe.recipe_thumbnail}`
+                      }
+                      alt={recipe.name}
+                      onClick={() => navigate(`/recipe/${recipe.id}`)}
+                    />
                   </span>
-                </span>
-                <span>
-                  <img
-                    key={recipe.id}
-                    className={`recipe_thumbnail`}
-                    src={
-                      recipe.api_recipe
-                        ? `${recipe.recipe_thumbnail_api}`
-                        : `${urls.baseURL}${recipe.recipe_thumbnail}`
-                    }
-                    alt={recipe.name}
-                    onClick={() => navigate(`/recipe/${recipe.id}`)}
-                  />
-                </span>
-                <span
-                  className="recipe_author"
-                  onClick={() => navigate(`/profile/${recipe.user_data.id}`)}
-                >
-                  <img
-                    src={`${urls.baseURL}${recipe.user_data.user_img}`}
-                    className="recipe_author_img"
-                  />
-                  <p className="recipe_author_nickname">{recipe.author}</p>
-                </span>
-                <div className="recipe_desc_div">
-                  <p className="recipe_desc">
-                    {recipe.description
-                      ? recipe.description.length > 13
-                        ? recipe.description.substr(0, 13) + " ..."
-                        : recipe.description
-                      : "-"}
-                  </p>
+                  <div className="user-info-container">
+                    <span
+                      className="recipe_author"
+                      onClick={() =>
+                        navigate(`/profile/${recipe.user_data.id}`)
+                      }
+                    >
+                      <img
+                        src={`${urls.baseURL}${recipe.user_data.user_img}`}
+                        className="recipe_author_img"
+                      />
+                      <p className="recipe_author_nickname">{recipe.author}</p>
+                    </span>
+                    <span className="recipe_top_span">
+                      <p className="recipe_title">{recipe.title}</p>
+                      <span className="recipe_star_avg_span">
+                        <img src={star} className="recipe_star_img" />
+                        <span className="recipe_star_avg">
+                          {recipe.star_avg
+                            ? parseFloat(recipe.star_avg).toFixed(1)
+                            : "-"}
+                        </span>
+                      </span>
+                    </span>
+                    <div className="recipe_desc_div">
+                      <p className="recipe_desc">
+                        {recipe.description
+                          ? recipe.description.length > 13
+                            ? recipe.description.substr(0, 13) + " ..."
+                            : recipe.description
+                          : "-"}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </SwiperSlide>
-          ))}
+              </SwiperSlide>
+            ))}
         </div>
       </Swiper>
     </section>
