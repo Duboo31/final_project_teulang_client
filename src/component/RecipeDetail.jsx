@@ -197,8 +197,8 @@ const RecipeDetail = ({ recipeDetail }) => {
                   {user.isAuthorized &&
                     (recipeDetail.request_user_article_data.is_star_rated
                       ? renderStar(
-                          recipeDetail.request_user_article_data.star_rate
-                        )
+                        recipeDetail.request_user_article_data.star_rate
+                      )
                       : renderStar(0))}
                 </div>
               ) : (
@@ -259,21 +259,21 @@ const RecipeDetail = ({ recipeDetail }) => {
                     </span>
                     {recipeDetail.api_recipe
                       ? orderObject.recipe_img_api && (
-                          <img
-                            src={`${orderObject.recipe_img_api}`}
-                            className="detail_recipe_order_img"
-                          />
-                        )
+                        <img
+                          src={`${orderObject.recipe_img_api}`}
+                          className="detail_recipe_order_img"
+                        />
+                      )
                       : orderObject.recipe_img && (
-                          <img
-                            src={
-                              orderObject.recipe_img
-                                ? `${urls.baseURL}${orderObject.recipe_img}`
-                                : ""
-                            }
-                            className="detail_recipe_order_img"
-                          />
-                        )}
+                        <img
+                          src={
+                            orderObject.recipe_img
+                              ? `${urls.baseURL}${orderObject.recipe_img}`
+                              : ""
+                          }
+                          className="detail_recipe_order_img"
+                        />
+                      )}
 
                     {/*content 뒤에 알파벳 붙어나오고(맨 앞 레시피만), 앞에 1. 이런 순서 번호가 붙음.*/}
                   </div>
