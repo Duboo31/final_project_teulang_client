@@ -29,7 +29,6 @@
   .modal__title {
     padding: 0.3rem 0.5rem;
     margin: 16px 0;
-    background-color: var(--light-color);
     border-radius: 0.3rem;
   }
   .modal::-webkit-scrollbar {

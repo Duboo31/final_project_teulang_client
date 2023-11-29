@@ -4,7 +4,7 @@ const getPorfile = async (userId) => {
   const config = {
     method: "get",
     maxBodyLength: Infinity,
-    url: `${process.env.REACT_APP_SERVER_URL}/users/${userId}/`,
+    url: `${process.env.REACT_APP_SERVER_LOCAL_URL}/users/${userId}/`,
   };
 
   try {

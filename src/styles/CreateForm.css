@@ -3,12 +3,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 1rem;
 }
 .whole_form {
     /* border: 1px solid; */
     /* border-radius: 0.3rem; */
-    border-top: 3px solid var(--main-color);
-    border-bottom: 3px solid var(--main-color);
+    /* border-top: 3px solid var(--main-color); */
+    /* border-bottom: 3px solid var(--main-color); */
     padding-bottom: 2rem;
     margin: 10px;
     max-width: 800px;
@@ -17,7 +18,8 @@
     /* border: 1px solid; */
     display: flex;
     flex-direction: column;
-    border-bottom: 1px solid var(--main-color);
+    border-bottom: 1px solid rgb(222, 222, 222);
+    margin-bottom: 1rem;
 }
 .form_top_content {
     display: flex;
@@ -46,18 +48,20 @@
     border-radius: 2rem;
     padding: 0.2rem 0.5rem;
     margin: 0 0.2rem;
-    background-color: var(--main-color-op60);
-}
-.form_add_thumbnail_btn:hover {
     cursor: pointer;
+    border: 1px solid #c3c3c3;
 }
 .form_add_thumbnail_preview {
-    width: 100%;
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
 }
 .form_desc {
     /* border: 1px solid; */
     padding: 1rem 0.3rem;
-    border-top: 1px solid var(--light-color);
+    border-top: 1px solid rgb(215, 215, 215);
 }
 .form_desc_top {
     font-size: 15px;
@@ -70,13 +74,13 @@
     width: 100%;
     resize: none;
     border: none;
-    border-left: 2px solid var(--light-color);
-    padding-left: 5px;
+    padding: 1rem;
+    background: rgb(245, 245, 245);
 }
 .form_ingre {
     /* border: 1px solid; */
     padding: 1rem 0.3rem;
-    border-top: 1px solid var(--light-color);
+    border-top: 1px solid rgb(235, 235, 235);
 }
 .form_ingre_top {
     margin: 0.3rem 0;
@@ -96,8 +100,8 @@
     width: 100%;
     resize: none;
     border: none;
-    border-left: 2px solid var(--light-color);
-    padding-left: 5px;
+    padding: 1rem;
+    background: rgb(245, 245, 245);
 }
 .form_ingre_update_body {
     margin: 0.7rem 0;
@@ -135,7 +139,7 @@
 }
 .form_orders {
     padding: 1rem 0.3rem;
-    border-top: 1px solid var(--light-color);
+    border-top: 1px solid #e0e0e0
 }
 .form_orders_top {
     /* border: 1px solid; */
@@ -162,12 +166,18 @@
     border: none;
     min-width: 25px;
     min-height: 25px;
-    max-width: 25px;
-    max-height: 25px;
-    font-size: 14px;
-    border-radius: 25px;
+    font-size: 1rem;
+    border-radius: 10px;
     text-align: center;
-    background-color: var(--main-color-op60);
+    background-color: var(--main-color);
+    color: #fff;
+}
+.add-list_btn {
+    width: 120px;
+    height: 30px;
+}
+.add-list_btn:hover {
+    font-weight: bold;
 }
 .form_add_btn:hover {
     cursor: pointer;
@@ -181,9 +191,8 @@
     display: flex;
     flex-direction: column;
     margin: 0.2rem 0;
-    padding: 0.1rem;
-    border-bottom: 1px solid var(--light-color);
-    margin-top: 0.3rem;
+    border-bottom: 1px solid #e2e2e2;
+    padding: 1rem 0;
 }
 .form_orders_each_top {
     display: flex;
@@ -194,10 +203,10 @@
     text-align: center;
     border: none;
     border-radius: 1.5rem;
-    background-color: var(--light-color);
+    border: 1px solid #959595;
     padding: 0.2rem 0.5rem;
     font-size: 12px;
-    margin: 0 0.1rem;
+    margin-bottom: .5rem;
 }
 .form_orders_add_each_btn:hover {
     cursor: pointer;
@@ -206,26 +215,27 @@
     display: flex;
 }
 .form_orders_each_order {
-    background-color: var(--light-color);
-    border-radius: 1rem;
+    background-color: #2496cb;
+    border-radius: 50%;
     min-width: 25px;
     min-height: 25px;
     max-width: 25px;
     max-height: 25px;
     font-size: 14px;
-
-    padding: 0.3rem;
-    margin-top: 0.3rem;
+    color: #fff;
+    font-weight: bold;
     text-align: center;
+    line-height: 25px;
+    margin-right: 5px;
 }
 .form_orders_each_content {
     padding: 0.5rem;
     font-size: medium;
     width: 100%;
-    border: 0.5px solid var(--main-color-op60);
-    margin: 0.3rem;
     resize: none;
     border-radius: 0.2rem;
+    padding: 1rem;
+    background: rgb(245, 245, 245);
 }
 .form_orders_each_img_preview {
     min-width: 8rem;
@@ -233,9 +243,13 @@
     max-width: 8rem;
     object-fit: cover;
     border-radius: 0.2rem;
-    margin: 0.3rem;
-    background-color: var(--light-color);
-    border: 1px solid var(--light-color);
+    /* background-color: var(--main-color); */
+    margin-left: .5rem;
+}
+.form_orders_each_img_preview::after {
+    content: "이미지";
+    width: fit-content;
+    height: fit-content;
 }
 .form_error_div {
     display: flex;
@@ -251,16 +265,21 @@
     justify-content: center;
 }
 .form_submit_btn {
-    width: fit-content;
+    width: 100%;
     border: none;
-    border-radius: 1.5rem;
+    text-align: center;
+    border-radius: 8px;
     background-color: var(--main-color);
     padding: 0.2rem 0.5rem;
     font-size: smaller;
     margin-top: 1rem;
+    cursor: pointer;
+    color: #fff;
+    height: 50px;
+    font-size: 1.1rem;
 }
 .form_submit_btn:hover {
-    cursor: pointer;
+    font-weight: bold;
 }
 @media screen and (min-width:769px) {
     .form_add_thumbnail_preview{

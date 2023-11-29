@@ -90,12 +90,31 @@ const Navigation = () => {
                 onClick={() => {
                   setIsNaviActive((cur) => !cur);
                 }}
+                to="/article"
+              >
+                자유 게시판
+              </Link>
+            </li>
+            <li>
+              <Link
+                onClick={() => {
+                  setIsNaviActive((cur) => !cur);
+                }}
                 to={users.isAuthorized ? "/create" : "/login"}
               >
                 레시피 작성
               </Link>
             </li>
-            <li>게시글 작성(미구현)</li>
+            <li>
+              <Link
+                onClick={() => {
+                  setIsNaviActive((cur) => !cur);
+                }}
+                to={users.isAuthorized ? "/article/create" : "/login"}
+              >
+                게시글 작성
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>

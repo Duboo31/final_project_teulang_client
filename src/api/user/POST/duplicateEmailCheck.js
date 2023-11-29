@@ -4,7 +4,7 @@ const isDuplicateEmail = async (email) => {
   const config = {
     method: "post",
     maxBodyLength: Infinity,
-    url: `${process.env.REACT_APP_SERVER_URL}/users/signup-confirm/`,
+    url: `${process.env.REACT_APP_SERVER_LOCAL_URL}/users/signup-confirm/`,
     headers: {
       "Content-Type": "application/json",
     },

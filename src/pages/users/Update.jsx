@@ -131,8 +131,8 @@ const Update = () => {
                 <img
                   src={
                     user.userProfile === "/media/user_defalt.jpg"
-                      ? `${process.env.REACT_APP_SERVER_URL}/media/user_defalt.jpg`
-                      : `${process.env.REACT_APP_SERVER_URL}${user.userProfile}`
+                      ? `${process.env.REACT_APP_SERVER_LOCAL_URL}/media/user_defalt.jpg`
+                      : `${process.env.REACT_APP_SERVER_LOCAL_URL}${user.userProfile}`
                   }
                   alt="프로필 이미지"
                 />

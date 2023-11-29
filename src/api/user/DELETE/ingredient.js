@@ -1,20 +1,16 @@
 import axios from "axios";
 
-const deleteUserAccount = async (userInfo) => {
-  const { password, userId } = userInfo;
+const deleteIngredient = async (data) => {
   const accessToken = localStorage.getItem("access");
 
   const config = {
     method: "DELETE",
     maxBodyLength: Infinity,
-    url: `${process.env.REACT_APP_SERVER_LOCAL_URL}/users/api/signout/${userId}/`,
+    url: `${process.env.REACT_APP_SERVER_LOCAL_URL}/users/${data.userId}/myFrige/${data.id}/`,
     headers: {
       Authorization: `Bearer ${accessToken}`,
       "Content-Type": "application/json",
     },
-    data: JSON.stringify({
-      password,
-    }),
   };
 
   try {
@@ -25,4 +21,4 @@ const deleteUserAccount = async (userInfo) => {
   }
 };
 
-export { deleteUserAccount };
+export { deleteIngredient };

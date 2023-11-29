@@ -8,7 +8,6 @@
     height: 50%;
     width: 100%;
     /* float: "left", */
-    border: 1px solid var(--main-color-op60);
     border-radius: 0.3rem;
     box-sizing: border-box;
     padding: 0.4rem;
@@ -33,14 +32,14 @@
     font-size: smaller;
 }
 .multi_sec_btn {
-    border: none;
+    display: inline-block;
     min-height: 25px;
     min-width: 25px;
-    max-height: 25px;
     max-width: 25px;
-    border-radius: 1.5rem;
-    background-color: var(--main-color-op60);
+    border-radius: 50%;
     text-align: center;
+    line-height: 15px;
+    border: 1px solid rgb(175, 175, 175);
 }
 .multi_sec_btn:hover {
     cursor: pointer;
@@ -50,14 +49,13 @@
     overflow: scroll;
 }
 .multi_detail_none {
-    background-color: var(--light-color);
+    background-color: #f0f0f0;
     height: 100%;
 }
 .multi_sec2 {
     height: 50%;
     width: 100%;
     /* float: right; */
-    border: 1px solid var(--main-color-op60);
     border-radius: 0.3rem;
     box-sizing: border-box;
     padding: 0.4rem;
@@ -71,14 +69,14 @@
 }
 @media screen and (min-width:769px) {
     .multi_whole{
-        padding: 30px 100px;
+        /* padding: 30px 100px; */
     }
 	.multi_sec1 {
         height: 100%;
         width: 50%;
         float: left;
-        border: 1px solid var(--main-color-op60);
-        border-radius: 0.3rem;
+        border: 1px solid #d0d0d0;
+        border-radius: 0.1rem;
         box-sizing: border-box;
         padding: 0.4rem;
         background-clip: content-box;
@@ -88,8 +86,8 @@
         height: 100%;
         width: 50%;
         float: right;
-        border: 1px solid var(--main-color-op60);
-        border-radius: 0.3rem;
+        border: 1px solid #d0d0d0;
+        border-radius: 0.1rem;
         box-sizing: border-box;
         padding: 0.4rem;
         background-clip: content-box;
