@@ -124,22 +124,20 @@
     margin: 1rem 0;
     height: 2rem;
     width: 2rem;
-    background-color: var(--main-color-op50);
-    border-radius: 0.3rem 0 0 0.3rem;
+    border-radius: 0 0.3rem 0.3rem 0;
     text-align: center;
     font-weight: 600;
     font-size: 15px;
-    display: none;
+    cursor: pointer;
 }
 .search_pagination_btn_next {
     border: none;
     margin: 1rem 0;
     height: 2rem;
     width: 2rem;
-    background-color: var(--main-color-op50);
     border-radius: 0 0.3rem 0.3rem 0;
     text-align: center;
     font-weight: 600;
     font-size: 15px;
-    display: none;
+    cursor: pointer;
 }

@@ -124,7 +124,7 @@
     font-weight: 600;
     font-size: 15px;
     cursor: pointer;
-    display: none;
+    /* display: none; */
 }
 .pagination_btn_next {
     border: none;
@@ -136,7 +136,7 @@
     font-weight: 600;
     font-size: 15px;
     cursor: pointer;
-    display: none;
+    /* display: none; */
 }
 .pagination_btn {
     border: none;

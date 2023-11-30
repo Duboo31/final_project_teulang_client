@@ -65,7 +65,7 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
       );
     }
     console.log(pagination_btn);
-    const start = parseInt(curPage / 5) * 5;
+    const start = parseInt((curPage - 1) / 5) * 5;
     const end = maxPage > start + 5 ? start + 5 : maxPage;
     return pagination_btn.slice(start, end);
   };
