@@ -90,7 +90,7 @@ const Navigation = () => {
                 onClick={() => {
                   setIsNaviActive((cur) => !cur);
                 }}
-                to="/recipe"
+                to="/recipe?page=1"
               >
                 전체 레시피
               </Link>
