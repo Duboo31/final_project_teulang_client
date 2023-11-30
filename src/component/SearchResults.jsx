@@ -51,7 +51,7 @@ const SearchResults = () => {
   };
 
   const pagination = () => {
-    console.log("maxPage",maxPage)
+    console.log("maxPage", maxPage)
     for (let i = 1; i < maxPage + 1; i++) {
       pagination_btn.push(
         <button
@@ -91,15 +91,15 @@ const SearchResults = () => {
     return searchResults.length > 0 ? (
       <section className="search_section">
         {searchResults.map((recipe, index) => {
-          const recipeImageUrl = recipe.api_recipe
+          const recipeImageUrl = recipe.recipe_thumbnail_api != []
             ? `${recipe.recipe_thumbnail_api}`
             : `${urls.baseURL}${recipe.recipe_thumbnail}`;
 
           const created_at = recipe.api_recipe
             ? "api recipe"
             : recipe.created_at.split("T")[0] +
-              " " +
-              recipe.created_at.split("T")[1].substr(0, 5);
+            " " +
+            recipe.created_at.split("T")[1].substr(0, 5);
           return (
             <div key={index} className="search_each_recipe">
               <div
