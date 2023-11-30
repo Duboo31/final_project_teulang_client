@@ -1,6 +1,7 @@
    :root {
     --main-color: #118DD3;  
-    --light-color: rgb(255, 234, 197);
+    /* --light-color: rgb(255, 234, 197); */
+    --light-color: #e4e4e4;
     --text-color: rgb(27, 14, 2);
     --main-color-op50 : rgb(237, 176, 62, 0.5);
     --main-color-op60 : rgb(237, 176, 62, 0.6);
