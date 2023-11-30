@@ -52,16 +52,30 @@ const SearchResults = () => {
 
   const pagination = () => {
     console.log("maxPage", maxPage);
+    console.log("curPage", curPage);
     for (let i = 1; i < maxPage + 1; i++) {
-      pagination_btn.push(
-        <button
-          name={`${i}`}
-          onClick={handleMove}
-          className="search_pagination_btn"
-        >
-          {i}
-        </button>
-      );
+      if (`${i}` === curPage) {
+        console.log("curPage - i", i);
+        pagination_btn.push(
+          <button
+            name={`${i}`}
+            onClick={handleMove}
+            className="search_pagination_cur_btn"
+          >
+            {i}
+          </button>
+        );
+      } else {
+        pagination_btn.push(
+          <button
+            name={`${i}`}
+            onClick={handleMove}
+            className="search_pagination_btn"
+          >
+            {i}
+          </button>
+        );
+      }
     }
     console.log(pagination_btn);
     const start = parseInt((curPage - 1) / 5) * 5;
