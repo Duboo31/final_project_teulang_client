@@ -18,8 +18,6 @@ export default function RecipeDetailForm({ recipeId }) {
   const fetchRecipeDetailData = async () => {
     const accesstoken = localStorage.getItem("access");
 
-    console.log("accesstoken",accesstoken);
-
 
     try {
       if (accesstoken) {
@@ -29,12 +27,12 @@ export default function RecipeDetailForm({ recipeId }) {
           },
         })
         setRecipeDetail(request.data);
-        console.log("fetchRecipeDetailData", request.data);
+        // console.log("fetchRecipeDetailData", request.data);
       }
       else {
         const request = await axios.get(requests.fetchRecipeListAll + recipeId)
         setRecipeDetail(request.data);
-        console.log("fetchRecipeDetailData", request.data);
+        // console.log("fetchRecipeDetailData", request.data);
       };
     } catch (error) {
       console.log(error);

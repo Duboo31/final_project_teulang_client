@@ -17,7 +17,7 @@ const RecipeDetail = ({ recipeDetail }) => {
   let stars = [];
 
   useEffect(() => {
-    console.log(recipeDetail);
+    // console.log(recipeDetail);
     setStarAvg(recipeDetail.star_avg);
   }, [recipeDetail]);
 
@@ -37,7 +37,7 @@ const RecipeDetail = ({ recipeDetail }) => {
           },
         })
         .then(function (response) {
-          console.log("reponse.data ", response.data);
+          // console.log("reponse.data ", response.data);
           navigate("/");
         })
         .catch(function (error) {
@@ -53,7 +53,6 @@ const RecipeDetail = ({ recipeDetail }) => {
   const handleBookmark = async (e) => {
     const accessToken = localStorage.getItem("access");
     const bookmark = document.getElementById("bookmark");
-    console.log(e.target.src === bookmarked_icon);
 
     if (e.target.src === bookmarked_icon) {
       bookmark.src = not_bookmarked_icon;
@@ -71,7 +70,7 @@ const RecipeDetail = ({ recipeDetail }) => {
         }
       )
       .then(function (response) {
-        console.log("reponse.data ", response.data);
+        // console.log("reponse.data ", response.data);
         alert(response.data);
       })
       .catch(function (error) {
@@ -103,7 +102,11 @@ const RecipeDetail = ({ recipeDetail }) => {
       })
       .catch(function (error) {
         console.log(error);
-        alert(error.response.data);
+        if (error.response.status === 403) {
+          alert("인증되지 않은 사용자입니다. 이메일 인증을 진행하세요.");
+        } else {
+          alert(error.response.data);
+        }
       });
   };
 
@@ -146,7 +149,7 @@ const RecipeDetail = ({ recipeDetail }) => {
               <p className="detail_star_avg">
                 {starAvg ? parseFloat(starAvg).toFixed(1) : "-"}
               </p>
-              {console.log("user", user)}
+              {/* {console.log("user", user)} */}
               {user.isAuthorized &&
                 !(user.userId === recipeDetail.user_data.id) && (
                   <img
@@ -197,8 +200,8 @@ const RecipeDetail = ({ recipeDetail }) => {
                   {user.isAuthorized &&
                     (recipeDetail.request_user_article_data.is_star_rated
                       ? renderStar(
-                        recipeDetail.request_user_article_data.star_rate
-                      )
+                          recipeDetail.request_user_article_data.star_rate
+                        )
                       : renderStar(0))}
                 </div>
               ) : (
@@ -259,21 +262,21 @@ const RecipeDetail = ({ recipeDetail }) => {
                     </span>
                     {recipeDetail.api_recipe
                       ? orderObject.recipe_img_api && (
-                        <img
-                          src={`${orderObject.recipe_img_api}`}
-                          className="detail_recipe_order_img"
-                        />
-                      )
+                          <img
+                            src={`${orderObject.recipe_img_api}`}
+                            className="detail_recipe_order_img"
+                          />
+                        )
                       : orderObject.recipe_img && (
-                        <img
-                          src={
-                            orderObject.recipe_img
-                              ? `${urls.baseURL}${orderObject.recipe_img}`
-                              : ""
-                          }
-                          className="detail_recipe_order_img"
-                        />
-                      )}
+                          <img
+                            src={
+                              orderObject.recipe_img
+                                ? `${urls.baseURL}${orderObject.recipe_img}`
+                                : ""
+                            }
+                            className="detail_recipe_order_img"
+                          />
+                        )}
 
                     {/*content 뒤에 알파벳 붙어나오고(맨 앞 레시피만), 앞에 1. 이런 순서 번호가 붙음.*/}
                   </div>
