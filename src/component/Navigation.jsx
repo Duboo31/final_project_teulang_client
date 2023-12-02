@@ -100,7 +100,7 @@ const Navigation = () => {
                 onClick={() => {
                   setIsNaviActive((cur) => !cur);
                 }}
-                to="/article"
+                to="/article?page=1"
               >
                 자유 게시판
               </Link>
