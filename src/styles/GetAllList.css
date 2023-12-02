@@ -9,7 +9,7 @@
 }
 .each_article {
     border-bottom: 1px solid #d4d4d4;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 .each_article_header {
     display: flex;
@@ -25,6 +25,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    cursor: pointer;
 }
 .each_article_header_right {
     display: flex;
