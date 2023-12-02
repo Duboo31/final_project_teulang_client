@@ -43,7 +43,6 @@ const SearchResults = () => {
         `articles/recipe/search?q=${searchTerm}&page=${curPage}`
       );
       setSearchResults(response.data.serializer_data);
-      console.log(response.data.pagination_data);
       setMaxPage(response.data.pagenation_data.pages_num); // 백엔드에 pagenation_data -> pagination_data로 수정 요청..?
     } catch (error) {
       console.log("error", error);
@@ -51,11 +50,9 @@ const SearchResults = () => {
   };
 
   const pagination = () => {
-    console.log("maxPage", maxPage);
-    console.log("curPage", curPage);
     for (let i = 1; i < maxPage + 1; i++) {
       if (`${i}` === curPage) {
-        console.log("curPage - i", i);
+        // console.log("curPage - i", i);
         pagination_btn.push(
           <button
             name={`${i}`}
@@ -77,7 +74,6 @@ const SearchResults = () => {
         );
       }
     }
-    console.log(pagination_btn);
     const start = parseInt((curPage - 1) / 5) * 5;
     const end = maxPage > start + 5 ? start + 5 : maxPage;
     return pagination_btn.slice(start, end);
@@ -85,7 +81,6 @@ const SearchResults = () => {
 
   const handleMove = (e) => {
     const { name } = e.target;
-    console.log(name);
     var go = 0;
 
     if (name === "prev") {
