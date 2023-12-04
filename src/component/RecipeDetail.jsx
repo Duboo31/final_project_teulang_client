@@ -54,11 +54,6 @@ const RecipeDetail = ({ recipeDetail }) => {
     const accessToken = localStorage.getItem("access");
     const bookmark = document.getElementById(`bookmark${recipeDetail.id}`);
 
-    if (e.target.src === bookmarked_icon) {
-      bookmark.src = not_bookmarked_icon;
-    } else {
-      bookmark.src = bookmarked_icon;
-    }
     await axios
       .post(
         `/articles/recipe/${recipeDetail.id}/bookmark/`,
@@ -71,7 +66,13 @@ const RecipeDetail = ({ recipeDetail }) => {
       )
       .then(function (response) {
         // console.log("reponse.data ", response.data);
-        alert(response.data);
+        // alert(response.data);
+
+        if (e.target.src === bookmarked_icon) {
+          bookmark.src = not_bookmarked_icon;
+        } else {
+          bookmark.src = bookmarked_icon;
+        }
       })
       .catch(function (error) {
         console.log(error);
