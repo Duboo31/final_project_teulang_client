@@ -70,11 +70,7 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
         );
       } else {
         pagination_btn.push(
-          <button
-            name={`${i}`}
-            onClick={handleMove}
-            className="pagination_btn"
-          >
+          <button name={`${i}`} onClick={handleMove} className="pagination_btn">
             {i}
           </button>
         );
@@ -221,7 +217,16 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
                 </div>
 
                 <div className="each_article_body">
-                  <span className="each_article_content">{content}</span>
+                  <span
+                    className="each_article_content"
+                    onClick={() => {
+                      isRecipe
+                        ? navigate(`/recipe/${article.id}`)
+                        : navigate(`/article/${article.id}`);
+                    }}
+                  >
+                    {content}
+                  </span>
                   {/* <img src={thumbnail} className="each_article_thumbnail" /> */}
                 </div>
               </div>
