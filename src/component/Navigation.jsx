@@ -6,17 +6,12 @@ import IsLogoutNavi from "./navigation/IsLogoutNavi";
 import Search from "./Search";
 
 import logo from "../image/logo.png";
-import logoWeb from "../image/logoWeb.png";
 
 // css
 import "../styles/navigation/searchBar.css";
 import "../styles/navigation/navigation.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBars,
-  faXmark,
-  faRectangleList,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBars, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
 const Navigation = () => {
   const [isNaviActive, setIsNaviActive] = useState(false);
@@ -49,7 +44,7 @@ const Navigation = () => {
               onClick={() => {
                 setIsNaviActive((cur) => !cur);
               }}
-              icon={faXmark}
+              icon={faCircleXmark}
               className="navigation-icon_item"
             />
           </div>
@@ -72,7 +67,7 @@ const Navigation = () => {
             </Link>
           </h2>
           <Search setIsNaviActive={setIsNaviActive} />
-          <div className="searchBar-container_multi">
+          {/* <div className="searchBar-container_multi">
             <Link
               to={users.isAuthorized ? "/multi" : "/login"}
               onClick={() => {
@@ -81,7 +76,7 @@ const Navigation = () => {
             >
               함께보기
             </Link>
-          </div>
+          </div> */}
         </div>
         <nav className="navigation-lower">
           <ul>
@@ -92,7 +87,7 @@ const Navigation = () => {
                 }}
                 to="/recipe?page=1"
               >
-                전체 레시피ㅋ
+                전체 레시피
               </Link>
             </li>
             <li>
@@ -124,6 +119,16 @@ const Navigation = () => {
                 to={users.isAuthorized ? "/article/create" : "/login"}
               >
                 게시글 작성
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={users.isAuthorized ? "/multi" : "/login"}
+                onClick={() => {
+                  setIsNaviActive((cur) => !cur);
+                }}
+              >
+                레시피 함께보기
               </Link>
             </li>
           </ul>
