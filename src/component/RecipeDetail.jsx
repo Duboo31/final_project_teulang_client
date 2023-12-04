@@ -52,7 +52,7 @@ const RecipeDetail = ({ recipeDetail }) => {
 
   const handleBookmark = async (e) => {
     const accessToken = localStorage.getItem("access");
-    const bookmark = document.getElementById("bookmark");
+    const bookmark = document.getElementById(`bookmark${recipeDetail.id}`);
 
     if (e.target.src === bookmarked_icon) {
       bookmark.src = not_bookmarked_icon;
@@ -158,7 +158,7 @@ const RecipeDetail = ({ recipeDetail }) => {
                         ? bookmarked_icon
                         : not_bookmarked_icon
                     }
-                    id="bookmark"
+                    id={`bookmark${recipeDetail.id}`}
                     onClick={handleBookmark}
                     className="detail_bookmark"
                   />
