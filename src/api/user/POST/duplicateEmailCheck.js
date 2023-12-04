@@ -19,13 +19,11 @@ const isDuplicateEmail = async (email) => {
     const response = await axios.request(config);
     if (response.status === 200) {
       isPassed = true;
-      console.log("확인 결과: 사용가능한 이메일");
       return isPassed;
     }
   } catch (err) {
     console.log(err);
     if (err.response.status === 409) {
-      console.log("이메일 중복 가입 차단");
       return isPassed;
     }
     console.error(err);

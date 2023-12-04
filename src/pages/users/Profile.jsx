@@ -81,21 +81,18 @@ const Profile = () => {
   const { mutate } = useMutation(postFollow, {
     onSuccess: (result) => {
       queryClient.invalidateQueries();
-      console.log("result: 팔로우 요청", result);
       if (
         result.status === 200 &&
         result.data.message === "팔로우 취소합니다."
       ) {
-        console.log("팔로우 취소");
       } else if (
         result.status === 200 &&
         result.data.message === "팔로우 합니다."
       ) {
-        console.log("팔로우 했음");
       }
     },
-    onError: () => {
-      console.log("팔로우 실패");
+    onError: (err) => {
+      console.log(err);
     },
   });
 

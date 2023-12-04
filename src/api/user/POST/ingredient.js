@@ -34,7 +34,7 @@ const createIngredient = async ({ title, amount, expiration_date, userId }) => {
     const response = await axios.request(config);
     return response;
   } catch (err) {
-    console.log("생성: ", err);
+    console.log(err);
     return err;
   }
 };

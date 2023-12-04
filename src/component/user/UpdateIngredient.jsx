@@ -14,12 +14,11 @@ const UpdateIngredient = ({ setClickEditId, id, userId }) => {
   } = useForm();
 
   const { mutate } = useMutation(editIngredient, {
-    onSuccess: (result) => {
-      console.log("result: 요청", result);
+    onSuccess: () => {
       setClickEditId("");
     },
-    onError: () => {
-      console.log("재료 생성 실패");
+    onError: (err) => {
+      console.log(err);
     },
   });
 

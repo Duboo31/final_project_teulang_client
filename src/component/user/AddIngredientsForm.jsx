@@ -15,14 +15,12 @@ const AddIngredientsForm = ({ setIsAddInputActive, userId }) => {
 
   const { mutate } = useMutation(createIngredient, {
     onSuccess: (result) => {
-      console.log("result: 요청", result);
       if (result.status === 201) {
-        console.log("성공!");
         setIsAddInputActive(false);
       }
     },
-    onError: () => {
-      console.log("재료 생성 실패");
+    onError: (err) => {
+      console.log(err);
     },
   });
 
@@ -33,7 +31,6 @@ const AddIngredientsForm = ({ setIsAddInputActive, userId }) => {
       expiration_date,
       userId,
     };
-    console.log("추가버튼 클릭");
     mutate(ingredientData);
   };
 

@@ -74,8 +74,8 @@ const Update = () => {
       }
       setIsNicknameBtnActive(false);
     },
-    onError: () => {
-      console.log("유저 정보 업데이트 요청 실패");
+    onError: (err) => {
+      console.log(err);
     },
   });
 

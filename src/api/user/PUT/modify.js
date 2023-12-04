@@ -27,7 +27,6 @@ const userModify = async (modifyInfo) => {
 
   try {
     const response = await axios.request(config);
-    console.log(response);
     return response;
   } catch (err) {
     return err;

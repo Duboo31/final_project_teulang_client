@@ -11,9 +11,6 @@ const Follow = ({ followData, openFollowerPopup, setOpenFollowerPopup }) => {
 
   const { followers, following } = followData;
 
-  console.log("followers: ", followers);
-  console.log("following: ", following);
-
   return (
     <>
       {openFollowerPopup && (

@@ -12,7 +12,6 @@ const saveLocalStorageToken = (access, refresh) => {
   );
 
   localStorage.setItem("payload", jsonPayload);
-  console.log("로컬에 저장 완료");
 };
 
 export { saveLocalStorageToken };
