@@ -74,7 +74,7 @@ const Navigation = () => {
           <Search setIsNaviActive={setIsNaviActive} />
           <div className="searchBar-container_multi">
             <Link
-              to="/multi"
+              to={users.isAuthorized ? "/multi" : "/login"}
               onClick={() => {
                 setIsNaviActive((cur) => !cur);
               }}
