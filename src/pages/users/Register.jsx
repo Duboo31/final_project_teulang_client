@@ -18,7 +18,6 @@ import {
   faEnvelope,
   faLock,
   faCircleUser,
-  faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Register = () => {
@@ -74,12 +73,10 @@ const Register = () => {
 
     if (isValidPassword) {
       clearErrors("password");
-    } else if (watchPassword !== undefined) {
-      setError(
-        "password",
-        { message: "문자, 숫자, 특수문자 조합 8글자 이상을 사용하세요." },
-        { shouldFocus: true }
-      );
+    } else if (watchPassword !== undefined && watchPassword.length > 1) {
+      setError("password", {
+        message: "문자, 숫자, 특수문자 조합 8글자 이상을 사용하세요.",
+      });
     }
 
     setIsValidEmail(isValidEmail);
