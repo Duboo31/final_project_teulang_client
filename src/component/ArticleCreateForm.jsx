@@ -135,6 +135,12 @@ export default function ArticleCreateForm({
         // if (error.response.status === 401 || error.response.status === 403) {
         //   renderErrorMsg("Unauthorized");
         // }
+        if (error.response.status === 401) {
+          alert("인증되지 않은 사용자입니다. 로그인 해주세요.");
+        }
+        if (error.response.status === 403) {
+          alert("인증되지 않은 사용자입니다. 이메일 인증을 진행하세요.");
+        }
       });
   };
 
