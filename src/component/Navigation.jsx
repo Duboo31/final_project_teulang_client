@@ -92,7 +92,7 @@ const Navigation = () => {
                 }}
                 to="/recipe?page=1"
               >
-                전체 레시피
+                전체 레시피ㅋ
               </Link>
             </li>
             <li>

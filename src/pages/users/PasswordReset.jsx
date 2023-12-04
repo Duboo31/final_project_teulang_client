@@ -42,7 +42,6 @@ const PasswordReset = () => {
 
   const sendEmail = useMutation(passwordResetEmailCheck, {
     onSuccess: (result) => {
-      console.log("result: ", result);
       if (result.status === 200) {
         setIsTimerActive(true);
         setError("email", { message: "인증 코드를 발송했습니다." });
@@ -58,14 +57,13 @@ const PasswordReset = () => {
         return;
       }
     },
-    onError: () => {
-      console.log("이메일 보내기 실패");
+    onError: (err) => {
+      console.log(err);
     },
   });
 
   const sendCode = useMutation(checkCodeNumber, {
     onSuccess: (result) => {
-      console.log("result: ", result);
       if (result.status === 200) {
         setIsTimerActive(false);
         setIsPasswordInputActive(true);
@@ -81,14 +79,13 @@ const PasswordReset = () => {
         return;
       }
     },
-    onError: () => {
-      console.log("이메일 보내기 실패");
+    onError: (err) => {
+      console.log(err);
     },
   });
 
   const passwordReset = useMutation(resetPassword, {
     onSuccess: (result) => {
-      console.log("result: ", result);
       if (result.status === 200) {
         alert(`비밀번호를 변경했습니다.
 로그인 페이지로 이동합니다.`);
@@ -98,8 +95,8 @@ const PasswordReset = () => {
         return;
       }
     },
-    onError: () => {
-      console.log("이메일 보내기 실패");
+    onError: (err) => {
+      console.log(err);
     },
   });
 

@@ -42,7 +42,6 @@ const Login = () => {
 
   const { mutate } = useMutation(postLogin, {
     onSuccess: (result) => {
-      console.log("result: ", result);
       if (result.status === 200) {
         const { userId, userEmail, nickname } = getUserInfoInLocalStorage();
 
@@ -62,8 +61,8 @@ const Login = () => {
         setError("password", { message: `등록된 사용자가 아닙니다.` });
       }
     },
-    onError: () => {
-      console.log("로그인 실패");
+    onError: (err) => {
+      console.log(err);
     },
   });
 

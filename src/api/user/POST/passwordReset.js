@@ -14,7 +14,6 @@ const passwordResetEmailCheck = async (email) => {
 
   try {
     const response = await axios.request(config);
-    console.log("이메일 보내기 성공 : ", response.data);
     return response;
   } catch (err) {
     return err;
@@ -22,7 +21,6 @@ const passwordResetEmailCheck = async (email) => {
 };
 
 const checkCodeNumber = async (codeData) => {
-  console.log("codeData: 코드 보내기", codeData);
   const config = {
     method: "post",
     maxBodyLength: Infinity,
@@ -32,7 +30,6 @@ const checkCodeNumber = async (codeData) => {
 
   try {
     const response = await axios.request(config);
-    console.log("인증 성공 : ", response.data);
     return response;
   } catch (err) {
     return err;
@@ -47,7 +44,6 @@ const resetPassword = async (codeData) => {
     new_password_check: codeData.passwordConfirm,
   };
 
-  console.log("codeData: 코드 보내기", codeData);
   const config = {
     method: "put",
     maxBodyLength: Infinity,
@@ -57,7 +53,6 @@ const resetPassword = async (codeData) => {
 
   try {
     const response = await axios.request(config);
-    console.log("비번 변경 성공 : ", response.data);
     return response;
   } catch (err) {
     return err;

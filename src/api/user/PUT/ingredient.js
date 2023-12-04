@@ -35,7 +35,7 @@ const editIngredient = async ({
     const response = await axios.request(config);
     return response;
   } catch (err) {
-    console.log("수정: ", err);
+    console.log(err);
     return err;
   }
 };

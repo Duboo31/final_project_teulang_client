@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { postRegister } from "../../api/user/POST/register";
 import { useMutation } from "react-query";
 import { useForm } from "react-hook-form";
@@ -18,6 +18,7 @@ import {
   faEnvelope,
   faLock,
   faCircleUser,
+  faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Register = () => {
@@ -34,6 +35,7 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
     setError,
+    clearErrors,
     watch,
   } = useForm();
 
@@ -42,11 +44,11 @@ const Register = () => {
   // 제어 컴포넌트로 이메일, 닉네임 중복 검사를 위한 실시간 확인
   const watchEmail = watch("email");
   const watchNickname = watch("nickname");
+  const watchPassword = watch("password");
 
   const { mutate } = useMutation(postRegister, {
     onSuccess: (result) => {
       if (result.status === 201) {
-        console.log("회원가입 성공");
       }
       navigate("/login");
       // if (status === 400) {
@@ -59,8 +61,8 @@ const Register = () => {
       alert(`${result.email} 로 인증 요청을 보냈습니다.
 이메일을 확인하세요.`);
     },
-    onError: (result) => {
-      console.log("회원가입 요청을 실패했습니다.: ", result);
+    onError: (err) => {
+      console.log(err);
     },
   });
 
@@ -68,8 +70,20 @@ const Register = () => {
   // 그에 맞는 불리언 값을 상태 값으로 저장
   useEffect(() => {
     const isValidEmail = EMAIL_REGEX.test(watchEmail);
+    const isValidPassword = PWD_REGEX.test(watchPassword);
+
+    if (isValidPassword) {
+      clearErrors("password");
+    } else if (watchPassword !== undefined) {
+      setError(
+        "password",
+        { message: "문자, 숫자, 특수문자 조합 8글자 이상을 사용하세요." },
+        { shouldFocus: true }
+      );
+    }
+
     setIsValidEmail(isValidEmail);
-  }, [watchEmail]);
+  }, [watchEmail, watchPassword]);
 
   // 이메일 중복 검사 api 요청 함수
   const onClickEmailCheckHandler = async () => {

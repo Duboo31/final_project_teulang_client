@@ -46,13 +46,11 @@ const Ingredients = () => {
   }, [isAddInputActive, clickEditId, delBtnAction]);
 
   const { mutate } = useMutation(deleteIngredient, {
-    onSuccess: (result) => {
-      // queryClient.invalidateQueries();
-      console.log("result 삭제: ", result);
+    onSuccess: () => {
       setDelBtnAction((cur) => !cur);
     },
-    onError: () => {
-      console.log("재료 삭제 실패");
+    onError: (err) => {
+      console.log(err);
     },
   });
 
@@ -66,8 +64,6 @@ const Ingredients = () => {
       mutate(delData);
     }
   };
-
-  console.log("data: ", data);
 
   const getStateText = (num) => {
     if (num === 1) {
@@ -150,7 +146,6 @@ const Ingredients = () => {
                 <li
                   onClick={() => {
                     setClickEditId(ingredient.id);
-                    console.log(ingredient.id);
                   }}
                 >
                   <FontAwesomeIcon icon={faPenToSquare} />
