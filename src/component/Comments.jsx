@@ -60,6 +60,9 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
         if (error.response.status === 401) {
           alert("인증되지 않은 사용자입니다. 로그인 해주세요.");
         }
+        if (error.response.status === 403) {
+          alert("인증되지 않은 사용자입니다. 이메일 인증을 진행하세요.");
+        }
       });
   };
 
