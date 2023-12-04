@@ -25,7 +25,7 @@ const Row = ({ title, id, fetchUrl, option }) => {
 
   const fetchRecipeData = async () => {
     const request = await axios.get(fetchUrl);
-    console.log("fetchRecipeDataRow: ", request.data);
+    // console.log("fetchRecipeDataRow: ", request.data);
     setRecipes(request.data.serializer_data);
   };
 

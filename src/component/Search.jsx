@@ -50,7 +50,7 @@ export default function Search({ setIsNaviActive }) {
         className="search__input"
         type="text"
         onChange={handleChange}
-        placeholder=",로 구분해 검색"
+        placeholder=",로 구분해 식재료를 검색해보세요!"
       />
       <button className="search__btn" onClick={handleSearch}>
         <FontAwesomeIcon icon={faMagnifyingGlass} />

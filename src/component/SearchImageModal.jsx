@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../styles/SearchImageModal.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import urls from "../shared/url";
 
 export default function SearchImageModal({
   setModalOpen,
@@ -16,7 +17,6 @@ export default function SearchImageModal({
 
   const onChange = (e) => {
     const { files } = e.target;
-    console.log("files", files[0]);
     setSearchImage(files[0]);
 
     // render image
@@ -37,7 +37,7 @@ export default function SearchImageModal({
       await axios
         .post("articles/detect_objects/", formData)
         .then(function (response) {
-          console.log("reponse.data ", response.data);
+          // console.log("reponse.data ", response.data);
           const detected_classes = response.data.detected_classes;
           let detected_classes_str = "";
           for (let i = 0; i < detected_classes.length; i++) {
@@ -47,12 +47,16 @@ export default function SearchImageModal({
               detected_classes_str += detected_classes[i] + ",";
             }
           }
-          console.log(detected_classes_str);
+          // 감지된 식재료 화면에 띄우기
           document.getElementById("detected_ingredients").innerText =
             detected_classes_str === ""
               ? "감지된 식재료가 없습니다."
               : detected_classes_str;
           setDetectedIngresStr(detected_classes_str);
+
+          // 감지된 output 이미지 화면에 띄우기
+          let index = response.data.output_image_path.indexOf("/media");
+          document.getElementById("search_img_preview").src = urls.baseURL+response.data.output_image_path.substr(index);
         })
         .catch(function (error) {
           console.log(error);
@@ -63,7 +67,7 @@ export default function SearchImageModal({
   };
 
   const handleSearchIngredients = () => {
-    console.log("detectedIngres", detectedIngresStr);
+    // console.log("detectedIngres", detectedIngresStr);
     if (detectedIngresStr !== null) {
       // null은 아니고, 제출하긴 한 상태.
       if (detectedIngresStr === "") {

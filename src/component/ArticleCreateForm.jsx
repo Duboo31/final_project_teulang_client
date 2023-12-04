@@ -64,7 +64,7 @@ export default function ArticleCreateForm({
         );
       });
     }
-    console.log("new_slidingImages", new_slidingImages);
+    // console.log("new_slidingImages", new_slidingImages);
     setSlidingImages(new_slidingImages);
   }, []);
 
@@ -79,7 +79,7 @@ export default function ArticleCreateForm({
     const { name, value, files } = e.target;
 
     if (name === "article_imgs") {
-      console.log(files);
+      // console.log(files);
       setInputs({
         ...inputs,
         [name]: files,
@@ -97,7 +97,7 @@ export default function ArticleCreateForm({
 
     for (const [key, value] of Object.entries(inputs)) {
       if (key === "article_imgs") {
-        console.log("a", value);
+        // console.log("a", value);
         for (let i = 0; i < value.length; i++) {
           formData.append("image", value[i]);
         }
@@ -109,7 +109,7 @@ export default function ArticleCreateForm({
     if (!isForUpdate) {
       postArticle(formData);
     } else {
-      console.log("update_delete_image", delete_image.current);
+      // console.log("update_delete_image", delete_image.current);
       if (delete_image.current.length > 0) {
         formData.append("delete_image", JSON.stringify(delete_image.current));
       }
@@ -131,10 +131,16 @@ export default function ArticleCreateForm({
         navigate(`/article/${response.data.id}`);
       })
       .catch(function (error) {
-        console.log(error.response.status);
+        console.log(error);
         // if (error.response.status === 401 || error.response.status === 403) {
         //   renderErrorMsg("Unauthorized");
         // }
+        if (error.response.status === 401) {
+          alert("인증되지 않은 사용자입니다. 로그인 해주세요.");
+        }
+        if (error.response.status === 403) {
+          alert("인증되지 않은 사용자입니다. 이메일 인증을 진행하세요.");
+        }
       });
   };
 
@@ -149,8 +155,8 @@ export default function ArticleCreateForm({
       })
       .then(function (response) {
         // console.log("reponse.data ", response.data);
-        console.log("serializer_data: ", response.data.serializer_data);
-        console.log("error_list: ", response.data.error_list);
+        // console.log("serializer_data: ", response.data.serializer_data);
+        // console.log("error_list: ", response.data.error_list);
         navigate(`/article/${response.data.serializer_data.id}`);
       })
       .catch(function (error) {
@@ -209,8 +215,8 @@ export default function ArticleCreateForm({
     let selected_img = document.getElementById(`cur_img_${id}`);
     selected_img.style.display = "none";
 
-    console.log(delete_image.current);
-    console.log(delete_image.current.length);
+    // console.log(delete_image.current);
+    // console.log(delete_image.current.length);
   };
 
   const showInputs = () => {
@@ -266,7 +272,7 @@ export default function ArticleCreateForm({
             navigation // arrow 버튼 사용 유무
             pagination={{ clickable: true }} // 페이지 버튼 보이게 할지
           >
-            {console.log("slidingImages", slidingImages)}
+            {/* {console.log("slidingImages", slidingImages)} */}
             {slidingImages}
           </Swiper>
         </div>

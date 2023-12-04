@@ -24,7 +24,7 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
   const curPage = query.get("page");
   const option = query.get("option");
   const optionUrl = option && isRecipe ? `&option=${option}` : "";
-  console.log("option:", option);
+  // console.log("option:", option);
 
   useEffect(() => {
     if (curPage !== null) {
@@ -39,14 +39,14 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
       const request = await axios.get(
         fetchUrl + `?page=${curPage}` + optionUrl
       );
-      console.log(
-        "fetchFreeArticlesList-pagenation_data: ",
-        request.data.pagenation_data
-      );
-      console.log(
-        "fetchFreeArticlesList-serializer_data: ",
-        request.data.serializer_data
-      );
+      // console.log(
+      //   "fetchFreeArticlesList-pagenation_data: ",
+      //   request.data.pagenation_data
+      // );
+      // console.log(
+      //   "fetchFreeArticlesList-serializer_data: ",
+      //   request.data.serializer_data
+      // );
       setArticlesList(request.data.serializer_data);
       setMaxPage(request.data.pagenation_data.pages_num);
     } catch (error) {
@@ -56,23 +56,33 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
 
   const pagination_btn = [];
   const pagination = () => {
-    console.log("maxPage", maxPage);
     for (let i = 1; i < maxPage + 1; i++) {
-      pagination_btn.push(
-        <button name={`${i}`} onClick={handleMove} className="pagination_btn">
-          {i}
-        </button>
-      );
+      if (`${i}` === curPage) {
+        // console.log("curPage - i", i);
+        pagination_btn.push(
+          <button
+            name={`${i}`}
+            onClick={handleMove}
+            className="pagination_cur_btn"
+          >
+            {i}
+          </button>
+        );
+      } else {
+        pagination_btn.push(
+          <button name={`${i}`} onClick={handleMove} className="pagination_btn">
+            {i}
+          </button>
+        );
+      }
     }
-    console.log(pagination_btn);
-    const start = parseInt(curPage / 5) * 5;
+    const start = parseInt((curPage - 1) / 5) * 5;
     const end = maxPage > start + 5 ? start + 5 : maxPage;
     return pagination_btn.slice(start, end);
   };
 
   const handleMove = (e) => {
     const { name } = e.target;
-    console.log(name);
     var go = 0;
 
     if (name === "prev") {
@@ -109,7 +119,7 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
               <option value="latest">최신순</option>
             </select>
           )}
-          {console.log("articlesList", articlesList)}
+          {/* {console.log("articlesList", articlesList)} */}
           <ul className="article-header_list">
             {!isRecipe && <li className="article-header_item">카테고리</li>}
             {isRecipe && <li className="article-header_item">별점</li>}
@@ -207,7 +217,16 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
                 </div>
 
                 <div className="each_article_body">
-                  <span className="each_article_content">{content}</span>
+                  <span
+                    className="each_article_content"
+                    onClick={() => {
+                      isRecipe
+                        ? navigate(`/recipe/${article.id}`)
+                        : navigate(`/article/${article.id}`);
+                    }}
+                  >
+                    {content}
+                  </span>
                   {/* <img src={thumbnail} className="each_article_thumbnail" /> */}
                 </div>
               </div>

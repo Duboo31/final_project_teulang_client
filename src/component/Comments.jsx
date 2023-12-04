@@ -14,7 +14,7 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
 
   useEffect(() => {
     setComments(recipeComments); // 처음에 새로고침하면 recipeComments가 undefined로 들어와서, 값이 들어왔을 때 comments에 넣고 화면에 띄우기 위해서 필요.
-    console.log("recipeComments", recipeComments);
+    // console.log("recipeComments", recipeComments);
   }, [recipeComments]);
 
   const user = useSelector(({ users }) => {
@@ -44,7 +44,7 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
         }
       )
       .then(function (response) {
-        console.log("reponse.data ", response.data); // response로 추가된 데이터를 보내달라고 해서 그걸 아래서 바로 setComments로 comments에 할당해야하나?
+        // console.log("reponse.data ", response.data); // response로 추가된 데이터를 보내달라고 해서 그걸 아래서 바로 setComments로 comments에 할당해야하나?
         // setComments(recipeComments); -> 이렇게 하면 안 됨!!
         setComments((prevComments) => [...prevComments, response.data]); // comments 값을 바꿔서 아래 추가된 코멘트가 렌더링되게끔.
 
@@ -59,6 +59,9 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
         console.log(error);
         if (error.response.status === 401) {
           alert("인증되지 않은 사용자입니다. 로그인 해주세요.");
+        }
+        if (error.response.status === 403) {
+          alert("인증되지 않은 사용자입니다. 이메일 인증을 진행하세요.");
         }
       });
   };
@@ -85,7 +88,7 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
     const accessToken = localStorage.getItem("access");
 
     if (updateBtn.textContent === "수정") {
-      console.log(prevContentSpan);
+      // console.log(prevContentSpan);
       updateInput.style.display = "block";
       prevContentSpan.style.display = "none";
       updateInput.value = prevCommentContent;
@@ -105,7 +108,7 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
           }
         )
         .then(function (response) {
-          console.log("data ", response.data);
+          // console.log("data ", response.data);
           let findIndex = comments.findIndex(
             (comment) => comment.id === updateCommentId
           );
@@ -140,7 +143,7 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
           },
         })
         .then(function (response) {
-          console.log("data ", response.data);
+          // console.log("data ", response.data);
           let findIndex = comments.findIndex(
             (comment) => comment.id === deleteCommentId
           );

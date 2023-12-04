@@ -497,7 +497,7 @@ export default function CreateForm({
         "block";
     } else if (type === "Unauthorized") {
       error_space.innerText =
-        "인증되지 않은 사용자입니다. 로그인 혹은 이메일 인증을 진행하세요.";
+        "인증되지 않은 사용자입니다. 이메일 인증을 진행하세요.";
       error_space.style.display = "block";
     }
   };

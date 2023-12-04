@@ -17,7 +17,7 @@ const RecipeDetail = ({ recipeDetail }) => {
   let stars = [];
 
   useEffect(() => {
-    console.log(recipeDetail);
+    // console.log(recipeDetail);
     setStarAvg(recipeDetail.star_avg);
   }, [recipeDetail]);
 
@@ -37,7 +37,7 @@ const RecipeDetail = ({ recipeDetail }) => {
           },
         })
         .then(function (response) {
-          console.log("reponse.data ", response.data);
+          // console.log("reponse.data ", response.data);
           navigate("/");
         })
         .catch(function (error) {
@@ -52,14 +52,8 @@ const RecipeDetail = ({ recipeDetail }) => {
 
   const handleBookmark = async (e) => {
     const accessToken = localStorage.getItem("access");
-    const bookmark = document.getElementById("bookmark");
-    console.log(e.target.src === bookmarked_icon);
+    const bookmark = document.getElementById(`bookmark${recipeDetail.id}`);
 
-    if (e.target.src === bookmarked_icon) {
-      bookmark.src = not_bookmarked_icon;
-    } else {
-      bookmark.src = bookmarked_icon;
-    }
     await axios
       .post(
         `/articles/recipe/${recipeDetail.id}/bookmark/`,
@@ -71,8 +65,14 @@ const RecipeDetail = ({ recipeDetail }) => {
         }
       )
       .then(function (response) {
-        console.log("reponse.data ", response.data);
-        alert(response.data);
+        // console.log("reponse.data ", response.data);
+        // alert(response.data);
+
+        if (e.target.src === bookmarked_icon) {
+          bookmark.src = not_bookmarked_icon;
+        } else {
+          bookmark.src = bookmarked_icon;
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -103,7 +103,11 @@ const RecipeDetail = ({ recipeDetail }) => {
       })
       .catch(function (error) {
         console.log(error);
-        alert(error.response.data);
+        if (error.response.status === 403) {
+          alert("인증되지 않은 사용자입니다. 이메일 인증을 진행하세요.");
+        } else {
+          alert(error.response.data);
+        }
       });
   };
 
@@ -146,7 +150,7 @@ const RecipeDetail = ({ recipeDetail }) => {
               <p className="detail_star_avg">
                 {starAvg ? parseFloat(starAvg).toFixed(1) : "-"}
               </p>
-              {console.log("user", user)}
+              {/* {console.log("user", user)} */}
               {user.isAuthorized &&
                 !(user.userId === recipeDetail.user_data.id) && (
                   <img
@@ -155,7 +159,7 @@ const RecipeDetail = ({ recipeDetail }) => {
                         ? bookmarked_icon
                         : not_bookmarked_icon
                     }
-                    id="bookmark"
+                    id={`bookmark${recipeDetail.id}`}
                     onClick={handleBookmark}
                     className="detail_bookmark"
                   />
@@ -164,7 +168,7 @@ const RecipeDetail = ({ recipeDetail }) => {
           </span>
           <img
             src={
-              recipeDetail.api_recipe
+              recipeDetail.recipe_thumbnail_api != []
                 ? `${recipeDetail.recipe_thumbnail_api} ` // api_recipe인 경우 식품안전나라에서 이미지 가져옴.
                 : `${urls.baseURL}${recipeDetail.recipe_thumbnail} ` // api_recipe가 아닌 경우 서버에서 이미지 가져옴.
             }

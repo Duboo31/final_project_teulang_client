@@ -36,7 +36,7 @@ export default function FreeDetailPage() {
 
   const fetchFreeArticleDetail = async () => {
     const request = await axios.get(requests.fetchFreeList + `${articleId}/`);
-    console.log("freeArticleDetail: ", request.data);
+    // console.log("freeArticleDetail: ", request.data);
     setFreeArticleDetail(request.data);
     setFreeArticleComments(request.data.article_free_comment);
   };
@@ -56,7 +56,7 @@ export default function FreeDetailPage() {
           },
         })
         .then(function (response) {
-          console.log("reponse.data ", response.data);
+          // console.log("reponse.data ", response.data);
           navigate("/");
         })
         .catch(function (error) {

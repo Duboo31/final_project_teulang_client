@@ -74,7 +74,7 @@ const Navigation = () => {
           <Search setIsNaviActive={setIsNaviActive} />
           <div className="searchBar-container_multi">
             <Link
-              to="/multi"
+              to={users.isAuthorized ? "/multi" : "/login"}
               onClick={() => {
                 setIsNaviActive((cur) => !cur);
               }}
@@ -90,7 +90,7 @@ const Navigation = () => {
                 onClick={() => {
                   setIsNaviActive((cur) => !cur);
                 }}
-                to="/recipe"
+                to="/recipe?page=1"
               >
                 전체 레시피ㅋ
               </Link>
@@ -100,7 +100,7 @@ const Navigation = () => {
                 onClick={() => {
                   setIsNaviActive((cur) => !cur);
                 }}
-                to="/article"
+                to="/article?page=1"
               >
                 자유 게시판
               </Link>

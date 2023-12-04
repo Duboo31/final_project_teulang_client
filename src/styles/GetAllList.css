@@ -9,7 +9,7 @@
 }
 .each_article {
     border-bottom: 1px solid #d4d4d4;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 .each_article_header {
     display: flex;
@@ -25,6 +25,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    cursor: pointer;
 }
 .each_article_header_right {
     display: flex;
@@ -68,6 +69,7 @@
     width: 100%;
     padding: 0 1rem 1rem;
     color: #4f4f4f;
+    cursor: pointer;
     /* font-size: 16px; */
     /* text-overflow: ellipsis; */
     /* overflow: hidden; */
@@ -124,7 +126,18 @@
     font-weight: 600;
     font-size: 15px;
     cursor: pointer;
-    display: none;
+    /* display: none; */
+}
+.pagination_cur_btn {
+    border: none;
+    margin: 1rem 0;
+    height: 2rem;
+    width: 2rem;
+    border-right: 0.5px solid var(--main-color-op60);
+    text-align: center;
+    font-size: 15px;
+    border: 1px solid rgb(99, 99, 99);
+    background-color: var(--main-color);
 }
 .pagination_btn_next {
     border: none;
@@ -136,7 +149,7 @@
     font-weight: 600;
     font-size: 15px;
     cursor: pointer;
-    display: none;
+    /* display: none; */
 }
 .pagination_btn {
     border: none;
