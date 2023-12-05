@@ -128,7 +128,7 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
             <select
               value={category ? category : "chat"}
               onChange={handleArticleSort}
-              className="all_list_sort_option"
+              className="all_list_sort_category"
             >
               <option value="chat">자유 게시글</option>
               <option value="review">리뷰 게시글</option>

@@ -6,6 +6,17 @@
     border: 1px solid #c3c3c3;
     padding: .5rem 1rem;
     margin: 1rem 0;
+    font-size: 16px;
+    width: 90px;
+    text-align: center;
+}
+.all_list_sort_category {
+    border: 1px solid #c3c3c3;
+    padding: .5rem 1rem;
+    margin: 1rem 0;
+    font-size: 16px;
+    width: 120px;
+    text-align: center;
 }
 .each_article {
     border-bottom: 1px solid #d4d4d4;
