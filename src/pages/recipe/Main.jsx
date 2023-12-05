@@ -1,15 +1,50 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import Row from "../../component/Row";
 import requests from "../../api/recipes/requests";
 import ArticleRow from "../../component/ArticleRow";
 
-const Main = () => {
-  // const users = useSelector(({ users }) => {
-  //   return users;
-  // });
+import { useDispatch, useSelector } from "react-redux";
 
-  // console.log("redux data: ", users);
+import { saveLocalStorageToken } from "../../api/user/saveLocalToken";
+import { getUserInfoInLocalStorage } from "../../js/isLoginUser";
+
+import { login } from "../../redux/modules/users";
+
+const Main = () => {
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    let searchParma = window.location.search;
+
+    if (searchParma) {
+      let resultParms = searchParma
+        .split("=")
+        .join(" ")
+        .split("&")
+        .join(" ")
+        .split(" ");
+
+      saveLocalStorageToken(resultParms[3], resultParms[1]);
+
+      const { userId, userEmail, nickname } = getUserInfoInLocalStorage();
+
+      dispatch(
+        login({
+          isAuthorized: true,
+          userEmail: userEmail,
+          userNickname: nickname,
+          userId: userId,
+          userProfile: "/media/user_defalt.jpg",
+        })
+      );
+      navigate("/");
+    }
+  }, []);
 
   return (
     <div>

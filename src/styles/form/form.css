@@ -55,15 +55,15 @@
 }
 
 .input-box.valid{
-  border-bottom: 3px solid rgb(54, 54, 255);
+  border: 1px solid #0f79fd;
 }
 
 .input-box.invalid {
-  border-bottom: 3px solid rgb(255, 53, 53);
+  border: 1px solid #ff3f3f
 }
 
 .input-box > input {
-  padding: 10px 0;
+  padding: 10px;
   width: 66%;
 }
 
@@ -85,6 +85,10 @@
   cursor: pointer;
   /* border-top: 1px solid #d6d6d6; */
   /* border-bottom: 1px solid #d6d6d6; */
+}
+
+.confirm-btn.invalid{
+  background-color: #ff3f3f
 }
 
 .submit-btn {

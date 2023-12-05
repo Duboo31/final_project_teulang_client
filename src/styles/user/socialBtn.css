@@ -1,0 +1,24 @@
+.social-btn {
+  background: #FEE500;
+  border-radius: 12px;
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.social-btn svg {
+  color: #000000;
+  margin-right: 10px;
+}
+
+.social-btn span {
+  color: #000000 85%;
+}
+
+.social-hr {
+  width: 100%;
+  height: 1px;
+  background: rgb(223, 223, 223);
+  margin: 1.5rem 0;
+}
