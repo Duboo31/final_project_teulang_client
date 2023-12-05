@@ -8,6 +8,7 @@ import React, {
   useState,
 } from "react";
 import urls from "../shared/url";
+import YoutubeModal from "./YoutubeModal";
 import "../styles/CreateForm.css";
 import "../styles/ArticleCreateForm.css";
 
@@ -33,6 +34,7 @@ export default function ArticleCreateForm({
   const navigate = useNavigate();
   const delete_image = useRef([]);
   const [slidingImages, setSlidingImages] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
   var update_cnt = useRef(0);
 
   const textRef = useRef();
@@ -45,7 +47,6 @@ export default function ArticleCreateForm({
     const new_slidingImages = [];
     if (cur_article_imgs.length > 0) {
       cur_article_imgs.map((img) => {
-        // console.log("img: ", img);
         new_slidingImages.push(
           <SwiperSlide key={img.id}>
             <div id={`cur_img_${img.id}`} className="article_create_img_div">
@@ -64,7 +65,6 @@ export default function ArticleCreateForm({
         );
       });
     }
-    // console.log("new_slidingImages", new_slidingImages);
     setSlidingImages(new_slidingImages);
   }, []);
 
@@ -79,7 +79,6 @@ export default function ArticleCreateForm({
     const { name, value, files } = e.target;
 
     if (name === "article_imgs") {
-      // console.log(files);
       setInputs({
         ...inputs,
         [name]: files,
@@ -97,7 +96,6 @@ export default function ArticleCreateForm({
 
     for (const [key, value] of Object.entries(inputs)) {
       if (key === "article_imgs") {
-        // console.log("a", value);
         for (let i = 0; i < value.length; i++) {
           formData.append("image", value[i]);
         }
@@ -109,7 +107,6 @@ export default function ArticleCreateForm({
     if (!isForUpdate) {
       postArticle(formData);
     } else {
-      // console.log("update_delete_image", delete_image.current);
       if (delete_image.current.length > 0) {
         formData.append("delete_image", JSON.stringify(delete_image.current));
       }
@@ -127,7 +124,7 @@ export default function ArticleCreateForm({
         },
       })
       .then(function (response) {
-        console.log("reponse.data ", response.data);
+        // console.log("reponse.data ", response.data);
         navigate(`/article/${response.data.id}`);
       })
       .catch(function (error) {
@@ -135,6 +132,9 @@ export default function ArticleCreateForm({
         // if (error.response.status === 401 || error.response.status === 403) {
         //   renderErrorMsg("Unauthorized");
         // }
+        if (error.response.status === 400) {
+          alert("타이틀은 필수 입력값입니다.");
+        }
         if (error.response.status === 401) {
           alert("인증되지 않은 사용자입니다. 로그인 해주세요.");
         }
@@ -167,7 +167,6 @@ export default function ArticleCreateForm({
   const renderImagePreview = (e) => {
     const { files } = e.target;
     const prevNewImages = document.getElementsByName("new_image");
-    console.log("gEbN", prevNewImages.length);
     let prev_slidingImages = [...slidingImages]; // 배열 복제
 
     if (files && files.length > 0) {
@@ -214,9 +213,6 @@ export default function ArticleCreateForm({
     delete_image.current.push(id);
     let selected_img = document.getElementById(`cur_img_${id}`);
     selected_img.style.display = "none";
-
-    // console.log(delete_image.current);
-    // console.log(delete_image.current.length);
   };
 
   const showInputs = () => {
@@ -272,20 +268,26 @@ export default function ArticleCreateForm({
             navigation // arrow 버튼 사용 유무
             pagination={{ clickable: true }} // 페이지 버튼 보이게 할지
           >
-            {/* {console.log("slidingImages", slidingImages)} */}
             {slidingImages}
           </Swiper>
         </div>
-        <select
-          name="category"
-          onChange={onChange}
-          value={inputs.category}
-          className="article_select_category"
-        >
-          <option value="chat">자유 게시판</option>
-          <option value="review">레시피 리뷰</option>
-        </select>
+        <div>
+          <select
+            name="category"
+            onChange={onChange}
+            value={inputs.category}
+            className="article_select_category"
+          >
+            <option value="chat">자유 게시판</option>
+            <option value="review">레시피 리뷰</option>
+          </select>
+        </div>
         <div className="form_desc">
+          <div className="article_youtube_summarize_btn_div">
+            <button onClick={() => setModalOpen(true)} className="article_youtube_summarize_btn">
+              youtube 영상 요약
+            </button>
+          </div>
           <textarea
             ref={textRef}
             name="content"
@@ -302,6 +304,16 @@ export default function ArticleCreateForm({
             게시글 등록
           </button>
         </div>
+      </div>
+
+      <div>
+        {modalOpen && (
+          <YoutubeModal
+            setModalOpen={setModalOpen}
+            setInputs={setInputs}
+            inputs={inputs}
+          />
+        )}
       </div>
     </section>
   );
