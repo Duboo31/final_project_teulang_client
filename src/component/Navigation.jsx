@@ -95,7 +95,7 @@ const Navigation = () => {
                 onClick={() => {
                   setIsNaviActive((cur) => !cur);
                 }}
-                to="/article?page=1"
+                to="/article?page=1&category=chat"
               >
                 자유 게시판
               </Link>
