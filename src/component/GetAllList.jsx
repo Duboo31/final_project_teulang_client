@@ -23,8 +23,8 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
   let query = useQuery();
   const curPage = query.get("page");
   const option = query.get("option");
-  const optionUrl = option && isRecipe ? `&option=${option}` : "";
-  // console.log("option:", option);
+  const category = query.get("category");
+  const optionUrl = (option || category) && isRecipe ? `&option=${option}` : `&category=${category}`;
 
   useEffect(() => {
     if (curPage !== null) {
@@ -32,7 +32,7 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
     } else {
       fetchArticlesList();
     }
-  }, [curPage, option]);
+  }, [curPage, option, category]);
 
   const fetchArticlesList = async (curPage = 1) => {
     try {
@@ -105,6 +105,11 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
     navigate(`/recipe?page=1&option=${value}`);
   };
 
+  const handleArticleSort = (e) => {
+    const { value } = e.target;
+    navigate(`/article?page=1&category=${value}`);
+  };
+
   return (
     <div className="all-article_wrap">
       {articlesList.length > 0 ? (
@@ -117,6 +122,16 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
             >
               <option value="bookmark">인기순</option>
               <option value="latest">최신순</option>
+            </select>
+          )}
+          {!isRecipe && (
+            <select
+              value={category ? category : "chat"}
+              onChange={handleArticleSort}
+              className="all_list_sort_option"
+            >
+              <option value="chat">자유 게시글</option>
+              <option value="review">리뷰 게시글</option>
             </select>
           )}
           {/* {console.log("articlesList", articlesList)} */}
