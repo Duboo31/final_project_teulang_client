@@ -1,10 +1,10 @@
 import React from 'react'
 import loadingGif from "../images/loading-gif.gif"
 
-export default function Loading() {
+export default function Loading({width = "100px", backHeight = "500px"}) {
   return (
-    <div style={{display: "flex", justifyContent: "center", alignItems: "center", minHeight: "500px"}}>
-      <img src={loadingGif} style={{width: "150px"}}></img>
+    <div style={{display: "flex", justifyContent: "center", alignItems: "center", minHeight: backHeight}}>
+      <img src={loadingGif} style={{width: width}}></img>
     </div>
   )
 }

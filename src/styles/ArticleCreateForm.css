@@ -12,3 +12,21 @@
     text-align: center;
     cursor: pointer;
 }
+.article_youtube_summarize_btn_div {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.article_youtube_summarize_btn {
+    padding: .2rem .5rem;
+    border-radius: 5px;
+    width: 130px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 13px;
+    color: white;
+    background-color: #a2a2a2;
+}
+.article_youtube_summarize_btn:hover {
+    font-weight: bold;
+}
