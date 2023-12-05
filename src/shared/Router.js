@@ -20,6 +20,7 @@ import RecipeAllPage from "../pages/recipe/RecipeAllPage";
 import Navigation from "../component/Navigation";
 import NotFound from "../component/NotFound";
 import PasswordReset from "../pages/users/PasswordReset";
+import SocialNicknameCheck from "../pages/users/SocialNicknameCheck";
 
 const Router = () => {
   return (
@@ -28,6 +29,10 @@ const Router = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/user/pwReset" element={<PasswordReset />} />
+        <Route
+          path="/social-nickname-check"
+          element={<SocialNicknameCheck />}
+        />
         <Route element={<Navigation />}>
           <Route index element={<Main />} />
           <Route path="/search" element={<SearchPage />} />

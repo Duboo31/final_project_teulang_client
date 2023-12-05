@@ -20,6 +20,9 @@ import {
   faCircleUser,
 } from "@fortawesome/free-solid-svg-icons";
 
+// components
+import SocialLogin from "../../component/social/SocialLogin";
+
 const Register = () => {
   // 중복 검사 통과 확인을 위한 훅
   const [isPassedEmail, setIsPassedEmail] = useState(false);
@@ -102,11 +105,7 @@ const Register = () => {
       return;
     } else {
       setIsPassedEmail(true);
-      setError(
-        "email",
-        { message: "사용가능한 이메일입니다." },
-        { shouldFocus: false }
-      );
+      clearErrors("email");
     }
   };
 
@@ -130,11 +129,7 @@ const Register = () => {
       return;
     } else {
       setIsPassedNickname(true);
-      setError(
-        "nickname",
-        { message: "사용가능한 닉네임입니다." },
-        { shouldFocus: false }
-      );
+      clearErrors("nickname");
     }
   };
 
@@ -206,7 +201,9 @@ const Register = () => {
               })}
             />
             <button
-              className="confirm-btn"
+              className={`${
+                isPassedEmail ? "confirm-btn valid" : "confirm-btn invalid"
+              }`}
               onClick={(e) => {
                 e.preventDefault();
                 onClickEmailCheckHandler();
@@ -244,7 +241,9 @@ const Register = () => {
                 e.preventDefault();
                 onClickNicknameCheckHandler();
               }}
-              className="confirm-btn"
+              className={`${
+                isPassedNickname ? "confirm-btn valid" : "confirm-btn invalid"
+              }`}
             >
               중복 체크
             </button>
@@ -289,6 +288,7 @@ const Register = () => {
           계정이 있으신가요?
           <Link to="/login">로그인하기</Link>
         </div>
+        <SocialLogin />
       </div>
     </div>
   );

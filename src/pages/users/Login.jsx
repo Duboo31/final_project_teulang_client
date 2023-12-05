@@ -8,10 +8,12 @@ import { login } from "../../redux/modules/users";
 import { getUserInfoInLocalStorage } from "../../js/isLoginUser";
 import { EMAIL_REGEX } from "../../js/validation";
 
+// components
+import SocialLogin from "../../component/social/SocialLogin";
+
 // css
 import logo from "../../image/logo.png";
 import "../../styles/form/form.css";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 
@@ -123,6 +125,7 @@ const Login = () => {
               계정이 없으신가요?
               <Link to="/register">회원가입</Link>
             </div>
+            <SocialLogin />
           </div>
         </div>
       ) : (
