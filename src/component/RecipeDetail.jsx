@@ -241,7 +241,7 @@ const RecipeDetail = ({ recipeDetail }) => {
           <div className="detail_sections_div">
             <p className="detail_sections_title">설명</p>
             <span className="detail_description">
-              {recipeDetail.description ? recipeDetail.description : "-"}
+              {recipeDetail.description ? recipeDetail.description : "설명이 없습니다."}
             </span>
           </div>
           <div className="detail_sections_div">
