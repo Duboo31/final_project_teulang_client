@@ -102,7 +102,7 @@ export default function FreeDetailPage() {
                 );
               })
             ) : (
-              <div>
+              <div className="free_detail_img_div">
                 <img src={default_thumbnail} />
               </div>
             )}
