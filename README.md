@@ -183,4 +183,3 @@ $ npm run start
 |-|-|
 |![스크린샷 2023-12-07 04-40-55](https://github.com/Duboo31/final_project_teulang_client/assets/92058864/b3d27b32-19c9-4359-b064-d2fc8d26318c)|![스크린샷 2023-12-07 04-40-36](https://github.com/Duboo31/final_project_teulang_client/assets/92058864/7eb95ebb-5890-47a4-9afe-ec9375ad33a9)|
 > 재료 이미지를 등록해서 어떤 재료인지 AI가 파악하고 해당 재료에 대한 레시피를 추천 해주는 기능
-
