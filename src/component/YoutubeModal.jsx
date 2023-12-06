@@ -62,7 +62,7 @@ export default function YoutubeModal({ setModalOpen, setInputs, inputs }) {
             <FontAwesomeIcon icon={faCircleXmark} />
           </div>
 
-          <div className="modal__content">
+          <div className="modal_content">
             <div className="youtube_modal_content">
               <div>
                 <div className="youtube_modal_notice">* 요약 시 시간이 오래 소요될 수 있습니다.</div>

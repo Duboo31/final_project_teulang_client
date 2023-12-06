@@ -15,7 +15,7 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
 }
-.modal__content {
+.modal_content {
     padding: 1rem;
     color: #333;
     display: flex;
@@ -115,7 +115,7 @@
 }
 
 @media screen and (min-width: 767px) {
-    .modal {
+    .modal_content {
       min-width: 800px;
       height: 400px;
     }
