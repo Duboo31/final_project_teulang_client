@@ -1,5 +1,5 @@
 .all-article_wrap {
-    min-width: 400px;
+    min-width: 375px;
     margin-top: 4rem;
 }
 .all_list_sort_option {
@@ -27,7 +27,7 @@
     justify-content: flex-start;
     align-items: center;
     height: 50px;
-    width: calc(100% - 220px);
+    width: calc(100% - 250px);
 }
 .each_article_header_title {
     font-size: 16px;
@@ -97,13 +97,14 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    width: 220px;
+    width: 250px;
     color: #757575;
 }
 .each_article_author {
     width: 130px;
     text-align: right;
     font-weight: 500;
+    display: inline-block;
 }
 .each_article_author:hover {
     cursor: pointer;
@@ -117,7 +118,8 @@
     padding: 0.3rem;
 }
 .each_article_author_nickname {
-
+    width: 100%;
+    display: inline-block;
 }
 .each_article_created_at {
     width: 110px;
