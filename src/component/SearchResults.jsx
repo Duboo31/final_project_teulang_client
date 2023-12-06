@@ -3,9 +3,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../api/recipes/axios";
 import urls from "../shared/url";
 import "../styles/SearchResults.css";
+import Loading from "../component/Loading";
 
 const SearchResults = () => {
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState(["-1"]);
+  const [fetchNone, setFetchNone] = useState(false);
   const navigate = useNavigate();
   const [maxPage, setMaxPage] = useState(0);
   const pagination_btn = [];
@@ -32,16 +34,25 @@ const SearchResults = () => {
   searchTerm = updatedSearchTerm;
 
   useEffect(() => {
+    setFetchNone(false)
+  }, [searchTermString])
+
+  useEffect(() => {
     if (searchTerms && curPage) {
       fetchSearchRecipe(searchTerm, curPage);
     }
-  }, [searchTermString, curPage]);
+  }, [searchTermString, curPage, fetchNone]);
 
   const fetchSearchRecipe = async (searchTerm, curPage = 1) => {
     try {
       const response = await axios.get(
         `articles/recipe/search?q=${searchTerm}&page=${curPage}`
       );
+      if (response.data.serializer_data.length === 0) {
+        setFetchNone(true);
+      } else {
+        setFetchNone(false);
+      }
       setSearchResults(response.data.serializer_data);
       setMaxPage(response.data.pagenation_data.pages_num); // 백엔드에 pagenation_data -> pagination_data로 수정 요청..?
     } catch (error) {
@@ -97,7 +108,7 @@ const SearchResults = () => {
   };
 
   const renderSearchRecipes = () => {
-    return searchResults.length > 0 ? (
+    return (searchResults.length > 0 && searchResults[0] !== "-1") ? (
       <section className="search_section">
         {searchResults.map((recipe, index) => {
           const recipeImageUrl =
@@ -182,12 +193,14 @@ const SearchResults = () => {
           </button>
         </div>
       </section>
-    ) : (
+    ) : fetchNone && searchResults[0] !== "-1" ? (
       <section className="no-results">
         <div className="no-results__text">
           <p>찾고자하는 검색어"{searchTermString}"에 맞는 게시글이 없습니다.</p>
         </div>
       </section>
+    ) : (
+      <Loading />
     );
   };
 
