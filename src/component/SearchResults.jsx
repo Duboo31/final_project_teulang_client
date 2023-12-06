@@ -9,7 +9,6 @@ const SearchResults = () => {
   const navigate = useNavigate();
   const [maxPage, setMaxPage] = useState(0);
   const pagination_btn = [];
-  const pagination_btn_show = [];
 
   const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -44,7 +43,6 @@ const SearchResults = () => {
         `articles/recipe/search?q=${searchTerm}&page=${curPage}`
       );
       setSearchResults(response.data.serializer_data);
-      console.log(response.data.pagination_data);
       setMaxPage(response.data.pagenation_data.pages_num); // 백엔드에 pagenation_data -> pagination_data로 수정 요청..?
     } catch (error) {
       console.log("error", error);
@@ -52,27 +50,37 @@ const SearchResults = () => {
   };
 
   const pagination = () => {
-    console.log("maxPage",maxPage)
     for (let i = 1; i < maxPage + 1; i++) {
-      pagination_btn.push(
-        <button
-          name={`${i}`}
-          onClick={handleMove}
-          className="search_pagination_btn"
-        >
-          {i}
-        </button>
-      );
+      if (`${i}` === curPage) {
+        // console.log("curPage - i", i);
+        pagination_btn.push(
+          <button
+            name={`${i}`}
+            onClick={handleMove}
+            className="search_pagination_cur_btn"
+          >
+            {i}
+          </button>
+        );
+      } else {
+        pagination_btn.push(
+          <button
+            name={`${i}`}
+            onClick={handleMove}
+            className="search_pagination_btn"
+          >
+            {i}
+          </button>
+        );
+      }
     }
-    console.log(pagination_btn)
-    const start = parseInt(curPage / 5) * 5;
+    const start = parseInt((curPage - 1) / 5) * 5;
     const end = maxPage > start + 5 ? start + 5 : maxPage;
     return pagination_btn.slice(start, end);
   };
 
   const handleMove = (e) => {
     const { name } = e.target;
-    console.log(name);
     var go = 0;
 
     if (name === "prev") {
@@ -92,9 +100,10 @@ const SearchResults = () => {
     return searchResults.length > 0 ? (
       <section className="search_section">
         {searchResults.map((recipe, index) => {
-          const recipeImageUrl = recipe.api_recipe
-            ? `${recipe.recipe_thumbnail_api}`
-            : `${urls.baseURL}${recipe.recipe_thumbnail}`;
+          const recipeImageUrl =
+            recipe.recipe_thumbnail_api != []
+              ? `${recipe.recipe_thumbnail_api}`
+              : `${urls.baseURL}${recipe.recipe_thumbnail}`;
 
           const created_at = recipe.api_recipe
             ? "api recipe"
@@ -138,7 +147,7 @@ const SearchResults = () => {
 
               <div className="search_recipe_footer">
                 <div
-                  onClick={() => navigate(`/profile/${recipe.user_data_id}`)}
+                  onClick={() => navigate(`/profile/${recipe.user_data.id}`)}
                   className="search_recipe_author"
                 >
                   <img

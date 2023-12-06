@@ -15,6 +15,12 @@
   padding: 0 1%;
 }
 
+.form-container > h1 {
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding-bottom: 40px;
+}
+
 .logo-box {
   max-width: 200px;
   cursor: pointer;
@@ -48,8 +54,16 @@
   margin-top: 10px;
 }
 
+.input-box.valid{
+  border: 1px solid #0f79fd;
+}
+
+.input-box.invalid {
+  border: 1px solid #ff3f3f
+}
+
 .input-box > input {
-  padding: 10px 0;
+  padding: 10px;
   width: 66%;
 }
 
@@ -63,7 +77,7 @@
 }
 
 .confirm-btn {
-  background-color: #1d293f;
+  background-color: #0f79fd;
   color: #fff;
   height: 44px;
   width: 27%;
@@ -73,8 +87,12 @@
   /* border-bottom: 1px solid #d6d6d6; */
 }
 
+.confirm-btn.invalid{
+  background-color: #ff3f3f
+}
+
 .submit-btn {
-  background-color: #1d293f;
+  background-color: #0f79fd;
   color: #fff;
   box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.38);
   padding: 16px 17px;
@@ -95,7 +113,7 @@
 .link-box > a {
   font-weight: bold;
   margin-left: 3px;
-  color: #407cec;
+  color: #0f79fd;
   cursor: pointer;
 }
 
@@ -105,5 +123,8 @@
 @media screen and (min-width: 767px) {
 .form-container {
     min-width: 450px;
+  }
+  .form-container > h1 br {
+    display: none;
   }
 }

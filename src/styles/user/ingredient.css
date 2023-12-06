@@ -1,0 +1,210 @@
+.my-ingredient-wrap {
+  position: relative;
+  color: #444444;
+}
+.recipe-banner {
+  width: 100%;
+  height: fit-content;
+  background: #fff;
+  border: 1px solid #a3a3a3;
+  display: flex;
+  flex-flow: column;
+  font-size: 18px;
+  margin: 1rem 0;
+  border-radius: 5px;
+}
+.recipe-banner>div {
+  display: flex;
+  margin: 1rem;
+}
+.recipe-banner>div>div>span {
+  padding: 0 3px;
+  font-weight: bold;
+}
+.recipe-banner>div>div>span:not(:last-child)::after {
+  content: ",";
+}
+.recipe-banner > div > div > p > a {
+  font-weight: bold;
+  color: rgb(15, 121, 243);
+  cursor: pointer;
+  padding: 0 5px;
+  margin-left: 3px;
+}
+
+.header-chart_list {
+  background: #f3f3f3;
+  color: #313131;
+  font-weight: bold;
+}
+
+.header-chart {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.4rem 1rem;
+  color: #5f5f5f;
+}
+.list-wrap {
+  border-bottom: 1px solid rgb(201, 201, 201);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.list-wrap > form, .ingredients-form {
+  width: 100%;
+  padding: 1rem;
+}
+
+
+.list-wrap>form>div:nth-child(1), .ingredients-form > div:nth-child(1) {
+  display: flex;
+  flex-direction: column;
+}
+.list-wrap>form>div:nth-child(1) input,
+.ingredients-form>div:nth-child(1) input {
+  border: 1px solid rgb(222, 222, 222);
+  padding: .5rem;
+  margin-bottom: 3px;
+}
+.list-wrap>form>div:nth-child(3)
+.ingredients-form > div:nth-child(3) {
+  display: flex;
+}
+.list-wrap>form>div:nth-child(3) input, 
+.list-wrap>form>div:nth-child(3) button,
+.ingredients-form>div:nth-child(3) input,
+.ingredients-form>div:nth-child(3) button {
+  display: inline-block;
+  width: 49%;
+  text-align: center;
+  background: var(--main-color);
+  color: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-right: 1%;
+}
+.list-wrap>form>div:nth-child(3) input:hover,
+.list-wrap>form>div:nth-child(3) button:hover,
+.ingredients-form>div:nth-child(3) button:hover,
+.ingredients-form>div:nth-child(3) input:hover {
+  font-weight: bold;
+}
+.list-wrap>form>div:nth-child(3) button, .ingredients-form>div:nth-child(3) button {
+  background: #e93434;
+  width: 49%;
+  margin-left: 1%;
+  margin-right: 0;
+}
+.header-chart li {
+  display: inline-block;
+  height: 100%;
+  text-align: center;
+}
+.header-chart.clicked {
+  background-color: #e3f6ff;
+}
+.header-chart li:nth-child(1) {
+  width: 20%;
+  text-align: left;
+  font-weight: bold;
+}
+.header-chart li:nth-child(2) {
+  width: 16%;
+}
+.header-chart li:nth-child(3) {
+  width: 22%;
+}
+.header-chart li:nth-child(4) {
+  width: 22%;
+}
+.header-chart li:nth-child(5) {
+  width: 10%;
+  cursor: pointer;
+}
+.header-chart li:nth-child(6) {
+  width: 10%;
+  cursor: pointer;
+}
+.header-chart li:nth-child(7) {
+  width: 10%;
+}
+
+.add-btn {
+  font-size: 18px;
+  display: inline-block;
+  text-align: center;
+  justify-content: center;
+  width: 100px;
+  padding: .5rem;
+  cursor: pointer;
+  position: relative;
+  border: 1px solid rgb(182, 182, 182);
+  border-radius: 5px;
+}
+.add-btn:hover {
+  font-weight: bold;
+}
+
+.add-btn_list {
+  width: 230px;
+  position: absolute;
+  left: 1rem;
+  top: 115px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 9999;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.add-btn_list div {
+  cursor: pointer;
+  width: 100%;
+}
+
+/* 상태 색상 */
+.state div {
+  border-radius: 40px;
+}
+.state1 div {
+  font-weight: bold;
+  background: #ffe3e3;
+  color: #df2424;
+}
+.state2 div {
+  font-weight: bold;
+  background: #fff5bd;
+  color: #b19400;
+}
+.state3 div {
+  font-weight: bold;
+  background: #ceffbc;
+  color: #299E00;
+}
+/* Form components */
+/* ---------------- Form components ------------------ */
+.ingredients-form {
+  width: 100%;
+  height: fit-content;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+  border-top: 1px solid rgb(189, 189, 189);
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+@media screen and (min-width: 1023px) {
+  .recipe-banner {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

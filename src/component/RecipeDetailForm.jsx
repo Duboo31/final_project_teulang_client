@@ -20,14 +20,22 @@ export default function RecipeDetailForm({ recipeId }) {
 
 
     try {
-      const request = await axios.get(requests.fetchRecipeListAll + recipeId, {
-        headers: {
-          Authorization: `Bearer ${accesstoken}`
-        },
-      });
-      setRecipeDetail(request.data);
-      console.log("fetchRecipeDetailData", request.data);
+      if (accesstoken) {
+        const request = await axios.get(requests.fetchRecipeListAll + recipeId, {
+          headers: {
+            Authorization: `Bearer ${accesstoken}`
+          },
+        })
+        setRecipeDetail(request.data);
+        // console.log("fetchRecipeDetailData", request.data);
+      }
+      else {
+        const request = await axios.get(requests.fetchRecipeListAll + recipeId)
+        setRecipeDetail(request.data);
+        // console.log("fetchRecipeDetailData", request.data);
+      };
     } catch (error) {
+      console.log(error);
       navigate("/*"); // NotFound 페이지로 이동.
     }
   };
@@ -38,6 +46,7 @@ export default function RecipeDetailForm({ recipeId }) {
       <Comments
         recipeComments={recipeDetail.article_recipe_comment}
         recipeId={recipeId}
+        fetchUrl={`/articles/recipe/${recipeId}/comment/`}
       />
     </div>
   );

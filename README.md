@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+# 프로젝트 명: 털랭 | teulang
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> 간단 설명 : 냉장고에 남는 식재료 때문에 골치 아프신 분들을 위한 식재료 기반 레시피 공유/추천 서비스
+> <br>
+> <br>
+> 타겟 층: 남는 식재료를 활용한 레시피가 필요한 사람, 자취 하는 사람들
+> <br>
+> <br>
+> 기획 의도: 자취생이라면 경험했을 '냉장고 털어먹기'를 위해, 식재료를 기반으로 레시피를 추천하고, 공유하는 서비스, '털랭'을 기획했습니다. 기존의 사이트에선 요리명을 통해 특정 레시피를 찾지만, 저희 서비스에선 재료명을 검색하여 여러 레시피를 확인할 수 있다는 것이 주요 특징입니다. 식재료를 검색할 때 키워드와 이미지로 검색할 수 있고, 사용자가 직접 레시피를 등록하는 것 또한 가능합니다. 사용자가 요리를 하면서 레시피 확인, 그리고 이미지 검색을 하는 데에 있어서 용이하도록 털랭 서비스는 모바일 환경을 지원합니다.
 
-## Available Scripts
+## 베포 주소
 
-In the project directory, you can run:
+[털랭](https://teulang.net/)
 
-### `yarn start`
+## 개발 인원
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+김현우 [github](https://github.com/Duboo31)<br>
+우은진 [github](https://github.com/EunjinWoo)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 개발 환경
 
-### `yarn test`
+- Node.js v18.17.1
+- npm 9.6.7
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+````json
+"@fortawesome/fontawesome-svg-core": "^6.4.2",
+"@fortawesome/free-brands-svg-icons": "^6.4.2",
+"@fortawesome/free-regular-svg-icons": "^6.4.2",
+"@fortawesome/free-solid-svg-icons": "^6.4.2",
+"@fortawesome/react-fontawesome": "^0.2.0",
+"@reduxjs/toolkit": "^1.9.7",
+"@testing-library/jest-dom": "^5.14.1",
+"@testing-library/react": "^13.0.0",
+"@testing-library/user-event": "^13.2.1",
+"axios": "^1.6.0",
+"react": "^18.2.0",
+"react-dom": "^18.2.0",
+"react-hook-form": "^7.48.2",
+"react-hook-use-form": "^1.2.0",
+"react-query": "^3.39.3",
+"react-redux": "^8.1.3",
+"react-router-dom": "^6.18.0",
+"react-scripts": "5.0.1",
+"redux-persist": "^6.0.0",
+"swiper": "^11.0.3",
+"web-vitals": "^2.1.0"```
+````
 
-### `yarn build`
+## 시작 가이드
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+$ git clone https://github.com/Duboo31/final_project_teulang_client.git
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Frontend**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+$ cd final_project_teulang_client
+$ npm i
+$ npm run start
+```
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 화면 구성

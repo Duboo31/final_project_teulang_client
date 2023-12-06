@@ -8,10 +8,12 @@ import { login } from "../../redux/modules/users";
 import { getUserInfoInLocalStorage } from "../../js/isLoginUser";
 import { EMAIL_REGEX } from "../../js/validation";
 
+// components
+import SocialLogin from "../../component/social/SocialLogin";
+
 // css
 import logo from "../../image/logo.png";
 import "../../styles/form/form.css";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 
@@ -42,7 +44,6 @@ const Login = () => {
 
   const { mutate } = useMutation(postLogin, {
     onSuccess: (result) => {
-      console.log("result: ", result);
       if (result.status === 200) {
         const { userId, userEmail, nickname } = getUserInfoInLocalStorage();
 
@@ -62,8 +63,8 @@ const Login = () => {
         setError("password", { message: `등록된 사용자가 아닙니다.` });
       }
     },
-    onError: () => {
-      console.log("로그인 실패");
+    onError: (err) => {
+      console.log(err);
     },
   });
 
@@ -117,9 +118,14 @@ const Login = () => {
               <input className="submit-btn" type="submit" value="로그인" />
             </form>
             <div className="link-box">
+              비밀번호를 잊으셨나요?
+              <Link to="/user/pwReset">비밀번호 재설정</Link>
+            </div>
+            <div className="link-box">
               계정이 없으신가요?
               <Link to="/register">회원가입</Link>
             </div>
+            <SocialLogin />
           </div>
         </div>
       ) : (

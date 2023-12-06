@@ -17,23 +17,9 @@ const RecipeDetail = ({ recipeDetail }) => {
   let stars = [];
 
   useEffect(() => {
-    console.log(recipeDetail);
+    // console.log(recipeDetail);
     setStarAvg(recipeDetail.star_avg);
   }, [recipeDetail]);
-
-  // useEffect(() => {
-  //   for (let i = 1; i < 6; i++) {
-  //     stars.push(
-  //       <img
-  //         src={empty_star}
-  //         key={`${i}`}
-  //         name={`${i}`}
-  //         className="detail_rate_star"
-  //         onClick={handleSubmitStarRate}
-  //       />
-  //     );
-  //   }
-  // },[])
 
   // 로그인 된 유저 정보
   const user = useSelector(({ users }) => {
@@ -41,21 +27,23 @@ const RecipeDetail = ({ recipeDetail }) => {
   });
 
   const handleDeleteRecipe = async () => {
-    const accessToken = localStorage.getItem("access");
+    if (window.confirm("게시글을 삭제하시겠습니까?")) {
+      const accessToken = localStorage.getItem("access");
 
-    await axios
-      .delete(`/articles/recipe/${recipeDetail.id}/`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-      .then(function (response) {
-        console.log("reponse.data ", response.data);
-        navigate("/");
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      await axios
+        .delete(`/articles/recipe/${recipeDetail.id}/`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then(function (response) {
+          // console.log("reponse.data ", response.data);
+          navigate("/");
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
   };
 
   const handleUpdateRecipe = () => {
@@ -64,14 +52,8 @@ const RecipeDetail = ({ recipeDetail }) => {
 
   const handleBookmark = async (e) => {
     const accessToken = localStorage.getItem("access");
-    const bookmark = document.getElementById("bookmark");
-    console.log(e.target.src === bookmarked_icon);
+    const bookmark = document.getElementById(`bookmark${recipeDetail.id}`);
 
-    if (e.target.src === bookmarked_icon) {
-      bookmark.src = not_bookmarked_icon;
-    } else {
-      bookmark.src = bookmarked_icon;
-    }
     await axios
       .post(
         `/articles/recipe/${recipeDetail.id}/bookmark/`,
@@ -83,8 +65,14 @@ const RecipeDetail = ({ recipeDetail }) => {
         }
       )
       .then(function (response) {
-        console.log("reponse.data ", response.data);
-        alert(response.data);
+        // console.log("reponse.data ", response.data);
+        // alert(response.data);
+
+        if (e.target.src === bookmarked_icon) {
+          bookmark.src = not_bookmarked_icon;
+        } else {
+          bookmark.src = bookmarked_icon;
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -115,7 +103,11 @@ const RecipeDetail = ({ recipeDetail }) => {
       })
       .catch(function (error) {
         console.log(error);
-        alert(error.response.data)
+        if (error.response.status === 403) {
+          alert("인증되지 않은 사용자입니다. 이메일 인증을 진행하세요.");
+        } else {
+          alert(error.response.data);
+        }
       });
   };
 
@@ -142,7 +134,6 @@ const RecipeDetail = ({ recipeDetail }) => {
           />
         );
       }
-      
     }
     return stars;
   };
@@ -159,23 +150,25 @@ const RecipeDetail = ({ recipeDetail }) => {
               <p className="detail_star_avg">
                 {starAvg ? parseFloat(starAvg).toFixed(1) : "-"}
               </p>
-              {!(user.userId === recipeDetail.user_data.id) && (
-                <img
-                  src={
-                    recipeDetail.request_user_article_data.is_bookmarked
-                      ? bookmarked_icon
-                      : not_bookmarked_icon
-                  }
-                  id="bookmark"
-                  onClick={handleBookmark}
-                  className="detail_bookmark"
-                />
-              )}
+              {/* {console.log("user", user)} */}
+              {user.isAuthorized &&
+                !(user.userId === recipeDetail.user_data.id) && (
+                  <img
+                    src={
+                      recipeDetail.request_user_article_data.is_bookmarked
+                        ? bookmarked_icon
+                        : not_bookmarked_icon
+                    }
+                    id={`bookmark${recipeDetail.id}`}
+                    onClick={handleBookmark}
+                    className="detail_bookmark"
+                  />
+                )}
             </div>
           </span>
           <img
             src={
-              recipeDetail.api_recipe
+              recipeDetail.recipe_thumbnail_api != []
                 ? `${recipeDetail.recipe_thumbnail_api} ` // api_recipe인 경우 식품안전나라에서 이미지 가져옴.
                 : `${urls.baseURL}${recipeDetail.recipe_thumbnail} ` // api_recipe가 아닌 경우 서버에서 이미지 가져옴.
             }
@@ -205,36 +198,33 @@ const RecipeDetail = ({ recipeDetail }) => {
             <div>
               {!(user.userId === recipeDetail.user_data.id) ? (
                 <div className="detail_star_div">
-                  {recipeDetail.request_user_article_data.is_star_rated
-                    ? renderStar(
-                        recipeDetail.request_user_article_data.star_rate
-                      )
-                    : renderStar(0)}
+                  {user.isAuthorized &&
+                    (recipeDetail.request_user_article_data.is_star_rated
+                      ? renderStar(
+                          recipeDetail.request_user_article_data.star_rate
+                        )
+                      : renderStar(0))}
                 </div>
               ) : (
                 <div>
-                  {user.userId === recipeDetail.user_data.id && (
-                    <button
-                      onClick={handleUpdateRecipe}
-                      className="detail_CU_btn"
-                    >
-                      수정
-                    </button>
-                  )}
-                  {user.userId === recipeDetail.user_data.id && (
-                    <button
-                      onClick={handleDeleteRecipe}
-                      className="detail_CU_btn"
-                    >
-                      삭제
-                    </button>
-                  )}
+                  <button
+                    onClick={handleUpdateRecipe}
+                    className="detail_CU_btn"
+                  >
+                    수정
+                  </button>
+                  <button
+                    onClick={handleDeleteRecipe}
+                    className="detail_CU_btn"
+                  >
+                    삭제
+                  </button>
                 </div>
               )}
             </div>
           </div>
           <div className="detail_sections_div">
-            <p className="detail_sections_title">재료 : </p>
+            <p className="detail_sections_title">재료</p>
             <div className="detail_all_ingredients">
               {recipeDetail.recipe_ingredients.map((ingredientObject) => {
                 return (
@@ -249,13 +239,13 @@ const RecipeDetail = ({ recipeDetail }) => {
             </div>
           </div>
           <div className="detail_sections_div">
-            <p className="detail_sections_title">설명 : </p>
+            <p className="detail_sections_title">설명</p>
             <span className="detail_description">
               {recipeDetail.description ? recipeDetail.description : "-"}
             </span>
           </div>
           <div className="detail_sections_div">
-            <p className="detail_sections_title">요리 순서 :</p>
+            <p className="detail_sections_title">요리 순서</p>
             <div className="detail_all_recipe_orders">
               {recipeDetail.recipe_order.map((orderObject) => {
                 return (

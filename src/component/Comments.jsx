@@ -4,8 +4,9 @@ import urls from "../shared/url";
 import Loading from "./Loading";
 import "../styles/Comments.css";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-export default function Comments({ recipeComments, recipeId }) {
+export default function Comments({ recipeComments, recipeId, fetchUrl }) {
   const [commentContent, setCommentContent] = useState("");
   const [commentUpdateContent, setCommentUpdateContent] = useState("");
   const [comments, setComments] = useState(recipeComments);
@@ -13,7 +14,12 @@ export default function Comments({ recipeComments, recipeId }) {
 
   useEffect(() => {
     setComments(recipeComments); // 처음에 새로고침하면 recipeComments가 undefined로 들어와서, 값이 들어왔을 때 comments에 넣고 화면에 띄우기 위해서 필요.
+    // console.log("recipeComments", recipeComments);
   }, [recipeComments]);
+
+  const user = useSelector(({ users }) => {
+    return users;
+  });
 
   // handle create comment
   const handleCreateInputChange = (e) => {
@@ -26,7 +32,7 @@ export default function Comments({ recipeComments, recipeId }) {
 
     await axios
       .post(
-        `/articles/recipe/${recipeId}/comment/`,
+        fetchUrl,
         {
           content: commentContent,
           article_recipe: recipeId,
@@ -38,19 +44,25 @@ export default function Comments({ recipeComments, recipeId }) {
         }
       )
       .then(function (response) {
-        console.log("reponse.data ", response.data); // response로 추가된 데이터를 보내달라고 해서 그걸 아래서 바로 setComments로 comments에 할당해야하나?
+        // console.log("reponse.data ", response.data); // response로 추가된 데이터를 보내달라고 해서 그걸 아래서 바로 setComments로 comments에 할당해야하나?
         // setComments(recipeComments); -> 이렇게 하면 안 됨!!
         setComments((prevComments) => [...prevComments, response.data]); // comments 값을 바꿔서 아래 추가된 코멘트가 렌더링되게끔.
-        // 이렇게 하기 위해서 원래 response로 오던 "댓글이 작성되었습니다"를 새로 작성된 데이터로 바꿨는데 이렇게 하는게 맞나?
 
         // 생성 인풋 값 지우기
         const createInput = document.getElementById(
           `comment_create_input${recipeId}`
         );
         createInput.value = "";
+        setCommentContent("");
       })
       .catch(function (error) {
         console.log(error);
+        if (error.response.status === 401) {
+          alert("인증되지 않은 사용자입니다. 로그인 해주세요.");
+        }
+        if (error.response.status === 403) {
+          alert("인증되지 않은 사용자입니다. 이메일 인증을 진행하세요.");
+        }
       });
   };
 
@@ -76,7 +88,7 @@ export default function Comments({ recipeComments, recipeId }) {
     const accessToken = localStorage.getItem("access");
 
     if (updateBtn.textContent === "수정") {
-      console.log(prevContentSpan);
+      // console.log(prevContentSpan);
       updateInput.style.display = "block";
       prevContentSpan.style.display = "none";
       updateInput.value = prevCommentContent;
@@ -84,7 +96,7 @@ export default function Comments({ recipeComments, recipeId }) {
     } else {
       await axios
         .put(
-          `/articles/recipe/${recipeId}/comment/${updateCommentId}/`,
+          `${fetchUrl}${updateCommentId}/`,
           {
             content: updateInput.value,
             article_recipe: recipeId,
@@ -96,7 +108,7 @@ export default function Comments({ recipeComments, recipeId }) {
           }
         )
         .then(function (response) {
-          console.log("data ", response.data);
+          // console.log("data ", response.data);
           let findIndex = comments.findIndex(
             (comment) => comment.id === updateCommentId
           );
@@ -110,52 +122,60 @@ export default function Comments({ recipeComments, recipeId }) {
         })
         .catch(function (error) {
           console.log(error);
+          if (error.response.status === 401) {
+            alert("인증되지 않은 사용자입니다. 로그인 해주세요.");
+          }
         });
     }
   };
 
   // handle delete comment
   const handleDeleteComment = async (deleteCommentId) => {
-    const accessToken = localStorage.getItem("access");
+    var result = window.confirm("댓글을 삭제하시겠습니까?");
 
-    await axios
-      .delete(`/articles/recipe/${recipeId}/comment/${deleteCommentId}/`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-      .then(function (response) {
-        console.log("data ", response.data);
-        let findIndex = comments.findIndex(
-          (comment) => comment.id === deleteCommentId
-        );
-        let copiedComments = [...comments];
-        copiedComments[findIndex] = response.data;
-        setComments(copiedComments);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    if (result == true) {
+      const accessToken = localStorage.getItem("access");
+
+      await axios
+        .delete(`${fetchUrl}${deleteCommentId}/`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then(function (response) {
+          // console.log("data ", response.data);
+          let findIndex = comments.findIndex(
+            (comment) => comment.id === deleteCommentId
+          );
+          let copiedComments = [...comments];
+          copiedComments[findIndex] = response.data;
+          setComments(copiedComments);
+        })
+        .catch(function (error) {
+          console.log(error.response);
+          if (error.response.status === 401) {
+            alert("인증되지 않은 사용자입니다. 로그인 해주세요.");
+          }
+        });
+    }
   };
 
   return (
     <section className="comments_whole">
       <section className="comments">
-        <p className="comments_create_title">댓글 : </p>
+        <p className="comments_create_title"></p>
         <div className="comments_create_div">
           <div className="comments_create">
             <textarea
+              placeholder="댓글을 입력하세요."
               onChange={handleCreateInputChange}
               id={`comment_create_input${recipeId}`}
               className="comments_create_input"
             />
-            <button
-              onClick={handleCreateComment}
-              className="comments_create_btn"
-            >
-              작성
-            </button>
           </div>
+          <button onClick={handleCreateComment} className="comments_create_btn">
+            댓글 등록
+          </button>
         </div>
 
         {/* 댓글 보여주기 */}
@@ -182,24 +202,26 @@ export default function Comments({ recipeComments, recipeId }) {
                           {comment.user_data.nickname}
                         </span>
                       </div>
-                      <div className="comments_UD_btns">
-                        <button
-                          onClick={() =>
-                            handleUpdateComment(comment.id, comment.content)
-                          }
-                          id={`comment_update_btn${comment.id}`}
-                          className="comments_update_btn"
-                        >
-                          수정
-                        </button>
-                        <button
-                          onClick={() => handleDeleteComment(comment.id)}
-                          id={`comment_delete_btn${comment.id}`}
-                          className="comments_delete_btn"
-                        >
-                          삭제
-                        </button>
-                      </div>
+                      {user.userId === comment.user_data.id && (
+                        <div className="comments_UD_btns">
+                          <button
+                            onClick={() =>
+                              handleUpdateComment(comment.id, comment.content)
+                            }
+                            id={`comment_update_btn${comment.id}`}
+                            className="comments_update_btn"
+                          >
+                            수정
+                          </button>
+                          <button
+                            onClick={() => handleDeleteComment(comment.id)}
+                            id={`comment_delete_btn${comment.id}`}
+                            className="comments_delete_btn"
+                          >
+                            삭제
+                          </button>
+                        </div>
+                      )}
                     </div>
 
                     <div className="comments_content_div">

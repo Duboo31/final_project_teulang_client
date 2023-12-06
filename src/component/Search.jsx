@@ -3,10 +3,12 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 // css
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass, faImage } from "@fortawesome/free-solid-svg-icons";
+import SearchImageModal from "./SearchImageModal";
 
 export default function Search({ setIsNaviActive }) {
   const [searchValue, setSearchValue] = useState(""); // 검색한 결과를 searchValue로 설정
+  const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
   const inputValue = new URLSearchParams(useLocation().search).get("q");
 
@@ -25,23 +27,47 @@ export default function Search({ setIsNaviActive }) {
     setIsNaviActive((cur) => !cur);
   };
 
+  const handleClickImageSearch = () => {
+    setModalOpen(true);
+  };
+
   // input에 입력될 때마다 serachValue값 변경
   const handleChange = (e) => {
     setSearchValue(e.target.value);
   };
 
+  const activeEnter = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <div className="searchBar-wrap">
       <input
+        onKeyDown={activeEnter}
         value={searchValue}
         className="search__input"
         type="text"
         onChange={handleChange}
-        placeholder="요리 재료 검색"
+        placeholder=",로 구분해 식재료를 검색해보세요!"
       />
       <button className="search__btn" onClick={handleSearch}>
         <FontAwesomeIcon icon={faMagnifyingGlass} />
       </button>
+      <button className="search__btn" onClick={handleClickImageSearch}>
+        <FontAwesomeIcon icon={faImage} />
+      </button>
+
+      <div>
+        {modalOpen && (
+          <SearchImageModal
+            setModalOpen={setModalOpen}
+            searchValue={searchValue}
+            setIsNaviActive={setIsNaviActive}
+          />
+        )}
+      </div>
     </div>
   );
 }

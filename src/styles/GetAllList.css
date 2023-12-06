@@ -1,0 +1,201 @@
+.all-article_wrap {
+    min-width: 375px;
+    margin-top: 4rem;
+}
+.all_list_sort_option {
+    border: 1px solid #c3c3c3;
+    padding: .5rem 1rem;
+    margin: 1rem 0;
+}
+.each_article {
+    border-bottom: 1px solid #d4d4d4;
+    /* cursor: pointer; */
+}
+.each_article_header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 50px;
+    width: calc(100% - 250px);
+}
+.each_article_header_title {
+    font-size: 16px;
+    font-weight: 500;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+}
+.each_article_header_right {
+    display: flex;
+    align-items: center;
+    width: 70px;
+    max-width: 70px;
+}
+.each_article_header_category {
+    text-align: left;
+}
+.each_article_header_star_div {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+.each_article_header_star_img {
+    min-height: 20px;
+    max-height: 20px;
+}
+.each_article_header_star {
+    margin-left: 5px;
+}
+.each_article_header_bookmark_div {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+.each_article_header_bookmark_img {
+    min-height: 19px;
+    max-height: 19px;
+}
+.each_article_header_bookmark {
+    margin-left: 5px;
+}
+.each_article_body {
+    display: flex;
+    width: 100%;
+    min-width: 100%;
+}
+.each_article_content {
+    width: 100%;
+    padding: 0 1rem 1rem;
+    color: #4f4f4f;
+    cursor: pointer;
+    /* font-size: 16px; */
+    /* text-overflow: ellipsis; */
+    /* overflow: hidden; */
+    /* white-space: nowrap; */
+}
+.each_article_thumbnail {
+    min-height: 150px;
+    max-height: 150px;
+    min-width: 150px;
+    max-width: 150px;
+    object-fit: cover;
+}
+.each_article_footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 250px;
+    color: #757575;
+}
+.each_article_author {
+    width: 130px;
+    text-align: right;
+    font-weight: 500;
+    display: inline-block;
+}
+.each_article_author:hover {
+    cursor: pointer;
+}
+.each_article_author_img {
+    max-height: 3rem;
+    max-width: 3rem;
+    min-height: 3rem;
+    min-width: 3rem;
+    border-radius: 3rem;
+    padding: 0.3rem;
+}
+.each_article_author_nickname {
+    width: 100%;
+    display: inline-block;
+}
+.each_article_created_at {
+    width: 110px;
+    text-align: right;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+.pagination_btn_prev {
+    border: none;
+    margin: 1rem 0;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 0.3rem 0 0 0.3rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    /* display: none; */
+}
+.pagination_cur_btn {
+    border: none;
+    margin: 1rem 0;
+    height: 2rem;
+    width: 2rem;
+    border-right: 0.5px solid var(--main-color-op60);
+    text-align: center;
+    font-size: 15px;
+    border: 1px solid rgb(99, 99, 99);
+    background-color: var(--main-color);
+}
+.pagination_btn_next {
+    border: none;
+    margin: 1rem 0;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 0 0.3rem 0.3rem 0;
+    text-align: center;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    /* display: none; */
+}
+.pagination_btn {
+    border: none;
+    margin: 1rem 0;
+    height: 2rem;
+    width: 2rem;
+    text-align: center;
+    font-size: 15px;
+    border: 1px solid #dadada;
+    cursor: pointer;
+}
+.pagination_btn:nth-child(1) {
+    border-radius: none;
+}
+
+.each_article_container {
+    display: flex;
+    width: 100%;
+    padding: 0 1rem;
+}
+
+.article-header_list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px solid rgb(115, 115, 115);
+    height: 50px;
+    font-weight: bold;
+    background: rgb(246, 246, 246);
+    padding: 0 1rem;
+}
+.article-header_item:nth-child(1) {
+    width: 70px;
+}
+.article-header_item:nth-child(2) {
+    width: calc(100% - 250px);
+    text-align: center;
+}
+
+.article-header_item:nth-child(3) {
+    width: 130px;
+    text-align: right;
+}
+.article-header_item:nth-child(4) {
+    width: 110px;
+    text-align: right;
+}

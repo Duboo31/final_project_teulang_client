@@ -18,7 +18,7 @@
     padding: 0 1rem;
     /* border-radius: 15px 15px 0 0; */
     /* background-color: var(--main-color-op90); */
-    border-top: 3px solid var(--main-color);
+    border-top: 3px solid #ebebeb;
     height: 50px;
 }
 .detail_title {
@@ -35,12 +35,15 @@
 .detail_star_avg {
     font-size: 14px;
     padding-left: 2px;
-    color: var(--main-color);
+    color: #333;
     font-weight: bold;
 }
 .detail_bookmark {
     margin: 0 -5px 0 10px ;
     height: 20px;
+}
+.detail_bookmark:hover {
+    cursor: pointer;
 }
 .detail_recipe_thumbnail {
     width: 100%;
@@ -53,6 +56,9 @@
 .detail_author {
     display: flex;
     align-items: center;
+}
+.detail_author:hover {
+    cursor: pointer;
 }
 .detail_author_img {
     max-height: 3rem;
@@ -83,6 +89,9 @@
     height: 18px;
     margin-right: 0.5px;
 }
+.detail_rate_star:hover {
+    cursor: pointer;
+}
 .detail_author_nickname {
     margin-bottom: 0;
     margin-top: 0.5rem;
@@ -90,17 +99,20 @@
 }
 .detail_CU_btn {
     border: none;
-    padding: 0.3rem 0.5rem;
+    padding: 0.3rem 0.7rem;
     margin: 0 0.2rem;
-    border-radius: 1rem;
-    background-color: var(--main-color-op60);
+    border-radius: 15px;
     font-size: 13px;
+    border: 1px solid #c0c0c0;
+}
+.detail_CU_btn:hover {
+    cursor: pointer;
 }
 .detail_sections_div {
     display: block;
     /* border: 1px solid; */
     padding: 1rem 0.3rem;
-    border-top: 1px solid var(--light-color);
+    border-top: 1px solid #e4e4e4;
 }
 .detail_sections_title {
     font-size: 15px;
@@ -114,12 +126,13 @@
     flex-wrap: wrap; /* 요소들이 가로로 넘치는 경우를 대비하여 줄 바꿈 설정 */
 }
 .detail_each_ingredient {
-    background-color: var(--light-color);
-    border-radius: 1rem;
+    background-color: var(--main-color);
+    color: #fff;
+    border-radius: 12px;
     margin: 0.2rem;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 500;
-    padding: 0.5rem;
+    padding: 0.5rem .6rem;
 }
 .detail_description {
     margin: 0.7rem 0;
@@ -136,26 +149,30 @@
     justify-content: space-between;
     margin: 0.2rem 0;
     padding: 0.1rem;
-    border-bottom: 1px solid var(--light-color);
+    border-bottom: 1px solid #e4e4e4;
 }
 .detail_recipe_orders {
     display: flex;
 }
 .detail_recipe_orders_order {
-    background-color: var(--light-color);
+    background-color: var(--main-color);
+    color: #fff;
     border-radius: 25px;
     max-width: 25px;
     max-height: 25px;
     min-width: 25px;
     min-height: 25px;
-    padding: 0.3rem;
     margin-top: 0.3rem;
     font-size: 14px;
     text-align: center;
+    line-height: 25px;
 }
 .detail_recipe_orders_content {
     padding: 0.5rem;
     font-size: 12px;
+    width: 100%;
+    display: inline-block;
+    overflow-wrap: anywhere;
 }
 .detail_recipe_order_img {
     max-width: 8rem;

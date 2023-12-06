@@ -497,7 +497,7 @@ export default function CreateForm({
         "block";
     } else if (type === "Unauthorized") {
       error_space.innerText =
-        "인증되지 않은 사용자입니다. 로그인 혹은 이메일 인증을 진행하세요.";
+        "인증되지 않은 사용자입니다. 이메일 인증을 진행하세요.";
       error_space.style.display = "block";
     }
   };
@@ -582,7 +582,7 @@ export default function CreateForm({
 
         {/* 레시피 설명 */}
         <div className="form_desc">
-          <p className="form_desc_top">설명 : </p>
+          <p className="form_desc_top">설명</p>
           <textarea
             ref={textRef}
             id="desc_input"
@@ -636,14 +636,14 @@ export default function CreateForm({
         ) : (
           <div className="form_ingre">
             <div className="form_ingre_top">
-              <span className="form_ingre_top_title">재료 : </span>
-              <span className="form_ingre_top_notice">
+              <span className="form_ingre_top_title">재료 </span>
+              {/* <span className="form_ingre_top_notice">
                 각 재료는 쉼표로 구분해서 넣어주세요.
-              </span>
+              </span> */}
             </div>
             <textarea
               id="ingredients_create_input"
-              placeholder="재료를 입력해주세요."
+              placeholder="각 재료는 쉼표로 구분해서 넣어주세요."
               onChange={onChange}
               name="recipe_ingredients_str"
               value={inputs.recipe_ingredients_str}
@@ -658,7 +658,7 @@ export default function CreateForm({
         <div className="form_orders">
           <div className="form_orders_top">
             <div className="form_orders_top_left">
-              <span className="form_orders_top_title">요리 순서 : </span>
+              <span className="form_orders_top_title">요리 순서</span>
               <span
                 id="recipe_order_content_error"
                 style={{ display: "none" }}
@@ -667,8 +667,11 @@ export default function CreateForm({
                 조리 순서 내용은 필수 입력값입니다.
               </span>
             </div>
-            <button onClick={addRecipeOrder} className="form_add_btn">
-              +
+            <button
+              onClick={addRecipeOrder}
+              className="add-list_btn form_add_btn"
+            >
+              조리 방법 추가
             </button>
           </div>
 
@@ -700,7 +703,7 @@ export default function CreateForm({
                       htmlFor={`recipe_order_img${recipeorder.order}`}
                       className="form_orders_add_each_btn"
                     >
-                      {recipeorder.order}번 이미지 추가
+                      {recipeorder.order}번 이미지 등록
                     </label>
                     {isForUpdate && (
                       <button
@@ -759,7 +762,7 @@ export default function CreateForm({
         </div>
         <div className="form_submit_div">
           <button onClick={handleSubmit} className="form_submit_btn">
-            submit
+            레시피 등록
           </button>
         </div>
       </div>

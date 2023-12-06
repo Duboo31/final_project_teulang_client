@@ -71,11 +71,18 @@ const Update = () => {
         );
         localStorage.setItem("nickname", nickname);
         localStorage.setItem("profileImg", user_img);
+        alert("변경 완료");
+        setIsNicknameBtnActive(false);
+      } else {
+        setError(
+          "nickname",
+          { message: "이미 존재하는 닉네임 입니다." },
+          { shouldFocus: true }
+        );
       }
-      setIsNicknameBtnActive(false);
     },
-    onError: () => {
-      console.log("유저 정보 업데이트 요청 실패");
+    onError: (err) => {
+      console.log(err);
     },
   });
 

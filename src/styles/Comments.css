@@ -16,15 +16,14 @@
     align-items: center;
     justify-content: center;
     height: min-content;
+    width: 100%;
 }
 .comments_create {
     display: flex;
-    height: 1.5rem;
-    height: fit-content;
-    border: 1px solid var(--main-color-op60);
-    border-radius: 0.2rem;
-    margin-bottom: 2rem;
-    width: calc(100% - 30px);
+    background: #efefef;
+    width: calc(100% - 110px);
+    margin-right: 10px;
+    border-radius: 8px;
 }
 .comments_create_title {
     font-size: 16px;
@@ -42,10 +41,17 @@
 }
 .comments_create_btn {
     width: fit-content;
-    padding: 0 1rem;
-    background-color: var(--main-color);
-    border: none;
+    padding: 1rem;
+    border: 1px solid #b5b5b5;
     font-size: 13px;
+    border-radius: 8px;
+    width: 100px;
+    text-align: center;
+    font-size: 15px;
+    cursor: pointer;
+}
+.comments_create_btn:hover {
+    font-weight: bold;
 }
 .comments_all_div {
     display: flex;
@@ -53,22 +59,24 @@
     align-items: center;
 }
 .comments_each_div{
-    margin: 0.5rem 0 0rem 0;
-    border: 0.1px solid var(--main-color);
+    margin: 1rem 0 0rem 0;
+    border: 0.1px solid #efefef;
     border-radius: 0.2rem;
-    width: calc(100% - 30px);
+    width: calc(100%);
 }
 .comments_header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 0.1px solid var(--light-color);
-    background-color: var(--light-color);
     padding: 0.3rem;
+    border-bottom: 1px solid #e8e8e8;
 }
 .comments_author {
     display: flex;
     align-items: center;
+}
+.comments_author:hover {
+    cursor: pointer;
 }
 .comments_author_img {
     min-height: 25px;
@@ -83,7 +91,7 @@
     font-weight: 600;
 }
 /* .comments_UD_btns {
-
+    
 } */
 .comments_update_btn {
     width: fit-content;
@@ -91,9 +99,13 @@
     border: none;
     border-radius: 1rem;
     font-size: 12px;
-    background-color: var(--main-color-op60);
     padding: 0.3rem 0.4rem;
     margin-right: 0.1rem;
+    border: 1px solid #b5b5b5;
+    cursor: pointer;
+}
+.comments_update_btn:hover {
+    cursor: pointer;
 }
 .comments_delete_btn {
     width: fit-content;
@@ -101,13 +113,17 @@
     border: none;
     border-radius: 1rem;
     font-size: 12px;
-    background-color: var(--main-color-op60);
     padding: 0.3rem 0.4rem;
     margin-left: 0.1rem;
+    border: 1px solid #b5b5b5;
+    cursor: pointer;
+}
+.comments_delete_btn:hover {
+    cursor: pointer;
 }
 .comments_content_div {
     display: flex;
-    border-bottom: 0.1px solid var(--main-color-op60);
+    border-bottom: 0.1px solid #d4d4d4;
     min-height: 60px;
 }
 .comments_content {

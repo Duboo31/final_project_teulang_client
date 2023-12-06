@@ -20,7 +20,7 @@ export default function MultiViewPage() {
   });
 
   const handleClick = (e) => {
-    console.log(e.target.name);
+    // console.log(e.target.name);
     if (e.target.name === "btn_left") {
       setIsRecipe1Clicked(true);
     }

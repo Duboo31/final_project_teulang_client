@@ -11,7 +11,6 @@ const postLogin = async (loginData) => {
 
   try {
     const response = await axios.request(config);
-    console.log("로그인 성공 data : ", response.data);
     const { access, refresh } = response.data;
     saveLocalStorageToken(access, refresh);
     return response;
