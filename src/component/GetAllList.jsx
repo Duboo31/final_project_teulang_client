@@ -210,7 +210,7 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
                     <span
                       className="each_article_author"
                       onClick={() => {
-                        navigate(`/profile/${article.user_data.id}`);
+                        article.user_data.id && navigate(`/profile/${article.user_data.id}`);
                       }}
                     >
                       {/* <img
@@ -218,7 +218,7 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
                         className="each_article_author_img"
                       /> */}
                       <span className="each_article_author_nickname">
-                        {article.user_data.nickname}
+                        {article.user_data.nickname ? article.user_data.nickname : "탈퇴한 회원"}
                       </span>
                     </span>
                     <p className="each_article_created_at">

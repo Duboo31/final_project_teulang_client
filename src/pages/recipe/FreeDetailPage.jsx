@@ -108,10 +108,10 @@ export default function FreeDetailPage() {
             )}
           </Swiper>
           <div className="free_detail_footer">
-            <div className="free_detail_author" onClick={() => navigate(`/profile/${freeArticleDetail.user_data.id}`)}>
-              <img src={urls.baseURL+freeArticleDetail.user_data.user_img} className="free_detail_author_img"/>
+            <div className="free_detail_author" onClick={() => (freeArticleDetail.user_data.id && navigate(`/profile/${freeArticleDetail.user_data.id}`))}>
+              <img src={freeArticleDetail.user_data.user_img ? urls.baseURL+freeArticleDetail.user_data.user_img : urls.baseURL+"/media/user_default.jpg"} className="free_detail_author_img"/>
               <div className="free_detail_author_right">
-                <p className="free_detail_author_nickname">{freeArticleDetail.user_data.nickname}</p>
+                <p className="free_detail_author_nickname">{freeArticleDetail.user_data.nickname ? freeArticleDetail.user_data.nickname : "탈퇴한 회원"}</p>
                 <p className="free_detail_created_at">
                   {freeArticleDetail.created_at.split("T")[0] +
                     " " +

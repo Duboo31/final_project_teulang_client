@@ -179,15 +179,15 @@ const RecipeDetail = ({ recipeDetail }) => {
             <div
               className="detail_author"
               onClick={() => {
-                navigate(`/profile/${recipeDetail.user_data.id}`);
+                recipeDetail.user_data.id && navigate(`/profile/${recipeDetail.user_data.id}`);
               }}
             >
               <img
-                src={`${urls.baseURL}${recipeDetail.user_data.user_img}`}
+                src={recipeDetail.user_data.user_img ? `${urls.baseURL}${recipeDetail.user_data.user_img}` : `${urls.baseURL}/media/user_default.jpg`}
                 className="detail_author_img"
               />
               <div className="detail_author_right">
-                <p className="detail_author_nickname">{recipeDetail.author}</p>
+                <p className="detail_author_nickname">{recipeDetail.author ? recipeDetail.author : "탈퇴한 회원"}</p>
                 <p className="detail_created_at">
                   {recipeDetail.created_at.split("T")[0] +
                     " " +
