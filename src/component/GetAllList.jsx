@@ -181,7 +181,7 @@ export default function GetAllList({ fetchUrl, isRecipe = false }) {
                             className="each_article_header_star_img"
                           />
                           <span className="each_article_header_star">
-                            {article?.star_avg}
+                            {article.star_avg && parseFloat(article.star_avg).toFixed(1)}
                           </span>
                         </div>
                         {/* <div className="each_article_header_bookmark_div">
