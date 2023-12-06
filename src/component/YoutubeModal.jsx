@@ -65,6 +65,7 @@ export default function YoutubeModal({ setModalOpen, setInputs, inputs }) {
           <div className="modal__content">
             <div className="youtube_modal_content">
               <div>
+                <div className="youtube_modal_notice">* 요약 시 시간이 오래 소요될 수 있습니다.</div>
                 <div className="youtube_modal_input_div">
                   <span className="youtube_modal_input_type">url</span>
                   <input

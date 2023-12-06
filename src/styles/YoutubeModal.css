@@ -23,9 +23,12 @@
     height: 100%;
 }
 
+.youtube_modal_notice {
+    font-size: 13.5px;
+}
 .youtube_modal_content {
     height: 100%;
-    margin-top: 40px;
+    margin-top: 10px;
     /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
@@ -33,6 +36,7 @@
     align-items: stretch;
 }
 .youtube_modal_input_div {
+    margin-top: 15px;
     display: flex;
     width: 100%;
     padding-bottom: 20px;
