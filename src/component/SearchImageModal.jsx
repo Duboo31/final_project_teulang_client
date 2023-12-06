@@ -107,6 +107,7 @@ export default function SearchImageModal({
                   onChange={onChange}
                   id="image_input_for_detection"
                   style={{ display: "none" }}
+                  accept="image/png, image/jpg"
                 />
                 <img id="search_img_preview" className="search_img_preview" />
                 <label
