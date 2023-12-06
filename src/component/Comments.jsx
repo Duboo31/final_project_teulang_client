@@ -190,16 +190,16 @@ export default function Comments({ recipeComments, recipeId, fetchUrl }) {
                       <div
                         className="comments_author"
                         onClick={() => {
-                          navigate(`/profile/${comment.user_data.id}`);
+                          comment.user_data.id && navigate(`/profile/${comment.user_data.id}`);
                         }}
                       >
                         <img
-                          src={`${urls.baseURL}${comment.user_data.user_img}`}
+                          src={comment.user_data.user_img ? `${urls.baseURL}${comment.user_data.user_img}` : `${urls.baseURL}/media/user_default.jpg`}
                           className="comments_author_img"
                         />{" "}
                         {/* 백에서 user_defalt.jpg 로 되어있음. user_default.jpg로 수정 필요 */}
                         <span className="comments_author_nickname">
-                          {comment.user_data.nickname}
+                          {comment.user_data.nickname ? comment.user_data.nickname : "탈퇴한 회원"}
                         </span>
                       </div>
                       {user.userId === comment.user_data.id && (
