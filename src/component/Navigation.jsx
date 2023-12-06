@@ -85,7 +85,7 @@ const Navigation = () => {
                 onClick={() => {
                   setIsNaviActive((cur) => !cur);
                 }}
-                to="/recipe?page=1"
+                to="/recipe?page=1&option=bookmark"
               >
                 전체 레시피
               </Link>
