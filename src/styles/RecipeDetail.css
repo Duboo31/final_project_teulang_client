@@ -138,6 +138,7 @@
     margin: 0.7rem 0;
     font-size: 12px;
     margin-left: 5px;
+    white-space: pre-line;
 }
 .detail_all_recipe_orders {
     margin: 0.7rem 0;
@@ -173,6 +174,7 @@
     width: 100%;
     display: inline-block;
     overflow-wrap: anywhere;
+    white-space: pre-line;
 }
 .detail_recipe_order_img {
     max-width: 8rem;
