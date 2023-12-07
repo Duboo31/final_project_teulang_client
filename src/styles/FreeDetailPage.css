@@ -66,4 +66,5 @@
     margin: 0.7rem 0;
     font-size: 14px;
     margin-left: 5px;
+    white-space: pre-line;
 }
