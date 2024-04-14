@@ -20,7 +20,7 @@
 ||김현우|우은진|
 |-|-|-|
 |GitHub|https://github.com/Duboo31|https://github.com/EunjinWoo|
-|Blog|https://velog.io/@duboo|https://...|
+|Blog|https://velog.io/@duboo|https://esthrelar.tistory.com/|
 
 ## 개발 환경
 
