@@ -48,7 +48,7 @@
 "react-scripts": "5.0.1",
 "redux-persist": "^6.0.0",
 "swiper": "^11.0.3",
-"web-vitals": "^2.1.0"```
+"web-vitals": "^2.1.0"
 ````
 
 ## 주요 스택 💻
